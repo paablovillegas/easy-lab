@@ -2,11 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { FormComponent } from './components/FormComponent';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Main } from './components/Main';
 
 ReactDOM.render(
-    <FormComponent placeholder="Nombre" icon={faUser} inputType="number"/>, 
+    <Main />, 
     document.getElementById('root')
 );
 

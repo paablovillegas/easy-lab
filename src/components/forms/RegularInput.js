@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
-export const FormComponent = ({placeholder, icon, inputType, title}) => {
+export const RegularInput = ({title, placeholder, icon, inputType = 'text'}) => {
     return (
-        <div className="px-2">
+        <div>
             <label className="block mt-2 mb-1 text-sm text-gray-300">{title || placeholder}</label>
             <div className="relative">
                 <FontAwesomeIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600" icon={icon} />
