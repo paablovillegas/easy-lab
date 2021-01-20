@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { Main } from './components/Main';
+import { Prueba } from './components/Prueba';
 
 ReactDOM.render(
-    <Main />, 
+    <Prueba />, 
     document.getElementById('root')
 );
 
