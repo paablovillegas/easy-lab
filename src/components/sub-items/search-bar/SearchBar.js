@@ -1,7 +1,7 @@
 import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { RoundInput } from '../forms/RoundInput'
+import { RoundInput } from '../../input-types/RoundInput'
 import { ItemFile } from './item-bar/ItemFile'
 
 export const SearchBar = () => {

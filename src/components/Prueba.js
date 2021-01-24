@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavBar } from './NavBar'
 import { PacienteForm } from './paciente-form/PacienteForm'
-import { SearchBar } from './search-bar/SearchBar'
+import { SearchBar } from './sub-items/search-bar/SearchBar'
 
 export const Prueba = () => {
 

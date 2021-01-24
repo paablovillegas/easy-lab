@@ -1,13 +1,13 @@
 import { faAt, faCalendarDay, faChevronLeft, faHome, faPhone, faUser, faVenusMars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { RegularButton } from '../forms/RegularButton'
-import { RegularInput } from '../forms/RegularInput'
-import { SelectInput } from '../forms/SelectInput'
+import { RegularButton } from '../input-types/RegularButton'
+import { RegularInput } from '../input-types/RegularInput'
+import { SelectInput } from '../input-types/SelectInput'
 
 export const PacienteForm = ({id}) => {
     return (
-        <div className="px-2 space-x-3.5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="px-2 space-x-3.5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-y-scroll">
             <div className="flex flex-row text-gray-900 lg:col-span-2">
                 <button
                     className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100"

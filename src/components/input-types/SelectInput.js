@@ -3,9 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
 export const SelectInput = ({title, icon}) => {
-    const [state, setState] = useState({
-        nombre: ''
-    })
     return (
         <div>
             <label className="block mt-2 mb-1 text-sm text-gray-300">{title}</label>
@@ -19,9 +16,4 @@ export const SelectInput = ({title, icon}) => {
             </div>
         </div>
     )
-
-
-    const cambiarNombre = () => {
-        setState({nombre: '3'})
-    }
 }
