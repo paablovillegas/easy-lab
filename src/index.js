@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { Prueba } from './components/Prueba';
+import { PacienteScreen } from './components/screens/paciente/PacienteScreen';
 
 ReactDOM.render(
-    <Prueba />, 
+    <PacienteScreen />, 
     document.getElementById('root')
 );
 

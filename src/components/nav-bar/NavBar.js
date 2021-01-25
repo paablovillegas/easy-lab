@@ -5,7 +5,7 @@ import './NavBar.css'
 
 export const NavBar = () => {
     return (
-        <div className="bg-gray-700 w-100 h-full flex flex-col overflow-y-hidden">
+        <div className="bg-gray-700 w-100 sm:min-h-screen flex flex-col overflow-y-hidden">
             <div className="flex sm:hidden flex-row pr-3">
                 <h3
                     className="flex-grow m-3 text-gray-200"
