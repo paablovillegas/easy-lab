@@ -12,7 +12,7 @@ export const PacienteForm = ({barraLateral, setBarraLateral, id}) => {
     }
 
     return (
-        <div 
+        <div
             className={`pt-3 px-2 space-x-3.5 grid grid-cols-1 sm:max-h-screen sm:overflow-y-auto xl:grid-cols-3
                 ${barraLateral ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}
             `}>
@@ -62,7 +62,7 @@ export const PacienteForm = ({barraLateral, setBarraLateral, id}) => {
                     icon={faHome} 
                 />
             </div>
-            <div className={`my-4 xl:col-start-2 ${barraLateral  ? 'lg:col-span-2' : 'sm:col-span-2 lg:col-start-3 lg:col-span-1'}`}>
+            <div className={`my-4 xl:col-start-2 xl:col-span-2 ${barraLateral  ? 'lg:col-span-2' : 'sm:col-span-2 lg:col-start-3 lg:col-span-1'}`}>
                 <RegularButton title="Actualizar" />
             </div>
         </div>

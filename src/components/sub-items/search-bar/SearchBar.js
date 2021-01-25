@@ -10,7 +10,7 @@ export const SearchBar = () => {
             <div
                 className="flex flex-row"
             >
-                <h2 className="flex-grow text-3xl font-bold pl-3">Catálogo de Pacientes</h2>
+                <h2 className="flex-grow text-3xl font-bold pl-3 mb-5">Catálogo de Pacientes</h2>
                 <button className="mr-2 px-5 py-5 my-auto">
                     <FontAwesomeIcon icon={faPlus} />
                 </button>

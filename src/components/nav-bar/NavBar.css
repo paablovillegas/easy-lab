@@ -15,10 +15,4 @@
     button.normal {
         @apply py-1 rounded transition focus:outline-none active:bg-gray-800 lg:text-left lg:mx-2 lg:px-2;
     }
-
-    /*
-    button {
-        @apply bg-green-200
-    }
-    */
 }
