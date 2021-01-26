@@ -1,10 +1,22 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
+import { changePaciente, dataReducer } from '../../../hooks/dataReducer'
+import { pacientesApi } from '../../../sample/Pacientes'
 import { PacienteForm } from '../../forms/catalogos/PacienteForm'
 import { NavBar } from '../../nav-bar/NavBar'
 import { SearchBar } from '../../sub-items/search-bar/SearchBar'
 
 export const PacienteScreen = () => {
     const [barraLateral, setBarraLateral] = useState(false);
+    const [pacientes, dispatchPacientes] = useReducer(dataReducer, [])
+    const [paciente, dispatchPaciente] = useReducer(changePaciente)
+
+    setTimeout(() => {
+        dispatchPacientes({
+            type: 'fetch',
+            payload: pacientesApi
+        })
+    }, 1500);
+
 
     return (
         <div className='flex flex-col sm:flex-row'>
@@ -17,10 +29,14 @@ export const PacienteScreen = () => {
                         ? 'sm:flex-1 lg:flex-initial lg:w-1/4' 
                         : 'hidden xl:flex xl:w-1/4'
                 }>
-                    <SearchBar />
+                    <SearchBar
+                        data={pacientes}
+                        selection={dispatchPaciente}
+                    />
                 </div>
                 <div className='sm:flex-1'>
                     <PacienteForm 
+                        paciente={paciente}
                         barraLateral={barraLateral}
                         setBarraLateral={setBarraLateral}
                     />

@@ -9,7 +9,7 @@ export const paciente = {
     edad: 23,
 };
 
-export const pacientes = [
+export const pacientesApi = [
     {
         id_paciente: 1,
         nombre: 'Sergio Alejandro',
@@ -21,7 +21,7 @@ export const pacientes = [
         edad: 19,
     },
     {
-        id_paciente: 1,
+        id_paciente: 2,
         nombre: 'Pablo Emmanuel',
         apellido_paterno: 'Villegas',
         apellido_materno: 'Ferruzca',
@@ -42,22 +42,31 @@ export const pacientes = [
     },
     {
         id_paciente: 4,
-        nombre: '',
+        nombre: 'Alfonso',
         apellido_paterno: 'Villegas',
-        apellido_materno: 'Ferruzca',
+        apellido_materno: 'Arcos',
         fecha_nacimiento: 980471133000,
-        correo: 'sergiovillegas@gmail.com',
+        correo: 'alfonsovillegas@gmail.com',
         telefono: 551231111,
         genero: 'M',
         edad: 19,
     },
     {
         id_paciente: 5,
-        nombre: 'Sergio Alejandro',
-        apellido_paterno: 'Villegas',
-        apellido_materno: 'Ferruzca',
+        nombre: 'Josué',
+        apellido_paterno: 'Ramirez',
         fecha_nacimiento: 980471133000,
-        correo: 'sergiovillegas@gmail.com',
+        correo: 'josueramirez@gmail.com',
+        telefono: 551231111,
+        genero: 'M',
+        edad: 19,
+    },
+    {
+        id_paciente: 6,
+        nombre: 'Estefanía',
+        apellido_paterno: 'Analis',
+        fecha_nacimiento: 980471133000,
+        correo: 'estafeaniaalanis@gmail.com',
         telefono: 551231111,
         genero: 'M',
         edad: 19,

@@ -5,8 +5,7 @@ import { RegularButton } from '../../input-types/RegularButton'
 import { RegularInput } from '../../input-types/RegularInput'
 import { SelectInput } from '../../input-types/SelectInput'
 
-export const PacienteForm = ({barraLateral, setBarraLateral, id}) => {
-
+export const PacienteForm = ({barraLateral, setBarraLateral, paciente }) => {
     const verOcularBarra = () => {
         setBarraLateral(state => !state);
     }
@@ -34,7 +33,7 @@ export const PacienteForm = ({barraLateral, setBarraLateral, id}) => {
                 >
                     <h1 
                         className="text-5xl font-bold">
-                            Paciente {id && id.toString().padStart(4, '0')}
+                            Paciente {paciente && paciente.id_paciente && paciente.id_paciente.toString().padStart(4, '0')}
                     </h1>
                     <h5 
                         className="text-sm text-gray-500">
