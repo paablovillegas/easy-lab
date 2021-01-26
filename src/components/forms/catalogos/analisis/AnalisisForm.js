@@ -42,7 +42,7 @@ export const AnalisisForm = ({barraLateral, setBarraLateral, id}) => {
             <RegularInput placeholder="Precio" title="Precio Estándar" inputType="number" icon={faDollarSign} />
             <RegularInput placeholder="Descripción" inputType="text" icon={faPollH} />
             <div>
-                <p>Componentes análisis</p>
+                <p>Componentes del análisis</p>
             </div>
             <div className={`my-4 xl:col-start-2 xl:col-span-2 ${barraLateral  ? 'lg:col-span-2' : 'sm:col-span-2 lg:col-start-3 lg:col-span-1'}`}>
                 <RegularButton title="Actualizar" />
