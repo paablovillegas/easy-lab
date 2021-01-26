@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PacienteScreen } from './components/screens/catalogos/PacienteScreen';
+import { AnalisisScreen } from './components/screens/catalogos/AnalisisScreen';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <PacienteScreen />, 
+    <AnalisisScreen />, 
     document.getElementById('root')
 );
 

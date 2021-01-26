@@ -1,4 +1,4 @@
-import { faChevronLeft, faChevronRight, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faIndustry, faPercentage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { RegularButton } from '../../input-types/RegularButton'
@@ -31,7 +31,7 @@ export const InstitucionForm = ({barraLateral, setBarraLateral, id}) => {
                 </button>
                 <div className="flex flex-col">
                     <h1 className="text-5xl font-bold">
-                            Doctor {id && id.toString().padStart(4, '0')}
+                            Institución {id && id.toString().padStart(4, '0')}
                     </h1>
                     <h5 
                         className="text-sm text-gray-500">
@@ -39,8 +39,8 @@ export const InstitucionForm = ({barraLateral, setBarraLateral, id}) => {
                     </h5>
                 </div>
             </div>
-            <RegularInput placeholder="Institucion" inputType="text" icon={faUser} />
-            <RegularInput placeholder="Descuento" inputType="text" icon={faUser} />
+            <RegularInput placeholder="Institucion" inputType="text" icon={faIndustry} />
+            <RegularInput placeholder="Descuento" inputType="text" icon={faPercentage} />
             <div className={`my-4 xl:col-start-2 xl:col-span-2 ${barraLateral  ? 'lg:col-span-2' : 'sm:col-span-2 lg:col-start-3 lg:col-span-1'}`}>
                 <RegularButton title="Actualizar" />
             </div>
