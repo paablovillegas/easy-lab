@@ -1,14 +1,3 @@
-export const paciente = {
-    id_paciente: 1,
-    nombre: 'Pablo Emmanuel',
-    apellido_paterno: 'Villegas',
-    apellido_materno: 'Ferruzca',
-    correo: 'pablovillegas@gmail.com',
-    telefono: 551232222,
-    genero: 'M',
-    edad: 23,
-};
-
 export const pacientesApi = [
     {
         id_paciente: 1,
@@ -68,7 +57,7 @@ export const pacientesApi = [
         fecha_nacimiento: 980471133000,
         correo: 'estafeaniaalanis@gmail.com',
         telefono: 551231111,
-        genero: 'M',
+        genero: 'F',
         edad: 19,
     },
 ];

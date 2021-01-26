@@ -10,6 +10,11 @@ export const dataReducer = (state = [], action) => {
 
 export const changePaciente = (state = {}, action) => {
     switch (action.type) {
+        case 'change': 
+            return {
+                ...state,
+                [action.payload.name]: action.payload.value,
+            };
         case 'click':
             return action.payload;
         default:

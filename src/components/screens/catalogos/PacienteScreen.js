@@ -6,9 +6,9 @@ import { NavBar } from '../../nav-bar/NavBar'
 import { SearchBar } from '../../sub-items/search-bar/SearchBar'
 
 export const PacienteScreen = () => {
-    const [barraLateral, setBarraLateral] = useState(false);
-    const [pacientes, dispatchPacientes] = useReducer(dataReducer, [])
-    const [paciente, dispatchPaciente] = useReducer(changePaciente)
+    const [barraLateral, setBarraLateral] = useState(true);
+    const [pacientes, dispatchPacientes] = useReducer(dataReducer, []);
+    const [paciente, dispatchPaciente] = useReducer(changePaciente);
 
     setTimeout(() => {
         dispatchPacientes({
@@ -35,11 +35,15 @@ export const PacienteScreen = () => {
                     />
                 </div>
                 <div className='sm:flex-1'>
-                    <PacienteForm 
-                        paciente={paciente}
-                        barraLateral={barraLateral}
-                        setBarraLateral={setBarraLateral}
-                    />
+                    {
+                        paciente &&
+                        <PacienteForm 
+                            paciente={paciente}
+                            handleInputChange={dispatchPaciente}
+                            barraLateral={barraLateral}
+                            setBarraLateral={setBarraLateral}
+                        />
+                    }
                 </div>
             </div>
         </div>

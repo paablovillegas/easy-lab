@@ -8,7 +8,13 @@ export const SearchBar = ({data, selection}) => {
     const handleClick = (i) => {
         selection({
             type: 'click',
-            payload: data[i]
+            payload: {
+                direccion: '',
+                nombre: '',
+                apellido_materno: '',
+                apellido_paterno: '',
+                ...data[i],
+            }
         })
     }
 

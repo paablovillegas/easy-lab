@@ -8,8 +8,8 @@ export const RegularInput = ({
     name,
     value,
     onChange,
-    inputType = 'text' }
-) => {
+    inputType = 'text' 
+}) => {
     return (
         <div>
             <label className="block mt-2 mb-1 text-sm text-gray-300">{title || placeholder}</label>
