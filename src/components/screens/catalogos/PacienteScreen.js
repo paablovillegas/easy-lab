@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PacienteForm } from '../../forms/paciente/PacienteForm'
+import { PacienteForm } from '../../forms/catalogos/PacienteForm'
 import { NavBar } from '../../nav-bar/NavBar'
 import { SearchBar } from '../../sub-items/search-bar/SearchBar'
 

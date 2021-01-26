@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { PacienteScreen } from './components/screens/catalogos/PacienteScreen';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { PacienteScreen } from './components/screens/paciente/PacienteScreen';
 
 ReactDOM.render(
     <PacienteScreen />, 
