@@ -1,9 +1,9 @@
 import { faAt, faCalendarDay, faChevronLeft, faChevronRight, faHome, faPhone, faUser, faVenusMars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { RegularButton } from '../../input-types/RegularButton'
-import { RegularInput } from '../../input-types/RegularInput'
-import { SelectInput } from '../../input-types/SelectInput'
+import { RegularButton } from '../../forms/input-types/RegularButton'
+import { RegularInput } from '../../forms/input-types/RegularInput'
+import { SelectInput } from '../../forms/input-types/SelectInput'
 
 export const PacienteForm = ({barraLateral, setBarraLateral, paciente, handleInputChange }) => {
     const opcionesGenero = [

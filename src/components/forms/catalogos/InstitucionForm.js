@@ -1,8 +1,8 @@
 import { faChevronLeft, faChevronRight, faIndustry, faPercentage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { RegularButton } from '../../input-types/RegularButton'
-import { RegularInput } from '../../input-types/RegularInput'
+import { RegularButton } from '../../forms/input-types/RegularButton'
+import { RegularInput } from '../../forms/input-types/RegularInput'
 
 export const InstitucionForm = ({barraLateral, setBarraLateral, id}) => {
 
