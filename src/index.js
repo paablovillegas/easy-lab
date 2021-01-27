@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PacienteScreen } from './components/screens/catalogos/PacienteScreen';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { AppRouter } from './routers/AppRouter';

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { pacientesApi } from '../../../../sample/Pacientes'
-import { SearchBar } from '../../../forms/search-bar/SearchBar'
+import { institucionesApi } from '../../../../sample/Instituciones'
 import { FormInstituciones } from './FormInstituciones'
+import { SearchInstitucion } from './SearchInstitucion'
 
 export const ScreenInstituciones = () => {
 
     return (
         <div className='flex flex-1'>
-            <SearchBar data={pacientesApi} />
+            <SearchInstitucion data={institucionesApi} />
             <Switch>
                 <Route path="/catalogos/instituciones/:id" component={FormInstituciones} />
             </Switch>
