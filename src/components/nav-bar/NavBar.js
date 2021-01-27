@@ -1,6 +1,7 @@
 import { faClipboardList, faHdd, faHospital, faInfoCircle, faList, faMoneyCheck, faSignOutAlt, faUser, faUserMd, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './NavBar.css'
 
 export const NavBar = () => {
@@ -37,20 +38,24 @@ export const NavBar = () => {
                         <h5>Pacientes</h5>
                     </button>
                     <button className="normal">
-                        <FontAwesomeIcon 
-                            className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
-                            icon={faUserMd}
-                            size="sm"
-                        />
-                        <h5>Doctores</h5>
+                        <Link to="/catalogos/doctores">
+                            <FontAwesomeIcon 
+                                className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
+                                icon={faUserMd}
+                                size="sm"
+                            />
+                            <h5>Doctores</h5>
+                        </Link>
                     </button>
                     <button className="normal">
-                        <FontAwesomeIcon 
-                            className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
-                            icon={faHospital}
-                            size="sm"
-                        />
-                        <h5>Instituciones</h5>
+                        <Link to="/catalogos/instituciones">
+                            <FontAwesomeIcon 
+                                className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
+                                icon={faHospital}
+                                size="sm"
+                            />
+                            <h5>Instituciones</h5>
+                        </Link>
                     </button>
                     <button className="normal">
                         <FontAwesomeIcon 

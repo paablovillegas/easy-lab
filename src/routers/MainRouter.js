@@ -9,11 +9,9 @@ export const MainRouter = () => {
             <div className="sm:w-16 lg:w-1/6">
                 <NavBar />
             </div>
-            <div className="flex flex-1">
-                <Switch>
-                    <Route path="/catalogos" component={ CatalogosRouter } />
-                </Switch>
-            </div>
+            <Switch>
+                <Route path="/catalogos" component={ CatalogosRouter } />
+            </Switch>
         </div>
     )
 }
