@@ -2,8 +2,8 @@ import React, { useReducer, useState } from 'react'
 import { changePaciente, dataReducer } from '../../../hooks/dataReducer'
 import { pacientesApi } from '../../../sample/Pacientes'
 import { PacienteForm } from '../../forms/catalogos/PacienteForm'
+import { SearchBar } from '../../forms/search-bar/SearchBar'
 import { NavBar } from '../../nav-bar/NavBar'
-import { SearchBar } from '../../sub-items/search-bar/SearchBar'
 
 export const PacienteScreen = () => {
     const [barraLateral, setBarraLateral] = useState(true);

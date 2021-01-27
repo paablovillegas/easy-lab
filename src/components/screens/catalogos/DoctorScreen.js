@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DoctorForm } from '../../forms/catalogos/DoctorForm';
+import { SearchBar } from '../../forms/search-bar/SearchBar';
 import { NavBar } from '../../nav-bar/NavBar';
-import { SearchBar } from '../../sub-items/search-bar/SearchBar';
 
 export const DoctorScreen = () => {
     const [barraLateral, setBarraLateral] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { InstitucionForm } from '../../forms/catalogos/InstitucionForm';
 import { NavBar } from '../../nav-bar/NavBar';
-import { SearchBar } from '../../sub-items/search-bar/SearchBar';
+import { SearchBar } from '../../forms/search-bar/SearchBar';
 
 export const InstitucionScreen = () => {
     const [barraLateral, setBarraLateral] = useState(false);
