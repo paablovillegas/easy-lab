@@ -4,19 +4,7 @@ import React from 'react'
 import { RoundInput } from '../../forms/input-types/RoundInput'
 import { ItemFile } from './item-bar/ItemFile'
 
-export const SearchBar = ({data, selection}) => {
-    const handleClick = (i) => {
-        selection({
-            type: 'click',
-            payload: {
-                direccion: '',
-                nombre: '',
-                apellido_materno: '',
-                apellido_paterno: '',
-                ...data[i],
-            }
-        })
-    }
+export const SearchBar = ({data}) => {
 
     return (
         <div className="bg-gray-50 min-h-screen sm:h-screen flex flex-col relative">
@@ -43,9 +31,10 @@ export const SearchBar = ({data, selection}) => {
                         return <ItemFile 
                             key={item.id_paciente} 
                             index={i} 
-                            nombre={item.nombre}
-                            apellidos={item.apellido_paterno.concat(' '.concat(item.apellido_materno || ''))}
-                            handleClick={() => handleClick(i)}
+                            id={item.id_paciente}
+                            title={item.nombre}
+                            subtitle={item.apellido_paterno.concat(' '.concat(item.apellido_materno || ''))}
+                            route='/catalogos/instituciones/'
                         />
                     })
                 }

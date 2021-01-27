@@ -26,7 +26,7 @@ export const NavBar = () => {
                 </button>
             </div>
             <div className={`flex flex-grow mt-3 sm:mt-6 flex-col space-y-3 ${menuState && 'hidden sm:flex'}`}>
-                <Link className="primary" to="/catalogos">
+                <Link className="primary" to="/catalogos" title="Catálogos">
                     <FontAwesomeIcon 
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-3" 
                         icon={faHdd}
@@ -34,7 +34,7 @@ export const NavBar = () => {
                     <h4>Catálogos</h4>
                 </Link>
                 <div className="mx-2 flex flex-col space-y-1">
-                    <Link className="normal" to="/">
+                    <Link className="normal" to="/" title="Pacientes">
                         <FontAwesomeIcon 
                             className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
                             icon={faUser}
@@ -42,7 +42,7 @@ export const NavBar = () => {
                         />
                         <h5>Pacientes</h5>
                     </Link>
-                    <Link className="normal" to="/catalogos/doctores">
+                    <Link className="normal" to="/catalogos/doctores" title="Doctores">
                         <FontAwesomeIcon 
                             className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
                             icon={faUserMd}
@@ -50,7 +50,7 @@ export const NavBar = () => {
                         />
                         <h5>Doctores</h5>
                     </Link>
-                    <Link className="normal" to="/catalogos/instituciones">
+                    <Link className="normal" to="/catalogos/instituciones" title="Instituciones">
                         <FontAwesomeIcon 
                             className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
                             icon={faHospital}
@@ -58,7 +58,7 @@ export const NavBar = () => {
                         />
                         <h5>Instituciones</h5>
                     </Link>
-                    <Link className="normal" to="/">
+                    <Link className="normal" to="/" title="Análisis">
                         <FontAwesomeIcon 
                             className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
                             icon={faVial}
@@ -67,14 +67,14 @@ export const NavBar = () => {
                         <h5>Análisis</h5>
                     </Link>
                 </div>
-                <Link className="primary" to="/">
+                <Link className="primary" to="/" title="Registros">
                     <FontAwesomeIcon 
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-3" 
                         icon={faMoneyCheck}
                     />
                     <h4>Registros</h4>
                 </Link>
-                <Link className="primary" to="/">
+                <Link className="primary" to="/" title="Reportes">
                     <FontAwesomeIcon 
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-5" 
                         icon={faClipboardList}
