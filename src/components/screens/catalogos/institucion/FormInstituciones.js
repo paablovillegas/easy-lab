@@ -2,17 +2,13 @@ import { faChevronLeft, faChevronRight, faIndustry, faPercentage } from '@fortaw
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { ListTypes } from '../../../../hooks/reducers/listReducer'
 import { institucionesApi, institucionInit } from '../../../../sample/Instituciones'
 import { RegularButton } from '../../../forms/input-types/RegularButton'
 import { RegularInput } from '../../../forms/input-types/RegularInput'
 
-export const FormInstituciones = ({updateList}) => {
+export const FormInstituciones = ({barraLateral, setBarraLateral}) => {
     const history = useHistory()
-    let barraLateral = false
-
     let { id } = useParams()
-
     const [institucion, setInstitucion] = useState(institucionInit)
 
     useEffect(() => {
@@ -22,11 +18,13 @@ export const FormInstituciones = ({updateList}) => {
         })
     }, [id])
 
+    const handleBarra = () => setBarraLateral(state => !state);
+
     const handleChange = ({ target }) => {
         setInstitucion({
             ...institucion,
             [target.name]: target.value
-        })
+        });
     }
 
     const click = () => {
@@ -36,14 +34,6 @@ export const FormInstituciones = ({updateList}) => {
                 ...institucion,
                 comision: inputNumber
             })
-            updateList({
-                type: ListTypes.UPDATE,
-                payload: {
-                    data:institucion,
-                    propName: 'id_institucion',
-                    id,
-                }
-            })
             history.replace('/catalogos/instituciones');
         } else {
             console.log('error');
@@ -51,7 +41,7 @@ export const FormInstituciones = ({updateList}) => {
     }
 
     return (
-        <div className='sm:flex-1'>
+        <div className='flex-1'>
             <div
                 className={`pt-3 px-2 space-x-3.5 grid grid-cols-1 sm:max-h-screen sm:overflow-y-auto xl:grid-cols-3
                     ${barraLateral ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}
@@ -62,7 +52,7 @@ export const FormInstituciones = ({updateList}) => {
                 `}>
                     <button
                         className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100"
-                        onClick={ () => {} }
+                        onClick={ handleBarra }
                     >
                         <FontAwesomeIcon
                             icon={barraLateral ? faChevronLeft : faChevronRight}

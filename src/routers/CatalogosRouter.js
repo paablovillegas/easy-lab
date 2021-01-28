@@ -6,7 +6,7 @@ import { InicioCatalogo } from '../components/screens/catalogos/_InicioScreen';
 
 export const CatalogosRouter = () => {
     return (
-        <div className="flex flex-1">
+        <div className="flex flex-1 min-h-screen pt-12 sm:pt-0">
             <Switch>
                 <Route exact path="/catalogos" component={InicioCatalogo} />
                 <Route path="/catalogos/instituciones" component={ScreenInstituciones} />

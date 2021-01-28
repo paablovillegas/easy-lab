@@ -1,41 +1,63 @@
 import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { RoundInput } from '../../../forms/input-types/RoundInput'
 import { ItemFile } from '../../../forms/search-bar/item-bar/ItemFile'
 
-export const SearchInstitucion = ({data}) => {
+export const SearchInstitucion = ({data, mostrarBarra}) => {
+    const history = useHistory().location.pathname.split('/').reverse();
+    let hasId = history[0] !== 'instituciones';
+
+    const [stringSearch, setStringSearch] = useState('');
+    const setSearch = ({target}) => {
+        setStringSearch(target.value)
+    }
+    const filter = ({institucion, comision}) => {
+        return institucion.toLowerCase().includes(stringSearch) ||
+            comision.toString().includes(stringSearch)
+    }
+
     return (
-        <div className="bg-gray-50 min-h-screen sm:h-screen flex flex-col relative">
+        <div className={`bg-gray-50 min-h-full flex-col relative sm:h-screen sm:flex sm:w-auto
+             ${hasId ? 'hidden' : 'w-screen  flex'}
+             ${mostrarBarra ? '' : 'sm:hidden'}
+        `}>
             <div
                 className="flex flex-row"
             >
-                <h2 className="flex-grow text-3xl font-bold pl-3 mb-5">Catálogo de Pacientes</h2>
-                <button className="mr-2 px-5 py-5 my-auto">
+                <h2 className="flex-grow text-3xl font-bold px-3 my-3">Instituciones</h2>
+                <Link className="mr-2 px-5 py-3 my-auto focus:outline-none transition rounded active:bg-gray-200"
+                    to='/catalogos/instituciones/nuevo'
+                    replace
+                >
                     <FontAwesomeIcon icon={faPlus} />
-                </button>
+                </Link>
             </div>
             <div className="p-2">
                 <RoundInput 
-                    placeholder="Nombre, correo..."
+                    placeholder="Institucion, comisión..."
                     icon={faVial}
                     size="xs"
+                    value={stringSearch}
+                    onChange={setSearch}
                 />
             </div>
             <p>Ordenar</p>
             <hr></hr>
             <div className="w-full flex-grow sm:mb-10 sm:overflow-y-auto">
                 {
-                    data.map((item, i) => {
-                        return <ItemFile 
-                            key={item.id_institucion} 
-                            index={i} 
-                            id={item.id_institucion}
-                            title={item.institucion}
-                            subtitle={item.comision.toString().concat(' %')}
-                            route='/catalogos/instituciones/'
-                        />
-                    })
+                    data.filter(item => filter(item))
+                        .map((item, i) => {
+                            return <ItemFile 
+                                key={item.id_institucion} 
+                                index={i} 
+                                id={item.id_institucion}
+                                title={item.institucion}
+                                subtitle={item.comision.toString().concat(' %')}
+                                route='/catalogos/instituciones/'
+                            />
+                        })
                 }
             </div>
             <div className="w-full h-10 relative sm:absolute bottom-0 bg-gray-200 flex flex-col justify-center">

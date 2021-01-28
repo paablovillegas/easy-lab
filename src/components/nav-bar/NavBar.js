@@ -8,6 +8,7 @@ export const NavBar = () => {
     const [menuState, setMenuState] = useState(false);
 
     const showHideMenu = () => {
+        console.log('aaa');
         setMenuState(state => !state)
     }
 
@@ -17,11 +18,10 @@ export const NavBar = () => {
                 <h3 className="flex-grow ml-3 my-auto text-gray-200 align-baseline">
                     Laboratorio Nombre
                 </h3>
-                <button className="normal p-2 m-2">
+                <button className="normal p-2 m-2" onClick={showHideMenu}>
                     <FontAwesomeIcon
                         className="text-gray-400 lg:hidden xl:inline-block xl:mr-2"
                         icon={faList} 
-                        onClick={showHideMenu}
                     />
                 </button>
             </div>
