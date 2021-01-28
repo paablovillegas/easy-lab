@@ -1,26 +1,23 @@
 import { faChevronLeft, faChevronRight, faIndustry, faPercentage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { institucionesApi } from '../../../../sample/Instituciones'
+import { useHistory, useParams } from 'react-router-dom'
+import { ListTypes } from '../../../../hooks/reducers/listReducer'
+import { institucionesApi, institucionInit } from '../../../../sample/Instituciones'
 import { RegularButton } from '../../../forms/input-types/RegularButton'
 import { RegularInput } from '../../../forms/input-types/RegularInput'
 
-export const FormInstituciones = () => {
+export const FormInstituciones = ({updateList}) => {
+    const history = useHistory()
     let barraLateral = false
-    const verOcularBarra = () => { };
 
     let { id } = useParams()
 
-    const [institucion, setInstitucion] = useState({
-        institucion: '',
-        comision: 0
-    })
+    const [institucion, setInstitucion] = useState(institucionInit)
 
     useEffect(() => {
         setInstitucion({
-            institucion: '',
-            comision: 0,
+            ...institucionInit,
             ...institucionesApi.find(i => i.id_institucion === parseInt(id))
         })
     }, [id])
@@ -30,6 +27,27 @@ export const FormInstituciones = () => {
             ...institucion,
             [target.name]: target.value
         })
+    }
+
+    const click = () => {
+        const inputNumber = parseFloat(institucion.comision)
+        if (inputNumber || inputNumber === 0) {
+            setInstitucion({
+                ...institucion,
+                comision: inputNumber
+            })
+            updateList({
+                type: ListTypes.UPDATE,
+                payload: {
+                    data:institucion,
+                    propName: 'id_institucion',
+                    id,
+                }
+            })
+            history.replace('/catalogos/instituciones');
+        } else {
+            console.log('error');
+        }
     }
 
     return (
@@ -44,7 +62,7 @@ export const FormInstituciones = () => {
                 `}>
                     <button
                         className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100"
-                        onClick={verOcularBarra}
+                        onClick={ () => {} }
                     >
                         <FontAwesomeIcon
                             icon={barraLateral ? faChevronLeft : faChevronRight}
@@ -72,14 +90,14 @@ export const FormInstituciones = () => {
                 />
                 <RegularInput
                     placeholder="Descuento"
-                    inputType="text"
+                    inputType="number"
                     icon={faPercentage}
                     name='comision'
                     value={institucion.comision}
                     onChange={handleChange}
                 />
                 <div className={`my-4 xl:col-start-2 xl:col-span-2 ${barraLateral ? 'lg:col-span-2' : 'sm:col-span-2 lg:col-start-3 lg:col-span-1'}`}>
-                    <RegularButton title="Actualizar" />
+                    <RegularButton title="Actualizar" onClick={click} />
                 </div>
             </div>
         </div>

@@ -1,3 +1,8 @@
+export const institucionInit = {
+    institucion: '',
+    comision: 0
+}
+
 export const institucionesApi = [
     {
         id_institucion: 1,
