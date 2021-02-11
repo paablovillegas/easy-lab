@@ -6,17 +6,17 @@ const initialState = {
 };
 
 const replaceInstitucion = (instituciones, inst) =>
-    instituciones = instituciones.map(i => i._id === inst._id ? inst : i);
+    instituciones.map(i => i._id === inst._id ? inst : i);
 
 const addInstitucion = (instituciones, inst) =>
-    instituciones = [...instituciones, inst].sort((a, b) => a.institucion > b.institucion ? 1 : -1);
+    [...instituciones, inst].sort((a, b) => a.institucion > b.institucion ? 1 : -1);
 
 export const institucionReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case Types.Institucion.FETCH:
             return {
-                ...state,
                 instituciones: payload,
+                active: null,
             };
         case Types.Institucion.SET_ACTIVE:
             return {
