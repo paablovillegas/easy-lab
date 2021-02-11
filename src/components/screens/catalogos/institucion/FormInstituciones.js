@@ -1,44 +1,43 @@
 import { faChevronLeft, faChevronRight, faIndustry, faPercentage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
-import { institucionesApi, institucionInit } from '../../../../sample/Instituciones'
+import { useDispatch } from 'react-redux'
+import { clearActive, startInsertInstitucion, startUpdateInstitucion } from '../../../../redux/actions/institucion'
 import { RegularButton } from '../../../forms/input-types/RegularButton'
 import { RegularInput } from '../../../forms/input-types/RegularInput'
 
-export const FormInstituciones = ({barraLateral, setBarraLateral}) => {
-    const history = useHistory()
-    let { id } = useParams()
-    const [institucion, setInstitucion] = useState(institucionInit)
+export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
+    const dispatch = useDispatch();
+
+    const [institucion, setInstitucion] = useState(data);
 
     useEffect(() => {
-        setInstitucion({
-            ...institucionInit,
-            ...institucionesApi.find(i => i.id_institucion === parseInt(id))
-        })
-    }, [id])
-
-    const handleBarra = () => setBarraLateral(state => !state);
+        setInstitucion({ ...data });
+    }, [data]);
 
     const handleChange = ({ target }) => {
         setInstitucion({
             ...institucion,
             [target.name]: target.value
         });
-    }
+    };
 
-    const click = () => {
-        const inputNumber = parseFloat(institucion.comision)
+    const updateInsert = () => {
+        const inputNumber = parseFloat(institucion.descuento)
         if (inputNumber || inputNumber === 0) {
             setInstitucion({
                 ...institucion,
-                comision: inputNumber
+                descuento: inputNumber
             })
-            history.replace('/catalogos/instituciones');
+            if (institucion._id) dispatch(startUpdateInstitucion(institucion));
+            else dispatch(startInsertInstitucion(institucion));
         } else {
+            //TODO: Mostrar error!
             console.log('error');
         }
-    }
+    };
+
+    const clearInstitucion = () => dispatch(clearActive());
 
     return (
         <div className='flex-1'>
@@ -51,8 +50,18 @@ export const FormInstituciones = ({barraLateral, setBarraLateral}) => {
                         ${barraLateral ? 'sm:col-span-1 lg:col-span-2' : 'sm:col-span-2 lg:col-span-3'}
                 `}>
                     <button
-                        className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100"
-                        onClick={ handleBarra }
+                        className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100 sm:hidden"
+                        onClick={clearInstitucion}
+                    >
+                        <FontAwesomeIcon
+                            icon={barraLateral ? faChevronLeft : faChevronRight}
+                            size="3x"
+                            className="my-auto ml-1 mr-2"
+                        />
+                    </button>
+                    <button
+                        className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100 hidden sm:inline-block"
+                        onClick={setBarraLateral}
                     >
                         <FontAwesomeIcon
                             icon={barraLateral ? faChevronLeft : faChevronRight}
@@ -62,7 +71,11 @@ export const FormInstituciones = ({barraLateral, setBarraLateral}) => {
                     </button>
                     <div className="flex flex-col">
                         <h1 className="text-5xl font-bold">
-                            Institución {id && id.toString().padStart(4, '0')}
+                            {
+                                institucion._id
+                                    ? 'Editar Institucion'
+                                    : 'Nueva Institucion'
+                            }
                         </h1>
                         <h5
                             className="text-sm text-gray-500">
@@ -82,12 +95,17 @@ export const FormInstituciones = ({barraLateral, setBarraLateral}) => {
                     placeholder="Descuento"
                     inputType="number"
                     icon={faPercentage}
-                    name='comision'
-                    value={institucion.comision}
+                    name='descuento'
+                    value={institucion.descuento}
                     onChange={handleChange}
                 />
-                <div className={`my-4 xl:col-start-2 xl:col-span-2 ${barraLateral ? 'lg:col-span-2' : 'sm:col-span-2 lg:col-start-3 lg:col-span-1'}`}>
-                    <RegularButton title="Actualizar" onClick={click} />
+                <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
+                    ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
+                `}>
+                    <RegularButton
+                        title={institucion._id ? 'Actualizar' : 'Registrar'}
+                        onClick={updateInsert}
+                    />
                 </div>
             </div>
         </div>

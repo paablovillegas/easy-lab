@@ -22,7 +22,7 @@ export const RoundInput = ({
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    className="bg-gray-50 text-gray-500 placeholder-gray-300 rounded-full shadow-sm ring-1 ring-gray-700 py-1.5 pl-11 pr-2 w-full transition duration-300 focus:outline-none focus:shadow-md text-sm"
+                    className="bg-gray-50 text-gray-600 placeholder-gray-300 rounded-full shadow-sm ring-1 ring-gray-700 py-1.5 pl-11 pr-2 w-full transition duration-300 focus:outline-none focus:shadow-md focus:placeholder-gray-400 text-sm"
                 />
             </div>
         </>
