@@ -1,32 +1,28 @@
-import React, { useReducer, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import { listReducer, ListTypes } from '../../../../hooks/reducers/listReducer'
-import { institucionesApi } from '../../../../sample/Instituciones'
+import { startFetch } from '../../../../redux/actions/institucion'
 import { FormInstituciones } from './FormInstituciones'
 import { SearchInstitucion } from './SearchInstitucion'
 
 export const ScreenInstituciones = () => {
-    const [instituciones, dispatchInstituciones] = useReducer(listReducer, [])
+    const dispatch = useDispatch();
+    const { instituciones } = useSelector(state => state.institucion);
+
     const [mostrarBarra, setMostrarBarra] = useState(true);
 
-    setTimeout(() => {
-        dispatchInstituciones({
-            type: ListTypes.FETCH,
-            payload: institucionesApi,
-        })
-    }, 1500);
-
-    fetch('http://localhost:4000/lab/instituciones')
-        .then(value => console.log(value.body));
+    useEffect(() => {
+        dispatch(startFetch());
+    }, [dispatch]);
 
     return (
         <div className='flex flex-1'>
             <SearchInstitucion data={instituciones} mostrarBarra={mostrarBarra} />
             <Switch>
-                <Route 
-                    path="/catalogos/instituciones/:id" 
-                    render={ (p) => 
-                        <FormInstituciones {...p} 
+                <Route
+                    path="/catalogos/instituciones/:id"
+                    render={(p) =>
+                        <FormInstituciones {...p}
                             mostrarBarra={mostrarBarra}
                             setMostrarBarra={setMostrarBarra}
                         />

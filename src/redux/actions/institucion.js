@@ -1,3 +1,4 @@
+import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
 
 export const setActive = (institucion) => ({
@@ -16,10 +17,14 @@ export const updateInstitucion = (institucion) => ({
 });
 
 export const startFetch = () => {
-    
+    return async (dispatch) => {
+        fetchConToken('instituciones')
+            .then(response => response.json())
+            .then(({ instituciones }) => dispatch(fetchInstituciones(instituciones)));
+    }
 }
 
-export const fetchInstituciones = (instituciones) => ({
+const fetchInstituciones = (instituciones) => ({
     type: Types.Institucion.FETCH,
     payload: instituciones,
 });

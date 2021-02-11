@@ -1,6 +1,6 @@
 import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { RoundInput } from '../../../forms/input-types/RoundInput'
 import { ItemFile } from '../../../forms/search-bar/item-bar/ItemFile'
@@ -13,9 +13,9 @@ export const SearchInstitucion = ({data, mostrarBarra}) => {
     const setSearch = ({target}) => {
         setStringSearch(target.value)
     }
-    const filter = ({institucion, comision}) => {
+    const filter = ({institucion, descuento}) => {
         return institucion.toLowerCase().includes(stringSearch) ||
-            comision.toString().includes(stringSearch)
+            descuento.toString().includes(stringSearch)
     }
 
     return (
@@ -50,18 +50,18 @@ export const SearchInstitucion = ({data, mostrarBarra}) => {
                     data.filter(item => filter(item))
                         .map((item, i) => {
                             return <ItemFile 
-                                key={item.id_institucion} 
+                                key={item._id} 
                                 index={i} 
-                                id={item.id_institucion}
+                                id={item._id}
                                 title={item.institucion}
-                                subtitle={item.comision.toString().concat(' %')}
+                                subtitle={item.descuento.toString().concat(' %')}
                                 route='/catalogos/instituciones/'
                             />
                         })
                 }
             </div>
             <div className="w-full h-10 relative sm:absolute bottom-0 bg-gray-200 flex flex-col justify-center">
-                <p className="text-sm text-center text-gray-600">Pacientes</p>
+                <p className="text-sm text-center text-gray-600">Instituciones</p>
                 <p className="text-xs text-center text-gray-500">{data.length}</p>
             </div>
         </div>

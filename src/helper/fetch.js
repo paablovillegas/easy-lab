@@ -1,4 +1,4 @@
-const baseUrl = process.env.API;
+const baseUrl = process.env.REACT_APP_API;
 
 const fetchSinToken = (endpoint, method = 'GET', data) => {
     const url = `${baseUrl}${endpoint}`;
