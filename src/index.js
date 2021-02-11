@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { LabApp } from './LabApp';
 import reportWebVitals from './reportWebVitals';
-import { AppRouter } from './routers/AppRouter';
 
 ReactDOM.render(
-    <AppRouter />, 
+    <LabApp />, 
     document.getElementById('root')
 );
 
