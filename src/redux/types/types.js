@@ -14,5 +14,12 @@ export const Types = {
         INSERT: '[Doc] New',
         UPDATE: '[Doc] Update',
         FETCH: '[Doc] Fetch',
-    }
+    },
+    Paciente: {
+        SET_ACTIVE: '[Pax] Set',
+        CLEAR_ACTIVE: '[Pax] Clear',
+        INSERT: '[Pax] New',
+        UPDATE: '[Pax] Update',
+        FETCH: '[Pax] Fetch',
+    },
 }

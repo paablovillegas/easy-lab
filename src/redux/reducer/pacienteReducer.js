@@ -1,45 +1,45 @@
 import { Types } from "../types/types";
 
 const initialState = {
-    doctores: [],
-    active: null,
+    pacientes: [],
+    paciente: null,
 }
 
-const replaceDoctor = (doctores = [], doctor) =>
-    doctores.map(i => i._id === doctor._id ? doctor : i);
+const replacePaciente = (pacientes, pax) =>
+    pacientes.map(i => i._id === pax._id ? pax : i);
 
-const insertDoctor = (doctores = [], doctor) => [...doctores, doctor]
+const insertPaciente = (pacientes, pax) => [...pacientes, pax]
     .sort((a, b) => a.apellido_paterno + a.apellido_materno >
         b.apellido_paterno + b.apellido_materno ? 1 : -1);
 
-export const doctorReducer = (state = initialState, { type, payload }) => {
+export const pacienteReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case Types.Doctor.FETCH:
+        case Types.Paciente.FETCH:
             return {
-                doctores: payload,
+                pacientes: payload,
                 active: null,
             };
-        case Types.Doctor.SET_ACTIVE:
+        case Types.Paciente.SET_ACTIVE:
             return {
                 ...state,
                 active: payload,
             };
-        case Types.Doctor.CLEAR_ACTIVE:
+        case Types.Paciente.CLEAR_ACTIVE:
             return {
                 ...state,
                 active: null,
             }
-        case Types.Doctor.UPDATE:
+        case Types.Paciente.UPDATE:
             return {
                 active: null,
-                doctores: replaceDoctor(state.doctores, payload),
+                pacientes: replacePaciente(state.pacientes, payload),
             };
-        case Types.Doctor.INSERT:
+        case Types.Paciente.INSERT:
             return {
                 active: null,
-                doctores: insertDoctor(state.doctores, payload),
+                pacientes: insertPaciente(state.pacientes, payload),
             };
         default:
             return state;
     }
-};
+}
