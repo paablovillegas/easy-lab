@@ -16,6 +16,9 @@ export const ScreenInstituciones = () => {
         })
     }, 1500);
 
+    fetch('http://localhost:4000/lab/instituciones')
+        .then(value => console.log(value.body));
+
     return (
         <div className='flex flex-1'>
             <SearchInstitucion data={instituciones} mostrarBarra={mostrarBarra} />
