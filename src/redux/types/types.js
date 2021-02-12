@@ -22,4 +22,16 @@ export const Types = {
         UPDATE: '[Pax] Update',
         FETCH: '[Pax] Fetch',
     },
+    Analisis: {
+        SET_ACTIVE: '[Als] Set',
+        CLEAR_ACTIVE: '[Als] Clear',
+        INSERT: '[Als] New',
+        UPDATE: '[Als] Update',
+        FETCH: '[Als] Fetch',
+    },
+    Componente: {
+        INSERT: '[Comp] New',
+        UPDATE: '[Comp] Update',
+        FETCH: '[Comp] Fetch',
+    },
 }
