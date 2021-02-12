@@ -23,14 +23,14 @@ export const SelectInput = ({
                     onChange={onChange}
                 >
                     {
-                        options.map(option => {
-                            return <option 
+                        options.map(option => (
+                            <option 
                                 key={option.value}
                                 value={option.value}
                             >
                                 {option.name}
                             </option>
-                        })
+                        ))
                     }
                 </select>
             </div>
