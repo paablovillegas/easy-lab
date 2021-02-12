@@ -34,4 +34,18 @@ export const Types = {
         UPDATE: '[Comp] Update',
         FETCH: '[Comp] Fetch',
     },
+    Orden: {
+        SET_ACTIVE: '[Orden] Set',
+        CLEAR_ACTIVE: '[Orden] Clear',
+        INSERT: '[Orden] New',
+        UPDATE: '[Orden] Update',
+        Fetch: {
+            FECHAS: '[Orden] Fetch fechas',
+            PACIENTE: '[Orden] Fetch paciente',
+            DOCTOR: '[Orden] Fetch doctor',
+            INSTITUCION: '[Orden] Fetch institucion',
+            ANALISIS: '[Orden] Fetch analisis',
+            ESTATUS: '[Orden] Fetch estatus',
+        },
+    },
 }

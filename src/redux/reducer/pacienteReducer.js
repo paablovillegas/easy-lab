@@ -2,7 +2,7 @@ import { Types } from "../types/types";
 
 const initialState = {
     pacientes: [],
-    paciente: null,
+    active: null,
 }
 
 const replacePaciente = (pacientes, pax) =>
