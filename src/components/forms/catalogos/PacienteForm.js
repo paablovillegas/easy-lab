@@ -128,5 +128,5 @@ export const PacienteForm = ({barraLateral, setBarraLateral, paciente, handleInp
                 <RegularButton title="Actualizar" />
             </div>
         </div>
-    )
+    );
 }

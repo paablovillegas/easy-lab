@@ -17,18 +17,20 @@ export const ScreenAnalisis = () => {
         dispatch(startFetchAnalisis());
     }, [dispatch]);
 
-    console.log(analisis, active);
-
     return (
         <div className='flex flex-1'>
-            <SearchAnalisis 
+            <SearchAnalisis
                 active={active}
                 mostrarBarra={mostrarBarra}
                 data={analisis}
             />
             {
                 active &&
-                <FormAnalisis />
+                <FormAnalisis
+                    barraLateral={mostrarBarra}
+                    setBarraLateral={hideShowBarra}
+                    data={active}
+                />
             }
         </div>
     );

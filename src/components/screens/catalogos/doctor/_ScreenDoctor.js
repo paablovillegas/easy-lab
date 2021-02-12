@@ -15,18 +15,20 @@ export const ScreenDoctor = () => {
         dispatch(startFetchDoctores())
     }, [dispatch]);
 
-    console.log(doctores, active);
-
     return (
         <div className='flex flex-1'>
-            <SearchDoctor 
+            <SearchDoctor
                 active={active}
                 mostrarBarra={mostrarBarra}
                 data={doctores}
             />
             {
                 active &&
-                <FormDoctor />
+                <FormDoctor
+                    barraLateral={mostrarBarra}
+                    data={active}
+                    setBarraLateral={hideShowBarra}
+                />
             }
         </div>
     )
