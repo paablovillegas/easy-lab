@@ -37,7 +37,7 @@ const updateInstitucion = (institucion) => ({
     payload: institucion,
 })
 
-export const startFetch = () => {
+export const startFetchInstituciones = () => {
     return (dispatch) => {
         fetchConToken('instituciones')
             .then(response => response.json())

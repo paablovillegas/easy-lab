@@ -35,7 +35,7 @@ const update = (analisis) => ({
     payload: analisis,
 });
 
-export const startFetch = () => {
+export const startFetchAnalisis = () => {
     return (dispatch) => fetchConToken('analisis')
         .then(response => response.json())
         .then(({ analisis }) => dispatch(fetch(analisis)));

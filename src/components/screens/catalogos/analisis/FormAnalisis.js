@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const FormDoctores = () => {
+export const FormAnalisis = () => {
     return (
         <div>
             

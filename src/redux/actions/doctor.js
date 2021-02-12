@@ -37,7 +37,7 @@ const updateDoctor = (doctor) => ({
     payload: doctor,
 });
 
-export const startFetch = (doctores) => {
+export const startFetchDoctores = () => {
     return (dispatch) => {
         fetchConToken('doctores')
             .then(response => response.json())

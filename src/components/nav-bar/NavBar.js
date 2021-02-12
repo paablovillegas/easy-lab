@@ -34,7 +34,7 @@ export const NavBar = () => {
                     <h4>Catálogos</h4>
                 </Link>
                 <div className="mx-2 flex flex-col space-y-1">
-                    <Link className="normal" to="/" title="Pacientes">
+                    <Link className="normal" to="/catalogos/pacientes" title="Pacientes">
                         <FontAwesomeIcon 
                             className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
                             icon={faUser}
@@ -58,7 +58,7 @@ export const NavBar = () => {
                         />
                         <h5>Instituciones</h5>
                     </Link>
-                    <Link className="normal" to="/" title="Análisis">
+                    <Link className="normal" to="/catalogos/analisis" title="Análisis">
                         <FontAwesomeIcon 
                             className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
                             icon={faVial}

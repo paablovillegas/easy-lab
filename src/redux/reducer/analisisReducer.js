@@ -15,7 +15,7 @@ export const analisisReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case Types.Analisis.FETCH:
             return {
-                doctores: payload,
+                analisis: payload,
                 active: null,
             };
         case Types.Analisis.SET_ACTIVE:
@@ -31,12 +31,12 @@ export const analisisReducer = (state = initialState, { type, payload }) => {
         case Types.Analisis.UPDATE:
             return {
                 active: null,
-                doctores: replaceAnalisis(state.doctores, payload),
+                analisis: replaceAnalisis(state.analisis, payload),
             };
         case Types.Analisis.INSERT:
             return {
                 active: null,
-                doctores: insertAnalisis(state.doctores, payload),
+                analisis: insertAnalisis(state.analisis, payload),
             };
         default:
             return state;

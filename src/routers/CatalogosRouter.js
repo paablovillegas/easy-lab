@@ -1,7 +1,10 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom';
-import { DoctorForm } from '../components/forms/catalogos/DoctorForm';
+
 import { ScreenInstituciones } from '../components/screens/catalogos/institucion/_ScreenInstituciones';
+import { ScreenAnalisis } from '../components/screens/catalogos/analisis/_ScreenAnalisis';
+import { ScreenPaciente } from '../components/screens/catalogos/paciente/_ScreenPaciente';
+import { ScreenDoctor } from '../components/screens/catalogos/doctor/_ScreenDoctor';
 import { InicioCatalogo } from '../components/screens/catalogos/_InicioScreen';
 
 export const CatalogosRouter = () => {
@@ -10,7 +13,9 @@ export const CatalogosRouter = () => {
             <Switch>
                 <Route exact path="/catalogos" component={InicioCatalogo} />
                 <Route path="/catalogos/instituciones" component={ScreenInstituciones} />
-                <Route path="/catalogos/doctores" component={DoctorForm} />
+                <Route path="/catalogos/pacientes" component={ScreenPaciente} />
+                <Route path="/catalogos/analisis" component={ScreenAnalisis} />
+                <Route path="/catalogos/doctores" component={ScreenDoctor} />
             </Switch>
         </div>
     )

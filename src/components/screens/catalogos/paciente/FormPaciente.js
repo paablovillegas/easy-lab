@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SearchDoctores = () => {
+export const FormPaciente = () => {
     return (
         <div>
             

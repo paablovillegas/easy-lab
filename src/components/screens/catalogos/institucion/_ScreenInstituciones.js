@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { startFetch } from '../../../../redux/actions/institucion'
+import { startFetchInstituciones } from '../../../../redux/actions/institucion'
 import { FormInstituciones } from './FormInstituciones'
 import { SearchInstitucion } from './SearchInstitucion'
 
@@ -12,7 +12,7 @@ export const ScreenInstituciones = () => {
     const hideShowBarra = () => setMostrarBarra(!mostrarBarra);
 
     useEffect(() => {
-        dispatch(startFetch());
+        dispatch(startFetchInstituciones());
     }, [dispatch]);
 
     return (
