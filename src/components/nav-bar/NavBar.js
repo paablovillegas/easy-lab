@@ -2,7 +2,6 @@ import { faClipboardList, faHdd, faHospital, faInfoCircle, faList, faMoneyCheck,
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import './NavBar.css'
 
 export const NavBar = () => {
     const [menuState, setMenuState] = useState(false);

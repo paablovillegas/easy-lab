@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { setActive } from '../../../../redux/actions/doctor';
 import { RoundInput } from '../../../forms/input-types/RoundInput';
-import { ItemFile } from '../../../forms/search-bar/item-bar/ItemFile';
+import { ItemFile } from '../../../forms/search-bar/ItemFile';
 
 const initialState = {
     nombre: '',

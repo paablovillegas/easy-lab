@@ -2,9 +2,10 @@ import dayjs from 'dayjs';
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
 
-const fromJSON = (institucion) => ({
-    ...institucion,
-    fecha_creacion: dayjs(institucion.fecha_creacion)
+const fromJSON = (i) => ({
+    ...i,
+    fecha_creacion: i.fecha_creacion && dayjs(i.fecha_creacion),
+    fecha_actualizacion: i.fecha_actualizacion && dayjs(i.fecha_actualizacion)
 });
 
 export const setActive = (institucion) => ({

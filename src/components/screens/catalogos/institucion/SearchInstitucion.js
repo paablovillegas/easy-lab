@@ -2,9 +2,10 @@ import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setActive } from '../../../../redux/actions/institucion'
+import { setActive, startFetchInstituciones } from '../../../../redux/actions/institucion'
 import { RoundInput } from '../../../forms/input-types/RoundInput'
-import { ItemFile } from '../../../forms/search-bar/item-bar/ItemFile'
+import { ItemFile } from '../../../forms/search-bar/ItemFile'
+import { ResumeBar } from '../../../forms/search-bar/ResumeBar'
 
 const initialInstitucion = {
     institucion: '',
@@ -23,6 +24,8 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
     const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
 
     const newItem = () => dispatch(setActive(initialInstitucion));
+
+    const updateList = () => dispatch(startFetchInstituciones());
 
     return (
         <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen
@@ -64,10 +67,11 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
                         })
                 }
             </div>
-            <div className="w-full h-10 absolute bottom-0 bg-gray-200 flex flex-col justify-center">
-                <p className="text-sm text-center text-gray-600">Instituciones</p>
-                <p className="text-xs text-center text-gray-500">{data.length}</p>
-            </div>
+            <ResumeBar
+                title="Instituciones"
+                cantidad={data.length}
+                onClick={updateList}
+            />
         </div>
     );
 }
