@@ -19,7 +19,11 @@ export const ScreenDoctor = () => {
 
     return (
         <div className='flex flex-1'>
-            <SearchDoctor />
+            <SearchDoctor 
+                active={active}
+                mostrarBarra={mostrarBarra}
+                data={doctores}
+            />
             {
                 active &&
                 <FormDoctor />

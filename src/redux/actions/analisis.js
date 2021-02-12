@@ -10,7 +10,7 @@ export const clearActive = () => ({
     type: Types.Analisis.CLEAR_ACTIVE,
 });
 
-export const startInsert = (analisis) => {
+export const startInsertAnalisis = (analisis) => {
     return (dispatch) => fetchConToken('analisis', analisis, 'POST')
         .then(response => response.json())
         .then(({ analisis }) => dispatch(insert(analisis)));
@@ -21,7 +21,7 @@ const insert = (analisis) => ({
     payload: analisis,
 });
 
-export const startUpdate = (analisis) => {
+export const startUpdateAnalisis = (analisis) => {
     return (dispatch) => {
         const endpoint = 'analisis/' + analisis._id;
         fetchConToken(endpoint, analisis, 'PUT')

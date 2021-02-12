@@ -19,7 +19,11 @@ export const ScreenPaciente = () => {
 
     return (
         <div className='flex flex-1'>
-            <SearchPaciente />
+            <SearchPaciente 
+                active={active}
+                mostrarBarra={mostrarBarra}
+                data={pacientes}
+            />
             {
                 active &&
                 <FormPaciente />

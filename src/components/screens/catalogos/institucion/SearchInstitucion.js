@@ -17,7 +17,7 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
 
     const setSearch = ({ target }) => setStringSearch(target.value);
 
-    const filter = ({ institucion, descuento }) => institucion.toLowerCase().includes(stringSearch)
+    const filterList = ({ institucion, descuento }) => institucion.toLowerCase().includes(stringSearch)
         || descuento.toString().includes(stringSearch);
 
     const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
@@ -52,7 +52,7 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
             <hr></hr>
             <div className="w-full flex-grow sm:mb-10 sm:overflow-y-auto">
                 {
-                    data.filter(item => filter(item))
+                    data.filter(item => filterList(item))
                         .map((item, i) => {
                             return <ItemFile
                                 key={item._id}
@@ -69,5 +69,5 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
                 <p className="text-xs text-center text-gray-500">{data.length}</p>
             </div>
         </div>
-    )
+    );
 }

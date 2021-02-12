@@ -21,7 +21,11 @@ export const ScreenAnalisis = () => {
 
     return (
         <div className='flex flex-1'>
-            <SearchAnalisis />
+            <SearchAnalisis 
+                active={active}
+                mostrarBarra={mostrarBarra}
+                data={analisis}
+            />
             {
                 active &&
                 <FormAnalisis />
