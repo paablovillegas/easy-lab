@@ -1,5 +1,11 @@
+import dayjs from 'dayjs';
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
+
+const fromJSON = (institucion) => ({
+    ...institucion,
+    fecha_creacion: dayjs(institucion.fecha_creacion)
+});
 
 export const setActive = (institucion) => ({
     type: Types.Institucion.SET_ACTIVE,
@@ -41,7 +47,10 @@ export const startFetchInstituciones = () => {
     return (dispatch) => {
         fetchConToken('instituciones')
             .then(response => response.json())
-            .then(({ instituciones }) => dispatch(fetchInstituciones(instituciones)));
+            .then(({ instituciones }) => {
+                instituciones = instituciones.map(i => fromJSON(i));
+                dispatch(fetchInstituciones(instituciones));
+            });
     }
 }
 

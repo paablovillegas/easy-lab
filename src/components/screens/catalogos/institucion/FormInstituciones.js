@@ -22,34 +22,26 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
         });
     };
 
-    const updateInsert = () => {
-        const inputNumber = parseFloat(institucion.descuento)
-        if (inputNumber || inputNumber === 0) {
-            setInstitucion({
-                ...institucion,
-                descuento: inputNumber
-            })
-            if (institucion._id) dispatch(startUpdateInstitucion(institucion));
-            else dispatch(startInsertInstitucion(institucion));
-        } else {
-            //TODO: Mostrar error!
-            console.log('error');
-        }
-    };
-
-    const submit = (e) => {
+    const updateInsert = (e) => {
         e.preventDefault()
-        console.log(institucion)
+        if (typeof (institucion.descuento) === 'string' && institucion.descuento.trim().length)
+            institucion.descuento = parseFloat(institucion.descuento.trim()) || 0;
+        if (institucion._id)
+            dispatch(startUpdateInstitucion(institucion));
+        else
+            dispatch(startInsertInstitucion(institucion));
     }
 
     const clearInstitucion = () => dispatch(clearActive());
+
+    const formatDate = (fecha) => (fecha && fecha.format('DD [de] MMMM YYYY, hh:mm A')) || '-';
 
     return (
         <div className='flex-1'>
             <form
                 className={`pt-3 px-2 space-x-3.5 grid grid-cols-1 sm:max-h-screen sm:overflow-y-auto xl:grid-cols-3
                     ${barraLateral ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}`}
-                onSubmit={submit}
+                onSubmit={updateInsert}
             >
                 <div
                     className={`flex flex-row text-gray-900 xl:col-span-3
@@ -58,6 +50,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                     <button
                         className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100 sm:hidden"
                         onClick={clearInstitucion}
+                        type="button"
                     >
                         <FontAwesomeIcon
                             icon={barraLateral ? faChevronLeft : faChevronRight}
@@ -68,6 +61,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                     <button
                         className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100 hidden sm:inline-block"
                         onClick={setBarraLateral}
+                        type="button"
                     >
                         <FontAwesomeIcon
                             icon={barraLateral ? faChevronLeft : faChevronRight}
@@ -85,7 +79,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                         </h1>
                         <h5
                             className="text-sm text-gray-500">
-                            Fecha de registro: 15 Enero 2021
+                            Fecha de registro: {formatDate(institucion.fecha_creacion)}
                         </h5>
                     </div>
                 </div>
@@ -96,6 +90,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                     name='institucion'
                     value={institucion.institucion}
                     onChange={handleChange}
+                    required={true}
                 />
                 <RegularInput
                     placeholder="Descuento"
