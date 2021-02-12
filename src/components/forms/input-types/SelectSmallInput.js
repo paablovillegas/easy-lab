@@ -1,6 +1,7 @@
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import './anim.css'
 
 export const SelectSmallInput = ({ options = [], selected, ascendente, changeOrder, changeSelected }) => {
 
@@ -27,10 +28,9 @@ export const SelectSmallInput = ({ options = [], selected, ascendente, changeOrd
             <button
                 className='mx-2 px-1.5 rounded transition duration-300 active:bg-gray-300 focus:outline-none'
                 onClick={changeOrder}
+                rotate={ascendente ? 1 : 0}
             >
-                <FontAwesomeIcon
-                    icon={ascendente ? faChevronDown : faChevronUp}
-                />
+                <FontAwesomeIcon icon={faChevronDown} />
             </button>
         </div>
     )
