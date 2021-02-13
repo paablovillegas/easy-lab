@@ -26,13 +26,13 @@ const update = (componente) => ({
     payload: componente,
 });
 
-export const startFetch = () => {
+export const startFetchComponente = () => {
     return (dispatch) => fetchConToken('componentes')
         .then(response => response.json())
         .then(({ componentes }) => dispatch(fetch(componentes)));
 };
 
 const fetch = (componentes) => ({
-    type: Types.Componentes.FETCH,
+    type: Types.Componente.FETCH,
     payload: componentes,
 });

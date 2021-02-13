@@ -15,18 +15,18 @@ export const componenteReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case Types.Componente.FETCH:
             return {
-                doctores: payload,
+                componentes: payload,
                 active: null,
             };
         case Types.Componente.UPDATE:
             return {
                 active: null,
-                doctores: replaceComponente(state.doctores, payload),
+                componentes: replaceComponente(state.componentes, payload),
             };
         case Types.Componente.INSERT:
             return {
                 active: null,
-                doctores: insertComponente(state.doctores, payload),
+                componentes: insertComponente(state.componentes, payload),
             };
         default:
             return state;

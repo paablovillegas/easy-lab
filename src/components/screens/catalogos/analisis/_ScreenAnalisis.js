@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startFetchAnalisis } from '../../../../redux/actions/analisis';
+import { startFetchComponente } from '../../../../redux/actions/componente';
 import { FormAnalisis } from './FormAnalisis';
 import { SearchAnalisis } from './SearchAnalisis';
 
@@ -12,6 +13,10 @@ export const ScreenAnalisis = () => {
     const dispatch = useDispatch();
 
     const hideShowBarra = () => setMostrarBarra(!mostrarBarra);
+
+    useEffect(() => {
+        dispatch(startFetchComponente())
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(startFetchAnalisis());

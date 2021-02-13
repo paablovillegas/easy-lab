@@ -2,38 +2,17 @@ import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { initialOrderAnalisis, initialStateAnalisis, opcionesAnalisis } from '../../../../helper/states/initialAnalisis';
 import { setActive, startFetchAnalisis } from '../../../../redux/actions/analisis';
 import { RoundInput } from '../../../forms/input-types/RoundInput';
 import { SelectSmallInput } from '../../../forms/input-types/SelectSmallInput';
 import { ItemFile } from '../../../forms/search-bar/ItemFile';
 import { ResumeBar } from '../../../forms/search-bar/ResumeBar';
 
-const initialState = {
-    analisis: '',
-    precio: 0,
-    componentes: [],
-}
-
-const initialOrder = {
-    selected: 'analisis',
-    ascendente: true,
-};
-
-const opciones = [
-    {
-        name: 'Analisis',
-        field: 'analisis',
-    },
-    {
-        name: 'Precio',
-        field: 'precio',
-    },
-];
-
 export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
     const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
-    const [{ selected, ascendente }, setSearchOrder] = useState(initialOrder)
+    const [{ selected, ascendente }, setSearchOrder] = useState(initialOrderAnalisis)
 
     const dispatch = useDispatch();
 
@@ -65,7 +44,7 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
 
     const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
 
-    const newItem = () => dispatch(setActive(initialState));
+    const newItem = () => dispatch(setActive(initialStateAnalisis));
 
     const updateList = () => dispatch(startFetchAnalisis());
 
@@ -94,7 +73,7 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
                 />
             </div>
             <SelectSmallInput
-                options={opciones}
+                options={opcionesAnalisis}
                 selected={selected}
                 ascendente={ascendente}
                 changeOrder={setAscendenteDescendente}

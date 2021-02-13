@@ -10,6 +10,7 @@ export const RegularInput = ({
     onChange,
     inputType = 'text',
     required = false,
+    disabled = false,
 }) => {
     return (
         <div>
@@ -24,6 +25,7 @@ export const RegularInput = ({
                     onChange={onChange}
                     className="bg-gray-100 text-gray-600 placeholder-gray-400 placeholder-opacity-75 rounded shadow-sm py-2 pl-11 pr-2 w-full transition duration-300 focus:outline-none focus:shadow-md"
                     required={required}
+                    disabled={disabled}
                 />
             </div>
         </div>

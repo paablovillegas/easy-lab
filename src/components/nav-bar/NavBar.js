@@ -30,7 +30,7 @@ export const NavBar = () => {
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-3" 
                         icon={faHdd}
                     />
-                    <h4>Catálogos</h4>
+                    <h4 className='menu'>Catálogos</h4>
                 </Link>
                 <div className="mx-2 flex flex-col space-y-1">
                     <Link className="normal" to="/catalogos/pacientes" title="Pacientes">
@@ -39,7 +39,7 @@ export const NavBar = () => {
                             icon={faUser}
                             size="sm"
                         />
-                        <h5>Pacientes</h5>
+                        <h5 className='menu'>Pacientes</h5>
                     </Link>
                     <Link className="normal" to="/catalogos/doctores" title="Doctores">
                         <FontAwesomeIcon 
@@ -47,7 +47,7 @@ export const NavBar = () => {
                             icon={faUserMd}
                             size="sm"
                         />
-                        <h5>Doctores</h5>
+                        <h5 className='menu'>Doctores</h5>
                     </Link>
                     <Link className="normal" to="/catalogos/instituciones" title="Instituciones">
                         <FontAwesomeIcon 
@@ -55,7 +55,7 @@ export const NavBar = () => {
                             icon={faHospital}
                             size="sm"
                         />
-                        <h5>Instituciones</h5>
+                        <h5 className='menu'>Instituciones</h5>
                     </Link>
                     <Link className="normal" to="/catalogos/analisis" title="Análisis">
                         <FontAwesomeIcon 
@@ -63,7 +63,7 @@ export const NavBar = () => {
                             icon={faVial}
                             size="sm"
                         />
-                        <h5>Análisis</h5>
+                        <h5 className='menu'>Análisis</h5>
                     </Link>
                 </div>
                 <Link className="primary" to="/" title="Registros">
@@ -71,14 +71,14 @@ export const NavBar = () => {
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-3" 
                         icon={faMoneyCheck}
                     />
-                    <h4>Registros</h4>
+                    <h4 className='menu'>Registros</h4>
                 </Link>
                 <Link className="primary" to="/" title="Reportes">
                     <FontAwesomeIcon 
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-5" 
                         icon={faClipboardList}
                     />
-                    <h4>Reportes</h4>
+                    <h4 className='menu'>Reportes</h4>
                 </Link>
             </div>
             <div className={`flex flex-none my-3 flex-col lg:flex-row space-y-1 lg:space-y-0 lg:justify-between ${menuState && 'hidden sm:flex'}`}>
@@ -87,14 +87,14 @@ export const NavBar = () => {
                         className="text-gray-400" 
                         icon={faInfoCircle}
                     />
-                    <h5 className="lg:hidden">Información</h5>
+                    <h5 className="menu lg:hidden">Información</h5>
                 </Link>
                 <Link to="/" className="text-center px-3 py-1 mx-2 lg:mr-4 rounded transition focus:outline-none active:bg-gray-800">
                     <FontAwesomeIcon 
                         className="text-gray-400" 
                         icon={faSignOutAlt}
                     />
-                    <h5 className="lg:hidden">Cerrar Sesión</h5>
+                    <h5 className="menu lg:hidden">Cerrar Sesión</h5>
                 </Link>
             </div>
         </div>

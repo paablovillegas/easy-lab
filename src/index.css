@@ -6,11 +6,11 @@
 
 @layer components {
 
-    h4 {
+    h4.menu {
         @apply inline-block sm:hidden lg:inline-block pl-3 md:pl-0 text-xl text-yellow-400 font-bold uppercase;
     }
 
-    h5 {
+    h5.menu {
         @apply inline-block sm:hidden lg:inline-block pl-3 md:pl-0 text-gray-400 uppercase;
     }
 
