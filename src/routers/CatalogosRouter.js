@@ -6,6 +6,7 @@ import { ScreenAnalisis } from '../components/screens/catalogos/analisis/_Screen
 import { ScreenPaciente } from '../components/screens/catalogos/paciente/_ScreenPaciente';
 import { ScreenDoctor } from '../components/screens/catalogos/doctor/_ScreenDoctor';
 import { InicioCatalogo } from '../components/screens/catalogos/_InicioScreen';
+import { ScreenComponente } from '../components/screens/catalogos/componente/_ScreenComponente';
 
 export const CatalogosRouter = () => {
     return (
@@ -16,6 +17,7 @@ export const CatalogosRouter = () => {
                 <Route path="/catalogos/pacientes" component={ScreenPaciente} />
                 <Route path="/catalogos/analisis" component={ScreenAnalisis} />
                 <Route path="/catalogos/doctores" component={ScreenDoctor} />
+                <Route path="/catalogos/componentes" component={ScreenComponente} />
             </Switch>
         </div>
     )

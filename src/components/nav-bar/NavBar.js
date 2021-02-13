@@ -1,4 +1,4 @@
-import { faClipboardList, faHdd, faHospital, faInfoCircle, faList, faMoneyCheck, faSignOutAlt, faUser, faUserMd, faVial } from '@fortawesome/free-solid-svg-icons'
+import { faClipboardList, faFlask, faHdd, faHospital, faInfoCircle, faList, faMoneyCheck, faSignOutAlt, faUser, faUserMd, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -64,6 +64,14 @@ export const NavBar = () => {
                             size="sm"
                         />
                         <h5 className='menu'>Análisis</h5>
+                    </Link>
+                    <Link className="normal" to="/catalogos/componentes" title="Componentes">
+                        <FontAwesomeIcon 
+                            className="text-gray-400 lg:hidden xl:inline-block xl:mr-2" 
+                            icon={faFlask}
+                            size="sm"
+                        />
+                        <h5 className='menu'>Componentes</h5>
                     </Link>
                 </div>
                 <Link className="primary" to="/" title="Registros">

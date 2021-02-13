@@ -30,6 +30,8 @@ export const Types = {
         FETCH: '[Als] Fetch',
     },
     Componente: {
+        SET_ACTIVE: '[Comp] Set',
+        CLEAR_ACTIVE: '[Comp] Clear',
         INSERT: '[Comp] New',
         UPDATE: '[Comp] Update',
         FETCH: '[Comp] Fetch',

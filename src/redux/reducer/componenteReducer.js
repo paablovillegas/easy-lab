@@ -18,6 +18,16 @@ export const componenteReducer = (state = initialState, { type, payload }) => {
                 componentes: payload,
                 active: null,
             };
+        case Types.Componente.SET_ACTIVE:
+            return {
+                ...state,
+                active: payload,
+            };
+        case Types.Componente.CLEAR_ACTIVE:
+            return {
+                ...state,
+                active: null,
+            }
         case Types.Componente.UPDATE:
             return {
                 active: null,

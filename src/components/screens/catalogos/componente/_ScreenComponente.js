@@ -1,14 +1,11 @@
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { startFetchAnalisis } from '../../../../redux/actions/analisis';
 import { startFetchComponentes } from '../../../../redux/actions/componente';
-import { FormAnalisis } from './FormAnalisis';
-import { SearchAnalisis } from './SearchAnalisis';
+import { FormComponente } from './FormComponente';
+import { SearchComponente } from './SearchComponente';
 
-export const ScreenAnalisis = () => {
-    const { analisis, active } = useSelector(state => state.analisis);
+export const ScreenComponente = () => {
+    const { componentes, active } = useSelector(state => state.componente);
     const [mostrarBarra, setMostrarBarra] = useState(true);
     const dispatch = useDispatch();
 
@@ -18,25 +15,21 @@ export const ScreenAnalisis = () => {
         dispatch(startFetchComponentes())
     }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(startFetchAnalisis());
-    }, [dispatch]);
-
     return (
         <div className='flex flex-1'>
-            <SearchAnalisis
+            <SearchComponente 
+                data={componentes}
                 active={active}
                 mostrarBarra={mostrarBarra}
-                data={analisis}
             />
             {
                 active &&
-                <FormAnalisis
+                <FormComponente 
+                    data={active}
                     barraLateral={mostrarBarra}
                     setBarraLateral={hideShowBarra}
-                    data={active}
                 />
             }
         </div>
-    );
+    )
 }

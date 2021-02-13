@@ -1,6 +1,15 @@
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
 
+export const setActive = (componente) => ({
+    type: Types.Componente.SET_ACTIVE,
+    payload: componente,
+});
+
+export const clearActive = () => ({
+    type: Types.Componente.CLEAR_ACTIVE,
+});
+
 export const startInsert = (componente) => {
     return (dispatch) => fetchConToken('componentes', componente, 'POST')
         .then(response => response.json())
@@ -8,7 +17,7 @@ export const startInsert = (componente) => {
 };
 
 const insert = (componente) => ({
-    type: Types.Componentes.INSERT,
+    type: Types.Componente.INSERT,
     payload: componente,
 });
 
@@ -22,11 +31,11 @@ export const startUpdate = (componente) => {
 }
 
 const update = (componente) => ({
-    type: Types.Componentes.UPDATE,
+    type: Types.Componente.UPDATE,
     payload: componente,
 });
 
-export const startFetchComponente = () => {
+export const startFetchComponentes = () => {
     return (dispatch) => fetchConToken('componentes')
         .then(response => response.json())
         .then(({ componentes }) => dispatch(fetch(componentes)));
