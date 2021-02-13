@@ -24,7 +24,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
     };
 
     const updateInsert = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (typeof (institucion.descuento) === 'string' && institucion.descuento.trim().length)
             institucion.descuento = parseFloat(institucion.descuento.trim()) || 0;
         if (institucion._id)
@@ -90,7 +90,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                     name='institucion'
                     value={institucion.institucion}
                     onChange={handleChange}
-                    required={true}
+                    required
                 />
                 <RegularInput
                     placeholder="Descuento"

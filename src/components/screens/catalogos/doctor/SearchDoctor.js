@@ -2,57 +2,17 @@ import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { initialOrderDoctor, initialStateDoctor, opcionesDoctor } from '../../../../helper/states/initialDoctor';
 import { setActive, startFetchDoctores } from '../../../../redux/actions/doctor';
 import { RoundInput } from '../../../forms/input-types/RoundInput';
 import { SelectSmallInput } from '../../../forms/input-types/SelectSmallInput';
 import { ItemFile } from '../../../forms/search-bar/ItemFile';
 import { ResumeBar } from '../../../forms/search-bar/ResumeBar';
 
-const initialState = {
-    nombre: '',
-    apellido_paterno: '',
-    apellido_materno: '',
-    correo: '',
-    telefono: '',
-    comision: 0,
-};
-
-const initialOrder = {
-    selected: 'apellido_paterno',
-    ascendente: true,
-};
-
-const opciones = [
-    {
-        name: 'Nombre',
-        field: 'nombre',
-    },
-    {
-        name: 'Apellido Paterno',
-        field: 'apellido_paterno',
-    },
-    {
-        name: 'Apellido Materno',
-        field: 'apellido_materno',
-    },
-    {
-        name: 'Correo',
-        field: 'correo',
-    },
-    {
-        name: 'Teléfono',
-        field: 'telefono',
-    },
-    {
-        name: 'Comisión',
-        field: 'comision',
-    },
-];
-
 export const SearchDoctor = ({ data = [], active, mostrarBarra }) => {
     const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
-    const [{ selected, ascendente }, setSearchOrder] = useState(initialOrder);
+    const [{ selected, ascendente }, setSearchOrder] = useState(initialOrderDoctor);
 
     const dispatch = useDispatch();
 
@@ -85,7 +45,7 @@ export const SearchDoctor = ({ data = [], active, mostrarBarra }) => {
 
     const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
 
-    const newItem = () => dispatch(setActive(initialState));
+    const newItem = () => dispatch(setActive(initialStateDoctor));
 
     const updateList = () => dispatch(startFetchDoctores());
 
@@ -114,7 +74,7 @@ export const SearchDoctor = ({ data = [], active, mostrarBarra }) => {
                 />
             </div>
             <SelectSmallInput 
-                options={opciones}
+                options={opcionesDoctor}
                 selected={selected}
                 ascendente={ascendente}
                 changeOrder={setAscendenteDescendente}

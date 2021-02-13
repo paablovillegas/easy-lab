@@ -2,37 +2,17 @@ import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { initialOrderInstitucion, initialStateInsitucion, opcionesInstitucion } from '../../../../helper/states/initialInstitucion'
 import { setActive, startFetchInstituciones } from '../../../../redux/actions/institucion'
 import { RoundInput } from '../../../forms/input-types/RoundInput'
 import { SelectSmallInput } from '../../../forms/input-types/SelectSmallInput'
 import { ItemFile } from '../../../forms/search-bar/ItemFile'
 import { ResumeBar } from '../../../forms/search-bar/ResumeBar'
 
-const initialInstitucion = {
-    institucion: '',
-    descuento: 0
-};
-
-const initialOrden = {
-    selected: 'institucion',
-    ascendente: true,
-};
-
-const opciones = [
-    {
-        name: 'Institucion',
-        field: 'institucion',
-    },
-    {
-        name: 'Descuento',
-        field: 'descuento',
-    },
-];
-
 export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
     const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
-    const [{ selected, ascendente }, setSearchOrder] = useState(initialOrden);
+    const [{ selected, ascendente }, setSearchOrder] = useState(initialOrderInstitucion);
 
     const dispatch = useDispatch();
 
@@ -64,7 +44,7 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
 
     const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
 
-    const newItem = () => dispatch(setActive(initialInstitucion));
+    const newItem = () => dispatch(setActive(initialStateInsitucion));
 
     const updateList = () => dispatch(startFetchInstituciones());
 
@@ -93,7 +73,7 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
                 />
             </div>
             <SelectSmallInput
-                options={opciones}
+                options={opcionesInstitucion}
                 selected={selected}
                 ascendente={ascendente}
                 changeOrder={setAscendenteDescendente}
