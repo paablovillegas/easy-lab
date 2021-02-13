@@ -1,10 +1,12 @@
 import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { setActive } from '../../../../redux/actions/analisis';
+import { setActive, startFetchAnalisis } from '../../../../redux/actions/analisis';
 import { RoundInput } from '../../../forms/input-types/RoundInput';
+import { SelectSmallInput } from '../../../forms/input-types/SelectSmallInput';
 import { ItemFile } from '../../../forms/search-bar/ItemFile';
+import { ResumeBar } from '../../../forms/search-bar/ResumeBar';
 
 const initialState = {
     analisis: '',
@@ -12,8 +14,27 @@ const initialState = {
     componentes: [],
 }
 
+const initialOrder = {
+    selected: 'analisis',
+    ascendente: true,
+};
+
+const opciones = [
+    {
+        name: 'Analisis',
+        field: 'analisis',
+    },
+    {
+        name: 'Precio',
+        field: 'precio',
+    },
+];
+
 export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
+    const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
+    const [{ selected, ascendente }, setSearchOrder] = useState(initialOrder)
+
     const dispatch = useDispatch();
 
     const setSearch = ({ target }) => setStringSearch(target.value);
@@ -21,9 +42,32 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
     const filterList = ({ analisis, precio }) => analisis.toLowerCase().includes(stringSearch)
         || precio.toString().includes(stringSearch);
 
+    const setCampoOrdenamiento = (field) => setSearchOrder({
+        selected: field,
+        ascendente: ascendente,
+    });
+
+    const setAscendenteDescendente = () => setSearchOrder({
+        selected,
+        ascendente: !ascendente,
+    });
+
+    useEffect(() => {
+        setItems([...data]);
+    }, [data]);
+
+    useEffect(() => {
+        setItems(prev => [...prev].sort((a, b) => ascendente
+            ? a[selected] > b[selected] ? 1 : -1
+            : a[selected] < b[selected] ? 1 : -1
+        ));
+    }, [setItems, selected, ascendente]);
+
     const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
 
     const newItem = () => dispatch(setActive(initialState));
+
+    const updateList = () => dispatch(startFetchAnalisis());
 
     return (
         <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen
@@ -49,7 +93,13 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
                     onChange={setSearch}
                 />
             </div>
-            <p>Ordenar</p>
+            <SelectSmallInput
+                options={opciones}
+                selected={selected}
+                ascendente={ascendente}
+                changeOrder={setAscendenteDescendente}
+                changeSelected={setCampoOrdenamiento}
+            />
             <hr></hr>
             <div className="w-full flex-grow sm:mb-10 sm:overflow-y-auto">
                 {
@@ -65,10 +115,11 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
                         })
                 }
             </div>
-            <div className="w-full h-10 absolute bottom-0 bg-gray-200 flex flex-col justify-center">
-                <p className="text-sm text-center text-gray-600">Analisis</p>
-                <p className="text-xs text-center text-gray-500">{data.length}</p>
-            </div>
+            <ResumeBar
+                title="Análisis"
+                cantidad={items.length}
+                onClick={updateList}
+            />
         </div>
     );
 }

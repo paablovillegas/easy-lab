@@ -20,7 +20,7 @@ const initialOrden = {
 
 const opciones = [
     {
-        name: 'Nombre',
+        name: 'Institucion',
         field: 'institucion',
     },
     {
@@ -33,6 +33,7 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
     const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
     const [{ selected, ascendente }, setSearchOrder] = useState(initialOrden);
+
     const dispatch = useDispatch();
 
     const setSearch = ({ target }) => setStringSearch(target.value);
@@ -52,7 +53,7 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
 
     useEffect(() => {
         setItems([...data]);
-    }, [data])
+    }, [data]);
 
     useEffect(() => {
         setItems(prev => [...prev].sort((a, b) => ascendente
