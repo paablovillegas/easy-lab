@@ -2,28 +2,27 @@ import { faChevronLeft, faChevronRight, faUser, faCalendarDay, faVenusMars, faAt
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { fromInputDate, maxFecha, toInputDate } from '../../../../helper/fechas';
+import { initialStatePaciente, opcionesGenero } from '../../../../helper/states/initialPaciente';
 import { clearActive, startInsertPaciente, startUpdatePaciente } from '../../../../redux/actions/paciente';
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
 import { SelectInput } from '../../../forms/input-types/SelectInput';
 
-const opcionesGenero = [
-    {
-        value: 1,
-        name: 'Masculino'
-    },
-    {
-        value: 2,
-        name: 'Femenino'
-    },
-]
-
 export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
     const dispatch = useDispatch();
-    const [paciente, setPaciente] = useState(data);
+    const [paciente, setPaciente] = useState({
+        ...initialStatePaciente,
+        ...data,
+        fecha_nacimiento: toInputDate(data.fecha_nacimiento),
+    });
 
     useEffect(() => {
-        setPaciente(data)
+        setPaciente({
+            ...initialStatePaciente,
+            ...data,
+            fecha_nacimiento: toInputDate(data.fecha_nacimiento),
+        });
     }, [data]);
 
     const handleChange = ({ target }) => {
@@ -33,29 +32,32 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
         });
     };
 
-    const updateInsert = () => {
-        const inputNumber = parseFloat(paciente.comision)
-        if (inputNumber || inputNumber === 0) {
-            setPaciente({
-                ...paciente,
-                comision: inputNumber
-            })
-            if (paciente._id) dispatch(startUpdatePaciente(paciente));
-            else dispatch(startInsertPaciente(paciente));
-        } else {
-            //TODO: Mostrar error!
-            console.log('error');
-        }
-    };
+    const updateInsert = (e) => {
+        e.preventDefault();
+        const pacienteAux = {
+            ...paciente,
+            apellido_materno: (paciente.apellido_materno.length && paciente.apellido_materno) || undefined,
+            correo: (paciente.correo.length && paciente.correo) || undefined,
+            telefono: (paciente.telefono.length && paciente.telefono) || undefined,
+            direccion: (paciente.direccion.length && paciente.direccion) || undefined,
+            fecha_nacimiento: fromInputDate(paciente.fecha_nacimiento),
+        };
+        if (pacienteAux._id)
+            dispatch(startUpdatePaciente(pacienteAux));
+        else
+            dispatch(startInsertPaciente(pacienteAux));
+    }
 
     const clearInstitucion = () => dispatch(clearActive());
 
     return (
         <div className='flex-1'>
-            <div
+            <form
                 className={`pt-3 px-2 space-x-3.5 grid grid-cols-1 sm:max-h-screen sm:overflow-y-auto xl:grid-cols-3
-                    ${barraLateral ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}
-            `}>
+                    ${barraLateral ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}`}
+                autoComplete='off'
+                onSubmit={updateInsert}
+            >
                 <div
                     className={`flex flex-row text-gray-900 xl:col-span-3
                         ${barraLateral ? 'sm:col-span-1 lg:col-span-2' : 'sm:col-span-2 lg:col-span-3'}
@@ -63,6 +65,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                     <button
                         className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100 sm:hidden"
                         onClick={clearInstitucion}
+                        type='button'
                     >
                         <FontAwesomeIcon
                             icon={barraLateral ? faChevronLeft : faChevronRight}
@@ -73,6 +76,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                     <button
                         className="mx-2 my-1 rounded transform duration-200 focus:outline-none active:bg-gray-100 hidden sm:inline-block"
                         onClick={setBarraLateral}
+                        type='button'
                     >
                         <FontAwesomeIcon
                             icon={barraLateral ? faChevronLeft : faChevronRight}
@@ -90,7 +94,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                         </h1>
                         <h5
                             className="text-sm text-gray-500">
-                            Fecha de registro: 15 Enero 2021
+                            Última actualización: {maxFecha(paciente)}
                         </h5>
                     </div>
                 </div>
@@ -101,6 +105,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                     name='nombre'
                     value={paciente.nombre}
                     onChange={handleChange}
+                    required
                 />
                 <RegularInput
                     placeholder='Apellido Paterno'
@@ -109,6 +114,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                     name='apellido_paterno'
                     value={paciente.apellido_paterno}
                     onChange={handleChange}
+                    required
                 />
                 <RegularInput
                     placeholder='Apellido Materno'
@@ -125,6 +131,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                     name='fecha_nacimiento'
                     value={paciente.fecha_nacimiento}
                     onChange={handleChange}
+                    required
                 />
                 <SelectInput
                     title="Género"
@@ -133,6 +140,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                     value={paciente.genero}
                     options={opcionesGenero}
                     onChange={handleChange}
+                    required
                 />
                 <RegularInput
                     placeholder='Correo Electrónico'
@@ -163,12 +171,9 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                 <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>
-                    <RegularButton
-                        title={paciente._id ? 'Actualizar' : 'Registrar'}
-                        onClick={updateInsert}
-                    />
+                    <RegularButton title={paciente._id ? 'Actualizar' : 'Registrar'} />
                 </div>
-            </div>
+            </form>
         </div>
     );
 }

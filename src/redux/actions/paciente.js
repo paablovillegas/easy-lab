@@ -25,7 +25,7 @@ export const startUpdatePaciente = (paciente) => {
     return (dispatch) => {
         fetchConToken('pacientes/' + paciente._id, paciente, 'PUT')
             .then(response => response.json())
-            .then(({ paciente }) => dispatch(updatePaciente(paciente)));
+            .then(({ paciente }) => dispatch(updatePaciente(paciente)))
     }
 };
 
