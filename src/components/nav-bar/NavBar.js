@@ -7,7 +7,6 @@ export const NavBar = () => {
     const [menuState, setMenuState] = useState(false);
 
     const showHideMenu = () => {
-        console.log('aaa');
         setMenuState(state => !state)
     }
 

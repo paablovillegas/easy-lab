@@ -55,7 +55,7 @@ export const SearchComponente = ({ data = [], active, mostrarBarra }) => {
             <div
                 className="flex flex-row"
             >
-                <h2 className="flex-grow text-3xl font-bold px-3 my-3">Instituciones</h2>
+                <h2 className="flex-grow text-3xl font-bold px-3 my-3">Componentes</h2>
                 <button
                     className="mr-2 px-5 py-3 my-auto focus:outline-none transition rounded active:bg-gray-200"
                     onClick={newItem}
@@ -65,7 +65,7 @@ export const SearchComponente = ({ data = [], active, mostrarBarra }) => {
             </div>
             <div className="p-2">
                 <RoundInput
-                    placeholder="Institucion, comisión..."
+                    placeholder="Componente, referencia..."
                     icon={faVial}
                     size="xs"
                     value={stringSearch}

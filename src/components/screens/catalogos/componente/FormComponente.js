@@ -4,23 +4,26 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { maxFecha } from '../../../../helper/fechas';
 import { initialStateComponente } from '../../../../helper/states/initialComponente';
-import { clearActive } from '../../../../redux/actions/componente';
+import { clearActive, startInsertComponente, startUpdateComponente } from '../../../../redux/actions/componente';
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
 
 export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
     const dispatch = useDispatch();
 
-    const [componente, setComponente] = useState(data);
+    const [componente, setComponente] = useState({
+        ...initialStateComponente,
+        ...data,
+    });
 
     useEffect(() => {
         setComponente({
             ...initialStateComponente,
             ...data,
-        })
+        });
     }, [data]);
 
-    const handleChange = ({target}) => {
+    const handleChange = ({ target }) => {
         setComponente({
             ...componente,
             [target.name]: target.value,
@@ -29,6 +32,14 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
 
     const updateInsert = (e) => {
         e.preventDefault();
+        const componenteAux = {
+            ...componente,
+            referencia: (componente.referencia.length && componente.referencia) || undefined
+        }
+        if (componenteAux._id)
+            dispatch(startUpdateComponente(componenteAux));
+        else
+            dispatch(startInsertComponente(componenteAux))
     }
 
     const clearComponente = () => dispatch(clearActive());
@@ -71,8 +82,8 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
                         <h1 className="text-5xl font-bold">
                             {
                                 componente._id
-                                    ? 'Editar Institucion'
-                                    : 'Nueva Institucion'
+                                    ? 'Editar Componente'
+                                    : 'Nueva Componente'
                             }
                         </h1>
                         <h5
@@ -82,7 +93,7 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
                     </div>
                 </div>
                 <RegularInput
-                    placeholder="Institucion"
+                    placeholder="Componente"
                     inputType="text"
                     icon={faFlask}
                     name='componente'
@@ -90,16 +101,18 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
                     onChange={handleChange}
                     required
                 />
-                <RegularInput
-                    placeholder="Descuento"
-                    inputType="number"
-                    icon={faBook}
-                    name='descuento'
-                    value={componente.descuento}
-                    onChange={handleChange}
-                />
-                <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
-                    ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
+                <div className={`xl:col-span-2 ${!barraLateral && 'lg:col-span-2'}`}>
+                    <RegularInput
+                        placeholder="Referencia"
+                        inputType="text"
+                        icon={faBook}
+                        name='referencia'
+                        value={componente.referencia}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className={`xl:col-start-2 xl:col-span-2 mt-4
+                    ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3'}
                 `}>
                     <RegularButton title={componente._id ? 'Actualizar' : 'Registrar'} />
                 </div>
