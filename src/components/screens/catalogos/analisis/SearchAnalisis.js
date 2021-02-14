@@ -65,7 +65,7 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
             </div>
             <div className="p-2">
                 <RoundInput
-                    placeholder="Institucion, comisión..."
+                    placeholder="Analisis, componentes..."
                     icon={faVial}
                     size="xs"
                     value={stringSearch}

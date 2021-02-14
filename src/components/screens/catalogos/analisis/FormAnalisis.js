@@ -2,6 +2,7 @@ import { faChevronLeft, faChevronRight, faDollarSign, faFont, faPollH } from '@f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { maxFecha } from '../../../../helper/fechas';
 import { initialStateAnalisis } from '../../../../helper/states/initialAnalisis';
 import { initialStateComponente } from '../../../../helper/states/initialComponente';
 import { clearActive, startInsertAnalisis, startUpdateAnalisis } from '../../../../redux/actions/analisis';
@@ -61,24 +62,7 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
         });
     };
 
-    const updateInsert = () => {
-        const inputNumber = parseFloat(analisis.precio)
-        if (inputNumber || inputNumber === 0) {
-            setAnalisis({
-                ...analisis,
-                precio: inputNumber
-            })
-            if (analisis._id)
-                dispatch(startUpdateAnalisis(analisis));
-            else
-                dispatch(startInsertAnalisis(analisis));
-        } else {
-            //TODO: Mostrar error!
-            console.log('error');
-        }
-    };
-
-    const submit = (e) => {
+    const updateInsert = (e) => {
         e.preventDefault();
         if (analisis.componentes.length === 0) {
             console.log('Es necesario al menos un analisis');
@@ -112,7 +96,7 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                 className={`pt-3 px-2 space-x-3.5 grid grid-cols-1 sm:max-h-screen sm:overflow-y-auto xl:grid-cols-3
                     ${barraLateral ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}`}
                 autoComplete='off'
-                onSubmit={submit}
+                onSubmit={updateInsert}
             >
                 <div
                     className={`flex flex-row text-gray-900 xl:col-span-3
@@ -144,13 +128,13 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                         <h1 className="text-5xl font-bold">
                             {
                                 analisis._id
-                                    ? 'Editar Paciente'
-                                    : 'Nuevo Paciente'
+                                    ? 'Editar Análisis'
+                                    : 'Nuevo Análisis'
                             }
                         </h1>
                         <h5
                             className="text-sm text-gray-500">
-                            Fecha de registro: 15 Enero 2021
+                            Última modificación: {maxFecha(analisis)}
                         </h5>
                     </div>
                 </div>
@@ -168,7 +152,7 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                 <RegularInput
                     placeholder='Precio'
                     title='Precio Estándar'
-                    inputType="text"
+                    inputType="number"
                     icon={faDollarSign}
                     name='precio'
                     value={analisis.precio}

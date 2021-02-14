@@ -30,6 +30,8 @@ export const ItemComponente = ({ barraLateral, componente, index, onChange, dele
 
     const deleteItem = () => deleteComponent(index);
 
+    const buttonClass = 'mt-8 mx-1 px-3.5 rounded transition duration-300 active:bg-gray-100 focus:outline-none ';
+
     return (
         <>
             <div className='flex'>
@@ -46,7 +48,7 @@ export const ItemComponente = ({ barraLateral, componente, index, onChange, dele
                     />
                 </div>
                 <button
-                    className='mt-8 mx-1 px-3.5 rounded transition duration-300 active:bg-gray-100 focus:outline-none'
+                    className={buttonClass + ' lg:hidden ' + (!barraLateral && ' sm:hidden')}
                     type='button'
                     onClick={deleteItem}
                 >
@@ -54,13 +56,24 @@ export const ItemComponente = ({ barraLateral, componente, index, onChange, dele
                 </button>
             </div>
             <div className={`${barraLateral ? 'mb-4 lg:mb-0 xl:col-span-2' : 'lg:col-span-2'}`}>
-                <RegularInput
-                    placeholder='Referencia'
-                    inputType="text"
-                    icon={faIndent}
-                    value={componente.referencia}
-                    disabled
-                />
+                <div className='flex'>
+                    <div className='flex-1'>
+                        <RegularInput
+                            placeholder='Referencia'
+                            inputType="text"
+                            icon={faIndent}
+                            value={componente.referencia}
+                            disabled
+                        />
+                    </div>
+                    <button
+                        className={buttonClass + ' lg:block ' + (barraLateral && ' sm:hidden')}
+                        type='button'
+                        onClick={deleteItem}
+                    >
+                        <FontAwesomeIcon icon={faTimes} />
+                    </button>
+                </div>
             </div>
         </>
     )

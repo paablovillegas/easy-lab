@@ -67,7 +67,7 @@ export const SearchPaciente = ({ data = [], active, mostrarBarra }) => {
             </div>
             <div className="p-2">
                 <RoundInput
-                    placeholder="Institucion, comisión..."
+                    placeholder="Nombre, apellidos..."
                     icon={faVial}
                     size="xs"
                     value={stringSearch}
