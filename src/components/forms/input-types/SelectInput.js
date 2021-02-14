@@ -29,6 +29,7 @@ export const SelectInput = ({
                             <option 
                                 key={option.value}
                                 value={option.value}
+                                disabled={option.value.toString().length === 0}
                             >
                                 {option.name}
                             </option>

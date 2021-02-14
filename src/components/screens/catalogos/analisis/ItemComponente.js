@@ -1,31 +1,58 @@
-import { faFlask, faIndent } from '@fortawesome/free-solid-svg-icons';
+import { faFlask, faIndent, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
 import { SelectInput } from '../../../forms/input-types/SelectInput';
 
-export const ItemComponente = ({ barraLateral, componente }) => {
+const defaultComponent = {
+    value: '',
+    name: '-- Seleccionar Componente --',
+
+};
+const mapComponente = (componente) => ({
+    value: componente._id,
+    name: componente.componente,
+});
+
+export const ItemComponente = ({ barraLateral, componente, index, onChange, deleteComponent }) => {
     const { componentes } = useSelector(state => state.componente);
 
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        setItems([...componentes])
+        let components = componentes.map(mapComponente);
+        components = [defaultComponent, ...components];
+        setItems(components);
     }, [componentes]);
 
-    console.log(items);
+    const handleChange = ({ target }) => onChange(target, index);
+
+    const deleteItem = () => deleteComponent(index);
+
     return (
         <>
-            <SelectInput
-                title='Componente'
-                inputType="text"
-                icon={faFlask}
-                name='componente'
-                value={componente.componente}
-                options={items}
-                onChange={() => { }}
-                required
-            />
+            <div className='flex'>
+                <div className='flex-1'>
+                    <SelectInput
+                        title='Componente'
+                        inputType="text"
+                        icon={faFlask}
+                        name='componente'
+                        value={componente._id}
+                        options={items}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <button
+                    className='mt-8 mx-1 px-3.5 rounded transition duration-300 active:bg-gray-100 focus:outline-none'
+                    type='button'
+                    onClick={deleteItem}
+                >
+                    <FontAwesomeIcon icon={faTimes} />
+                </button>
+            </div>
             <div className={`${barraLateral ? 'mb-4 lg:mb-0 xl:col-span-2' : 'lg:col-span-2'}`}>
                 <RegularInput
                     placeholder='Referencia'

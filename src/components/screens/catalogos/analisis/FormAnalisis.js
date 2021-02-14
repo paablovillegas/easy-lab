@@ -1,14 +1,16 @@
 import { faChevronLeft, faChevronRight, faDollarSign, faFont, faPollH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initialStateAnalisis } from '../../../../helper/states/initialAnalisis';
+import { initialStateComponente } from '../../../../helper/states/initialComponente';
 import { clearActive, startInsertAnalisis, startUpdateAnalisis } from '../../../../redux/actions/analisis';
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
 import { ItemComponente } from './ItemComponente';
 
 export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
+    const { componentes } = useSelector(state => state.componente);
     const dispatch = useDispatch();
     const [analisis, setAnalisis] = useState({
         ...initialStateAnalisis,
@@ -26,6 +28,36 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
         setAnalisis({
             ...analisis,
             [target.name]: target.value,
+        });
+    };
+
+    const handleChangeComponente = (target, index) => {
+        const newComponent = componentes.find(i => i._id === target.value);
+        const newComponents = [...analisis.componentes];
+        newComponents[index] = newComponent;
+        setAnalisis({
+            ...analisis,
+            componentes: newComponents,
+        });
+    };
+
+    const nuevoComponente = () => {
+        const newComponents = [...analisis.componentes];
+        newComponents.push({
+            ...initialStateComponente,
+            _id: '',
+        });
+        setAnalisis({
+            ...analisis,
+            componentes: newComponents,
+        });
+    };
+
+    const deleteComponente = (i) => {
+        const newComponents = analisis.componentes.filter((item, index) => index !== i);
+        setAnalisis({
+            ...analisis,
+            componentes: newComponents,
         });
     };
 
@@ -48,7 +80,28 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(analisis.componentes);
+        if (analisis.componentes.length === 0) {
+            console.log('Es necesario al menos un analisis');
+            return;
+        }
+        const ids = analisis.componentes.reduce((acc, { _id }) => {
+            if (!_id.length || !acc.includes(_id))
+                return [...acc, _id];
+            return acc;
+        }, []);
+        if (ids.length !== analisis.componentes.length) {
+            console.log('Componentes repetidos!');
+            return;
+        }
+        const analisisAux = {
+            ...analisis,
+            componentes: ids,
+            descripcion: (analisis.descripcion.length && analisis.descripcion) || undefined
+        }
+        if (analisisAux._id)
+            dispatch(startUpdateAnalisis(analisisAux));
+        else
+            dispatch(startInsertAnalisis(analisisAux));
     }
 
     const clearInstitucion = () => dispatch(clearActive());
@@ -139,15 +192,27 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                     <hr className='my-1' />
                 </div>
                 {
-                    analisis.componentes.map(item =>
+                    analisis.componentes.map((item, i) =>
                         <ItemComponente
-                            key={item._id}
+                            key={item._id + i}
                             barraLateral={barraLateral}
                             componente={item}
+                            index={i}
+                            onChange={handleChangeComponente}
+                            deleteComponent={deleteComponente}
                         />
                     )
                 }
-                <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
+                <button
+                    className={'py-1 my-1 w-1/2 text-sm place-self-center border border-gray-500 '
+                        + 'rounded-full focus:outline-none transition duration-300 hover:shadow-md '
+                        + 'active:bg-gray-100'}
+                    type='button'
+                    onClick={nuevoComponente}
+                >
+                    Nuevo Componente
+                </button>
+                <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8 pb-2
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>
                     <RegularButton title={analisis._id ? 'Actualizar' : 'Registrar'} />

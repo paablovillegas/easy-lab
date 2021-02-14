@@ -18,12 +18,14 @@ export const RegularInput = ({
             <div className="relative">
                 <FontAwesomeIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600" icon={icon} />
                 <input
+                    className={`bg-gray-100 text-gray-600 placeholder-gray-400 placeholder-opacity-75 rounded 
+                    shadow-sm py-2 pl-11 pr-2 w-full transition duration-300 focus:outline-none focus:shadow-md
+                    disabled:opacity-60`}
                     type={inputType}
                     placeholder={placeholder}
                     name={name}
                     value={value}
                     onChange={onChange}
-                    className="bg-gray-100 text-gray-600 placeholder-gray-400 placeholder-opacity-75 rounded shadow-sm py-2 pl-11 pr-2 w-full transition duration-300 focus:outline-none focus:shadow-md"
                     required={required}
                     disabled={disabled}
                 />
