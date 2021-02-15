@@ -1,15 +1,30 @@
-import { faClipboardList, faFlask, faHdd, faHospital, faInfoCircle, faList, faMoneyCheck, faSignOutAlt, faUser, faUserMd, faVial } from '@fortawesome/free-solid-svg-icons'
+import { faClipboardList, faDatabase, faFlask, faHdd, faHospital, faInfoCircle, faList, faMoneyCheck, faPlusSquare, faSignOutAlt, faUser, faUserMd, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 export const NavBar = () => {
     const { pathname } = useLocation();
+    const history = useHistory();
+
+    const [currentZone, setCurrentZone] = useState(pathname);
     const [menuState, setMenuState] = useState(false);
 
     const showHideMenu = () => {
         setMenuState(state => !state)
     };
+
+    useEffect(() => {
+        setCurrentZone(pathname)
+    }, [pathname]);
+
+    const navigate = (zone) => {
+        if (currentZone.includes(zone)) {
+            history.push(zone);
+        } else {
+            setCurrentZone(zone);
+        }
+    }
 
     return (
         <div className="bg-gray-700 w-100 sm:min-h-screen flex flex-col overflow-y-hidden">
@@ -24,17 +39,17 @@ export const NavBar = () => {
                     />
                 </button>
             </div>
-            <div className={`flex flex-grow mt-3 sm:mt-6 flex-col space-y-3 ${menuState && 'hidden sm:flex'}`}>
-                <Link className="primary" to="/catalogos" title="Catálogos">
+            <div className={`flex flex-grow mt-3 sm:mt-6 flex-col space-y-2 ${menuState && 'hidden sm:flex'}`}>
+                <button className="primary" title="Catálogos" onClick={() => navigate('/catalogos')}>
                     <FontAwesomeIcon
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-3"
                         icon={faHdd}
                     />
                     <h4 className='menu'>Catálogos</h4>
-                </Link>
+                </button>
                 <div className="mx-2 flex flex-col space-y-1">
                     {
-                        pathname.includes('catalogos') &&
+                        currentZone.includes('catalogos') &&
                         <>
                             <Link className="normal" to="/catalogos/pacientes" title="Pacientes">
                                 <FontAwesomeIcon
@@ -79,13 +94,36 @@ export const NavBar = () => {
                         </>
                     }
                 </div>
-                <Link className="primary" to="/" title="Registros">
+                <button className="primary" title="Registros" onClick={() => navigate('/registros')}>
                     <FontAwesomeIcon
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-3"
                         icon={faMoneyCheck}
                     />
                     <h4 className='menu'>Registros</h4>
-                </Link>
+                </button>
+                <div className='mx-2 flex flex-col space-y-1'>
+                    {
+                        currentZone.includes('registros') &&
+                        <>
+                            <Link className="normal" to="/registros/nuevo" title="Nuevo">
+                                <FontAwesomeIcon
+                                    className="text-gray-400 lg:hidden xl:inline-block xl:mr-2"
+                                    icon={faPlusSquare}
+                                    size="sm"
+                                />
+                                <h5 className='menu'>Nuevo</h5>
+                            </Link>
+                            <Link className="normal" to="/registros/ordenes" title="Ordenes">
+                                <FontAwesomeIcon
+                                    className="text-gray-400 lg:hidden xl:inline-block xl:mr-2"
+                                    icon={faDatabase}
+                                    size="sm"
+                                />
+                                <h5 className='menu'>Ordenes</h5>
+                            </Link>
+                        </>
+                    }
+                </div>
                 <Link className="primary" to="/" title="Reportes">
                     <FontAwesomeIcon
                         className="align-baseline text-yellow-400 lg:hidden xl:inline-block xl:mr-5"

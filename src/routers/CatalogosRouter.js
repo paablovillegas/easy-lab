@@ -5,7 +5,7 @@ import { ScreenInstituciones } from '../components/screens/catalogos/institucion
 import { ScreenAnalisis } from '../components/screens/catalogos/analisis/_ScreenAnalisis';
 import { ScreenPaciente } from '../components/screens/catalogos/paciente/_ScreenPaciente';
 import { ScreenDoctor } from '../components/screens/catalogos/doctor/_ScreenDoctor';
-import { InicioCatalogo } from '../components/screens/catalogos/_InicioScreen';
+import { InicioCatalogo } from '../components/screens/catalogos/InicioCatalogos';
 import { ScreenComponente } from '../components/screens/catalogos/componente/_ScreenComponente';
 
 export const CatalogosRouter = () => {

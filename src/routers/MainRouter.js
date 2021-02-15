@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { NavBar } from '../components/nav-bar/NavBar'
 import { CatalogosRouter } from './CatalogosRouter'
+import { RegistrosRouter } from './RegistrosRouter'
 
 export const MainRouter = () => {
     return (
@@ -10,7 +11,8 @@ export const MainRouter = () => {
                 <NavBar />
             </div>
             <Switch>
-                <Route path="/catalogos" component={ CatalogosRouter } />
+                <Route path="/catalogos" component={CatalogosRouter} />
+                <Route path="/registros" component={RegistrosRouter} />
             </Switch>
         </div>
     )
