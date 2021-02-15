@@ -10,16 +10,10 @@ const defaultPaciente = {
     name: '-- Seleccionar Paciente --',
 };
 
-export const PacienteForm = () => {
+export const PacienteForm = ({ paciente, setPaciente }) => {
     const { paciente: { pacientes } } = useSelector(state => state);
 
     const [items, setItems] = useState([]);
-
-    //TODO: Cambiar de lugar
-    const [paciente, setPaciente] = useState({
-        ...initialStatePaciente,
-        _id: '',
-    });
 
     useEffect(() => {
         let items = pacientes.map(i => ({

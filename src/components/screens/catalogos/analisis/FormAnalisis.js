@@ -8,6 +8,7 @@ import { initialStateComponente } from '../../../../helper/states/initialCompone
 import { clearActive, startInsertAnalisis, startUpdateAnalisis } from '../../../../redux/actions/analisis';
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
+import { RoundButton } from '../../../forms/input-types/RoundButton';
 import { ItemComponente } from './ItemComponente';
 
 export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
@@ -187,15 +188,12 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                         />
                     )
                 }
-                <button
-                    className={'py-1 my-1 w-1/2 text-sm place-self-center border border-gray-500 '
-                        + 'rounded-full focus:outline-none transition duration-300 hover:shadow-md '
-                        + 'active:bg-gray-100'}
-                    type='button'
-                    onClick={nuevoComponente}
-                >
-                    Nuevo Componente
-                </button>
+                <div className={`text-center py-2 ${barraLateral ? 'lg:col-span-2 xl:col-span-3' : 'sm:col-span-2 lg:col-span-3'}`}>
+                    <RoundButton
+                        title='Nuevo Componente'
+                        onClick={nuevoComponente}
+                    />
+                </div>
                 <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8 pb-2
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>

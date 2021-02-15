@@ -11,16 +11,10 @@ const defaultDoctor = {
     name: '-- Seleccionar Doctor --',
 };
 
-export const DoctorForm = ({ active, setActive }) => {
+export const DoctorForm = ({ active, setActive, doctor, setDoctor }) => {
     const { doctor: { doctores } } = useSelector(state => state);
 
     const [items, setItems] = useState([]);
-
-    //TODO: Cambiar de lugar
-    const [doctor, setDoctor] = useState({
-        ...initialStateDoctor,
-        _id: '',
-    });
 
     useEffect(() => {
         let items = doctores.map(i => ({

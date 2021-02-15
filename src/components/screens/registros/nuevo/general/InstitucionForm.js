@@ -1,7 +1,6 @@
 import { faIndustry, faPercentage } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { initialStateInsitucion } from '../../../../../helper/states/initialInstitucion';
 import { RegularInput } from '../../../../forms/input-types/RegularInput';
 import { SelectInput } from '../../../../forms/input-types/SelectInput';
 import { ToggleSwitch } from '../../../../forms/input-types/ToggleSwitch';
@@ -11,16 +10,10 @@ const defaultInstitucion = {
     name: '-- Seleccionar Institucion --',
 };
 
-export const InstitucionForm = ({ active, setActive }) => {
+export const InstitucionForm = ({ active, setActive, institucion, setInstitucion }) => {
     const { institucion: { instituciones } } = useSelector(state => state);
 
     const [items, setItems] = useState([]);
-
-    //TODO: Cambiar de lugar
-    const [institucion, setInstitucion] = useState({
-        ...initialStateInsitucion,
-        _id: '',
-    });
 
     useEffect(() => {
         let items = instituciones.map(i => ({
@@ -31,7 +24,7 @@ export const InstitucionForm = ({ active, setActive }) => {
         setItems(items);
     }, [instituciones]);
 
-    const handleChange = ({target}) => {
+    const handleChange = ({ target }) => {
         const newInst = instituciones.find(i => i._id === target.value);
         setInstitucion(newInst);
     };
