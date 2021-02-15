@@ -8,8 +8,8 @@ import { SelectInput } from '../../../forms/input-types/SelectInput';
 const defaultComponent = {
     value: '',
     name: '-- Seleccionar Componente --',
-
 };
+
 const mapComponente = (componente) => ({
     value: componente._id,
     name: componente.componente,
@@ -38,7 +38,6 @@ export const ItemComponente = ({ barraLateral, componente, index, onChange, dele
                 <div className='flex-1'>
                     <SelectInput
                         title='Componente'
-                        inputType="text"
                         icon={faFlask}
                         name='componente'
                         value={componente._id}

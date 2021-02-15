@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { startFetchDoctores } from '../../../../redux/actions/doctor';
 import { startFetchInstituciones } from '../../../../redux/actions/institucion';
 import { startFetchPacientes } from '../../../../redux/actions/paciente';
@@ -9,11 +9,6 @@ import { Stepper } from './Stepper';
 const steps = ['General', 'Análisis', 'Facturación', 'Total'];
 
 export const NuevaOrdenScreen = () => {
-    const {
-        institucion: { instituciones },
-        doctor: { doctores },
-        paciente: { pacientes }
-    } = useSelector(state => state);
     const dispatch = useDispatch();
     const [step, setStep] = useState(1);
 
@@ -22,7 +17,6 @@ export const NuevaOrdenScreen = () => {
         dispatch(startFetchDoctores())
         dispatch(startFetchInstituciones())
     }, [dispatch]);
-    console.log(instituciones, doctores, pacientes);
 
     const next = () => setStep(step + 1);
 

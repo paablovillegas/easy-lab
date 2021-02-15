@@ -10,6 +10,7 @@ export const SelectInput = ({
     value,
     onChange,
     required = false,
+    disabled = false,
 }) => {
     return (
         <div>
@@ -22,7 +23,8 @@ export const SelectInput = ({
                     name={name}
                     value={value}
                     onChange={onChange}
-                    required={required}
+                    required={required && !disabled}
+                    disabled={disabled}
                 >
                     {
                         options.map(option => (

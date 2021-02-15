@@ -6,6 +6,7 @@ import { PacienteForm } from './PacienteForm'
 export const GeneralForm = () => {
     const [institucionActiva, setInstitucionActiva] = useState(true);
     const [doctorActivo, setDoctorActivo] = useState(true);
+
     return (
         <div>
             <PacienteForm />
