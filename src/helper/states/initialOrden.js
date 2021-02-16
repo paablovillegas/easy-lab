@@ -1,5 +1,10 @@
 import { initialStatePaciente } from "./initialPaciente";
 
+const initialReducerOrden = {
+    ordenes: [],
+    active: null,
+};
+
 const initialStateOrden = {
     paciente: {
         ...initialStatePaciente,
@@ -22,5 +27,6 @@ const initialStateOrden = {
 };
 
 export {
+    initialReducerOrden,
     initialStateOrden,
 }

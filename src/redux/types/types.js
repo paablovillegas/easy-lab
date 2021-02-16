@@ -49,5 +49,26 @@ export const Types = {
             ANALISIS: '[Orden] Fetch analisis',
             ESTATUS: '[Orden] Fetch estatus',
         },
+        Nuevo: {
+            START_ORDEN: '[Orden] Nueva orden',
+            General: {
+                SET_PACIENTE: '[Orden] Nueva set paciente',
+                Doctor: {
+                    SET_DOCTOR: '[Orden] Nueva set doctor',
+                    ENABLE_DOCTOR: '[Orden] Nueva enable doctor',
+                    DISABLE_DOCTOR: '[Orden] Nueva disable doctor',
+                },
+                Institucion: {
+                    SET_INSTITUCION: '[Orden] Nueva set insitucion',
+                    ENABLE_INSTITUCION: '[Orden] Nueva enable insitucion',
+                    DISABLE_INSTITUCION: '[Orden] Nueva disable insitucion',
+                }
+            },
+            Analisis: {
+                SET_ANALISIS: '[Orden] Nueva set analisis',
+                ADD_ANALISIS: '[Orden] Nueva add analisis',
+                REMOVE_ANALISIS: '[Orden] Nueva remove analisis',
+            },
+        },
     },
 }

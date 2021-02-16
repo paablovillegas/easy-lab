@@ -6,6 +6,7 @@ import { analisisReducer } from "../reducer/analisisReducer";
 import { pacienteReducer } from "../reducer/pacienteReducer";
 import { doctorReducer } from "../reducer/doctorReducer";
 import { authReducer } from "../reducer/authReducer";
+import { ordenReducer } from "../reducer/ordenReducer";
 
 const reducers = combineReducers({
     auth: authReducer,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
     paciente: pacienteReducer,
     componente: componenteReducer,
     analisis: analisisReducer,
+    orden: ordenReducer,
 });
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;

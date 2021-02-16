@@ -1,7 +1,8 @@
 import { faAt, faPhoneAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initialStatePaciente } from '../../../../../helper/states/initialPaciente';
+import { setPaciente } from '../../../../../redux/actions/orden/newOrden';
 import { RegularInput } from '../../../../forms/input-types/RegularInput';
 import { SelectInput } from '../../../../forms/input-types/SelectInput';
 
@@ -10,8 +11,12 @@ const defaultPaciente = {
     name: '-- Seleccionar Paciente --',
 };
 
-export const PacienteForm = ({ paciente, setPaciente }) => {
-    const { paciente: { pacientes } } = useSelector(state => state);
+export const PacienteForm = () => {
+    const dispatch = useDispatch();
+    const {
+        paciente: { pacientes },
+        orden: { active: { paciente } }
+    } = useSelector(state => state);
 
     const [items, setItems] = useState([]);
 
@@ -26,11 +31,11 @@ export const PacienteForm = ({ paciente, setPaciente }) => {
 
     const handleChange = ({ target }) => {
         let newInst = pacientes.find(i => i._id === target.value);
-        newInst = {
-            ...initialStatePaciente,
-            ...newInst,
-        }
-        setPaciente(newInst);
+        if (newInst)
+            dispatch(setPaciente({
+                ...initialStatePaciente,
+                ...newInst,
+            }));
     };
 
     return (

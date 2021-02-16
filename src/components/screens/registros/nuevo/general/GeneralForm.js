@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { initialStateDoctor } from '../../../../../helper/states/initialDoctor';
 import { initialStateInsitucion } from '../../../../../helper/states/initialInstitucion';
-import { initialStatePaciente } from '../../../../../helper/states/initialPaciente';
 import { DoctorForm } from './DoctorForm';
 import { InstitucionForm } from './InstitucionForm';
 import { PacienteForm } from './PacienteForm'
 
 export const GeneralForm = ({ next }) => {
+    const { active } = useSelector(state => state.orden);
     const [institucionActiva, setInstitucionActiva] = useState(true);
     const [doctorActivo, setDoctorActivo] = useState(true);
-    const [paciente, setPaciente] = useState({
-        ...initialStatePaciente,
-        _id: '',
-    });
     const [institucion, setInstitucion] = useState({
         ...initialStateInsitucion,
         _id: '',
@@ -24,7 +21,11 @@ export const GeneralForm = ({ next }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        if (!paciente._id || !paciente._id.length) {
+        if (!active) {
+            console.log('error orden');
+            return
+        }
+        if (!active.paciente || !active.paciente._id || !active.paciente._id.length) {
             console.log('error paciente!');
             return
         }
@@ -44,10 +45,7 @@ export const GeneralForm = ({ next }) => {
         <form
             onSubmit={submit}
         >
-            <PacienteForm
-                paciente={paciente}
-                setPaciente={setPaciente}
-            />
+            <PacienteForm />
             <InstitucionForm
                 active={institucionActiva}
                 setActive={setInstitucionActiva}

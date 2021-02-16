@@ -1,10 +1,15 @@
 
+const initialReducerAnalisis = {
+    analisis: [],
+    active: null,
+};
+
 const initialStateAnalisis = {
     analisis: '',
     descripcion: '',
     precio: 0,
     componentes: [],
-}
+};
 
 const initialOrderAnalisis = {
     selected: 'analisis',
@@ -23,6 +28,7 @@ const opcionesAnalisis = [
 ];
 
 export {
+    initialReducerAnalisis,
     initialStateAnalisis,
     initialOrderAnalisis,
     opcionesAnalisis,

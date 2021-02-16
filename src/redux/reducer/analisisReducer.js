@@ -1,9 +1,5 @@
+import { initialReducerAnalisis } from "../../helper/states/initialAnalisis";
 import { Types } from "../types/types";
-
-const initialState = {
-    analisis: [],
-    active: null,
-};
 
 const replaceAnalisis = (analisis = [], als) =>
     analisis.map(i => i._id === als._id ? als : i);
@@ -11,7 +7,7 @@ const replaceAnalisis = (analisis = [], als) =>
 const insertAnalisis = (analisis = [], als) => [...analisis, als]
     .sort((a, b) => a.analisis > b.analisis ? 1 : -1);
 
-export const analisisReducer = (state = initialState, { type, payload }) => {
+export const analisisReducer = (state = initialReducerAnalisis, { type, payload }) => {
     switch (type) {
         case Types.Analisis.FETCH:
             return {
