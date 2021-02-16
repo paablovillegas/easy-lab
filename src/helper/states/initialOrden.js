@@ -1,3 +1,5 @@
+import { initialStateDoctor } from "./initialDoctor";
+import { initialStateInsitucion } from "./initialInstitucion";
 import { initialStatePaciente } from "./initialPaciente";
 
 const initialReducerOrden = {
@@ -11,19 +13,17 @@ const initialStateOrden = {
         _id: '',
     },
     doctor: {
+        ...initialStateDoctor,
         _id: '',
-        nombre: '',
-        apellido_paterno: '',
-        apellido_materno: '',
-        correo: '',
-        telefono: '',
-        comision: 0,
     },
+    doctor_activo: true,
     institucion: {
+        ...initialStateInsitucion,
         _id: '',
-        institucion: '',
-        descuento: 0,
-    }
+        active: true,
+    },
+    institucion_activo: true,
+    analisis: [],
 };
 
 export {

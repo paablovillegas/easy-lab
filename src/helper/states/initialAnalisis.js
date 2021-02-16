@@ -11,6 +11,11 @@ const initialStateAnalisis = {
     componentes: [],
 };
 
+const initialStateOrdenAnalisis = {
+    ...initialStateAnalisis,
+    _id: '',
+}
+
 const initialOrderAnalisis = {
     selected: 'analisis',
     ascendente: true,
@@ -30,6 +35,7 @@ const opcionesAnalisis = [
 export {
     initialReducerAnalisis,
     initialStateAnalisis,
+    initialStateOrdenAnalisis,
     initialOrderAnalisis,
     opcionesAnalisis,
 }

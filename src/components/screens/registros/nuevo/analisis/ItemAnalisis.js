@@ -1,7 +1,8 @@
 import { faDollarSign, faTimes, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeAnalisis, setAnalisis } from '../../../../../redux/actions/orden/newOrden';
 import { RegularInput } from '../../../../forms/input-types/RegularInput'
 import { SelectInput } from '../../../../forms/input-types/SelectInput';
 
@@ -10,9 +11,12 @@ const defaultAnalisis = {
     name: '-- Seleccionar Análisis --',
 };
 
-export const ItemAnalisis = ({ item, index, onChange, removeItem }) => {
+export const ItemAnalisis = ({ item, index }) => {
     const { analisis } = useSelector(state => state.analisis);
+    const dispatch = useDispatch();
     const [items, setItems] = useState([]);
+
+    const remove = (index) => dispatch(removeAnalisis(index));
 
     useEffect(() => {
         let analisisAux = analisis.map(i => ({
@@ -25,7 +29,7 @@ export const ItemAnalisis = ({ item, index, onChange, removeItem }) => {
 
     const handleChange = ({ target }) => {
         const itemAux = analisis.find(i => i._id === target.value);
-        onChange(itemAux, index)
+        dispatch(setAnalisis(itemAux, index));
     }
 
     return (
@@ -37,7 +41,7 @@ export const ItemAnalisis = ({ item, index, onChange, removeItem }) => {
                 <button
                     className='px-2.5 focus:outline-none'
                     type='button'
-                    onClick={() => removeItem(index)}
+                    onClick={() => remove(index)}
                 >
                     <FontAwesomeIcon icon={faTimes} />
                 </button>
@@ -61,5 +65,5 @@ export const ItemAnalisis = ({ item, index, onChange, removeItem }) => {
                 />
             </div>
         </div>
-    )
+    );
 }

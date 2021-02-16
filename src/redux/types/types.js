@@ -52,22 +52,20 @@ export const Types = {
         Nuevo: {
             START_ORDEN: '[Orden] Nueva orden',
             General: {
-                SET_PACIENTE: '[Orden] Nueva set paciente',
+                SET_PACIENTE: '[Orden] Set paciente',
                 Doctor: {
-                    SET_DOCTOR: '[Orden] Nueva set doctor',
-                    ENABLE_DOCTOR: '[Orden] Nueva enable doctor',
-                    DISABLE_DOCTOR: '[Orden] Nueva disable doctor',
+                    SET_DOCTOR: '[Orden] Set doctor',
+                    ENABLE_DISABLE: '[Orden] Enable disable doctor',
                 },
                 Institucion: {
-                    SET_INSTITUCION: '[Orden] Nueva set insitucion',
-                    ENABLE_INSTITUCION: '[Orden] Nueva enable insitucion',
-                    DISABLE_INSTITUCION: '[Orden] Nueva disable insitucion',
-                }
+                    SET_INSTITUCION: '[Orden] Set insitucion',
+                    ENABLE_DISABLE: '[Orden] Enable disable insitucion',
+                },
             },
             Analisis: {
-                SET_ANALISIS: '[Orden] Nueva set analisis',
-                ADD_ANALISIS: '[Orden] Nueva add analisis',
-                REMOVE_ANALISIS: '[Orden] Nueva remove analisis',
+                SET_ANALISIS: '[Orden] Set analisis',
+                ADD_ANALISIS: '[Orden] Add analisis',
+                REMOVE_ANALISIS: '[Orden] Remove analisis',
             },
         },
     },

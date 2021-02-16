@@ -1,6 +1,7 @@
 import { faIndustry, faPercentage } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { enableDisableInstitucion, setInstitucion } from '../../../../../redux/actions/orden/newOrden';
 import { RegularInput } from '../../../../forms/input-types/RegularInput';
 import { SelectInput } from '../../../../forms/input-types/SelectInput';
 import { ToggleSwitch } from '../../../../forms/input-types/ToggleSwitch';
@@ -10,8 +11,12 @@ const defaultInstitucion = {
     name: '-- Seleccionar Institucion --',
 };
 
-export const InstitucionForm = ({ active, setActive, institucion, setInstitucion }) => {
-    const { institucion: { instituciones } } = useSelector(state => state);
+export const InstitucionForm = () => {
+    const dispatch = useDispatch();
+    const {
+        orden: { active: { institucion_activo: active, institucion }, },
+        institucion: { instituciones }
+    } = useSelector(state => state);
 
     const [items, setItems] = useState([]);
 
@@ -24,9 +29,11 @@ export const InstitucionForm = ({ active, setActive, institucion, setInstitucion
         setItems(items);
     }, [instituciones]);
 
+    const setActive = () => dispatch(enableDisableInstitucion(active));
+
     const handleChange = ({ target }) => {
         const newInst = instituciones.find(i => i._id === target.value);
-        setInstitucion(newInst);
+        dispatch(setInstitucion(newInst));
     };
 
     return (

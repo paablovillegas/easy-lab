@@ -11,7 +11,7 @@ import { GeneralForm } from './general/GeneralForm';
 import { ResumenForm } from './resumen/ResumenForm';
 import { Stepper } from './Stepper';
 
-const steps = ['General', 'Análisis', 'Facturación', 'Total'];
+const steps = ['General', 'Análisis', 'Resumen', 'Pago'];
 
 export const NuevaOrdenScreen = () => {
     const { active } = useSelector(state => state.orden);

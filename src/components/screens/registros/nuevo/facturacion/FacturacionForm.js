@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { ToggleSwitch } from '../../../../forms/input-types/ToggleSwitch';
+import { NextPrevious } from '../NextPrevious';
 
 export const FacturacionForm = ({ next, prev }) => {
     const [active, setActive] = useState(true);
@@ -25,20 +26,7 @@ export const FacturacionForm = ({ next, prev }) => {
                     </div>
                 </div>
             </div>
-            <div className='flex px-4 pb-3 space-x-2 mt-3'>
-                <button
-                    className='flex-1 rounded py-2 font-medium uppercase text-gray-700 transition duration-300 active:bg-gray-200 focus:outline-none'
-                    type='button'
-                    onClick={prev}
-                >
-                    Anterior
-                    </button>
-                <button
-                    className='flex-1 rounded py-2 font-medium uppercase text-yellow-400 bg-gray-700 transition duration-300 active:bg-gray-900 focus:outline-none'
-                >
-                    Siguiente
-                    </button>
-            </div>
+            <NextPrevious previous={prev} />
         </form>
     );
 }

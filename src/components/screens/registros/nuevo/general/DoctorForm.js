@@ -1,7 +1,8 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initialStateDoctor } from '../../../../../helper/states/initialDoctor';
+import { enableDisableDoctor, setDoctor } from '../../../../../redux/actions/orden/newOrden';
 import { RegularInput } from '../../../../forms/input-types/RegularInput';
 import { SelectInput } from '../../../../forms/input-types/SelectInput';
 import { ToggleSwitch } from '../../../../forms/input-types/ToggleSwitch';
@@ -11,8 +12,12 @@ const defaultDoctor = {
     name: '-- Seleccionar Doctor --',
 };
 
-export const DoctorForm = ({ active, setActive, doctor, setDoctor }) => {
-    const { doctor: { doctores } } = useSelector(state => state);
+export const DoctorForm = () => {
+    const dispatch = useDispatch();
+    const {
+        orden: { active: { doctor_activo: active, doctor }, },
+        doctor: { doctores }
+    } = useSelector(state => state);
 
     const [items, setItems] = useState([]);
 
@@ -25,13 +30,15 @@ export const DoctorForm = ({ active, setActive, doctor, setDoctor }) => {
         setItems(items);
     }, [doctores]);
 
+    const setActive = () => dispatch(enableDisableDoctor(active));
+
     const handleChange = ({ target }) => {
-        let newInst = doctores.find(i => i._id === target.value);
-        newInst = {
+        let newDoctor = doctores.find(i => i._id === target.value);
+        newDoctor = {
             ...initialStateDoctor,
-            ...newInst,
-        }
-        setDoctor(newInst);
+            ...newDoctor,
+        };
+        dispatch(setDoctor(newDoctor));
     };
 
     return (
