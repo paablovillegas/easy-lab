@@ -35,16 +35,14 @@ export const DoctorForm = ({ active, setActive, doctor, setDoctor }) => {
     };
 
     return (
-        <div className={`rounded-xl px-3 pt-3 pb-6 mx-4 mb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-3 ${active ? 'shadow' : 'shadow-sm'}`}>
-                <div className='md:col-span-2 lg:col-span-3'>
-                    <ToggleSwitch
-                        title='Doctor'
-                        active={active}
-                        setActive={setActive}
-                    />
-                </div>
-                <div className={`${active ? 'block' : 'hidden'}`}>
-                </div>
+        <div className={`rounded-xl px-3 pt-3 pb-3 mx-4 mb-3 ${active ? 'shadow' : 'shadow-sm'}`}>
+            <ToggleSwitch
+                title='Doctor'
+                active={active}
+                setActive={setActive}
+            />
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-4 pb-3 ${active ? 'block' : 'hidden'}`}>
+                <hr className='md:col-span-2 lg:col-span-3 mt-3' />
                 <div className='lg:col-span-2'>
                     <SelectInput
                         icon={faUser}
@@ -76,6 +74,7 @@ export const DoctorForm = ({ active, setActive, doctor, setDoctor }) => {
                     value={doctor.telefono}
                     disabled
                 />
+            </div>
         </div>
     );
 }

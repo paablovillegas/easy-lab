@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { initialStateOrden } from '../../../../helper/states/initialOrden';
 import { startFetchAnalisis } from '../../../../redux/actions/analisis';
 import { startFetchDoctores } from '../../../../redux/actions/doctor';
 import { startFetchInstituciones } from '../../../../redux/actions/institucion';
@@ -38,12 +39,7 @@ export const NuevaOrdenScreen = () => {
                 />
                 {(() => {
                     switch (step) {
-                        case 1: return <GeneralForm
-                            step={step}
-                            steps={steps}
-                            next={next}
-                            prev={prev}
-                        />
+                        case 1: return <GeneralForm next={next} />
                         case 2: return <AnalisisForm
                             next={next}
                             prev={prev}

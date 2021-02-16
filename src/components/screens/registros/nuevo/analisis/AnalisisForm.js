@@ -16,6 +16,11 @@ export const AnalisisForm = ({ prev, next }) => {
         setAnalisis([...analisis, newItem]);
     };
 
+    const removeAnalisis = (index) => {
+        const analisisAux = analisis.filter((_, i) => i !== index);
+        setAnalisis(analisisAux);
+    };
+
     const setIndex = (item, i) => {
         const analisisAux = analisis.map((aux, index) =>
             index === i ? item : aux);
@@ -40,7 +45,7 @@ export const AnalisisForm = ({ prev, next }) => {
             return
         }
         next();
-    }
+    };
 
     return (
         <form
@@ -53,6 +58,7 @@ export const AnalisisForm = ({ prev, next }) => {
                         item={i}
                         index={index}
                         onChange={setIndex}
+                        removeItem={removeAnalisis}
                     />
                 )
             }
