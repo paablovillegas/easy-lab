@@ -28,7 +28,7 @@ export const ItemAnalisis = ({ item, index, onChange }) => {
     }
 
     return (
-        <div className='rounded-xl p-3 mx-4 mb-3 shadow'>
+        <div className='rounded-xl p-3 mx-4 mb-3 shadow grid grid-cols-2 space-x-4'>
             <SelectInput
                 icon={faVial}
                 onChange={handleChange}

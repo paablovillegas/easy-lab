@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { toast } from '../../../../../helper/alerts'
 import { initialStateAnalisis } from '../../../../../helper/states/initialAnalisis';
 import { RoundButton } from '../../../../forms/input-types/RoundButton';
 import { ItemAnalisis } from './ItemAnalisis';
@@ -32,7 +33,10 @@ export const AnalisisForm = ({ prev, next }) => {
             return [...acc, i];
         }, []);
         if (analisisAux.length !== analisis.length) {
-            console.log('Error analisis repetidos o erróneos');
+            toast.fire({
+                icon: 'warning',
+                title: 'Analisis erróneos o repetidos'
+            });
             return
         }
         next();
