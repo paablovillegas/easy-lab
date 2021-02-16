@@ -21,7 +21,8 @@ export const AnalisisForm = ({ prev, next }) => {
         setAnalisis(analisisAux);
     };
 
-    const submit = () => {
+    const submit = (e) => {
+        e.preventDefault();
         const analisisAux = analisis.reduce((acc, i) => {
             if (!i._id || !i._id.length)
                 return acc;
@@ -38,7 +39,9 @@ export const AnalisisForm = ({ prev, next }) => {
     }
 
     return (
-        <div>
+        <form
+            onSubmit={submit}
+        >
             {
                 analisis.map((i, index) =>
                     <ItemAnalisis
@@ -65,11 +68,10 @@ export const AnalisisForm = ({ prev, next }) => {
                     </button>
                 <button
                     className='flex-1 rounded py-2 font-medium uppercase text-yellow-400 bg-gray-700 transition duration-300 active:bg-gray-900 focus:outline-none'
-                    onClick={submit}
                 >
                     Siguiente
                     </button>
             </div>
-        </div>
+        </form>
     );
 }

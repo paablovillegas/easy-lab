@@ -31,7 +31,7 @@ export const InstitucionForm = ({ active, setActive, institucion, setInstitucion
 
     return (
         <div className={`rounded-xl p-3 mx-4 mb-3 ${active ? 'shadow' : 'shadow-sm'}`}>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-4  mb-3'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-4 mb-3'>
                 <div className='md:col-span-2 lg:col-span-3'>
                     <ToggleSwitch
                         title='Institucion'

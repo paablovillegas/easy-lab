@@ -5,7 +5,9 @@ import { startFetchDoctores } from '../../../../redux/actions/doctor';
 import { startFetchInstituciones } from '../../../../redux/actions/institucion';
 import { startFetchPacientes } from '../../../../redux/actions/paciente';
 import { AnalisisForm } from './analisis/AnalisisForm';
+import { FacturacionForm } from './facturacion/FacturacionForm';
 import { GeneralForm } from './general/GeneralForm';
+import { ResumenForm } from './resumen/ResumenForm';
 import { Stepper } from './Stepper';
 
 const steps = ['General', 'Análisis', 'Facturación', 'Total'];
@@ -46,9 +48,12 @@ export const NuevaOrdenScreen = () => {
                             next={next}
                             prev={prev}
                         />
-                        case 3: return <p>CCCCC</p>
-                        case 4: return <p>DDDDD</p>
-                        default: return <p>?</p>
+                        case 3: return <FacturacionForm
+                            next={next}
+                            prev={prev}
+                        />
+                        case 4: return <ResumenForm />
+                        default: return '?'
                     }
                 })()}
             </div>

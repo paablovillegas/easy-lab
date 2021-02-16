@@ -69,7 +69,6 @@ export const GeneralForm = ({ next }) => {
                     </button>
                 <button
                     className='flex-1 rounded py-2 font-medium uppercase text-yellow-400 bg-gray-700 transition duration-300 active:bg-gray-900 focus:outline-none'
-                    onClick={submit}
                 >
                     Siguiente
                     </button>
