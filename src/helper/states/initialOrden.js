@@ -29,6 +29,7 @@ const initialStateOrden = {
         rfc: '',
         correo: '',
         uso_cfdi: '',
+        forma_pago: '',
     },
     facturacion_activo: true,
 };

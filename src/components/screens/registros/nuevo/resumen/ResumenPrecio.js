@@ -1,6 +1,8 @@
+import { faCreditCard, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { numberFormat } from '../../../../../helper/currency';
+import { RegularInput } from '../../../../forms/input-types/RegularInput';
 
 export const ResumenPrecio = () => {
     const orden = useSelector(state => state.orden.active);
@@ -16,6 +18,7 @@ export const ResumenPrecio = () => {
 
     return (
         <div className='rounded-xl p-3 mx-4 mb-3 shadow'>
+            <p className='text-xl text-gray-800'>Total</p>
             <div className='flex'>
                 <p className='flex-1 text-right pr-6'>Subtotal:</p>
                 <p className='w-20 text-right'>{numberFormat(subtotal)}</p>
@@ -29,13 +32,22 @@ export const ResumenPrecio = () => {
                 <p className='w-20 text-right'>{numberFormat(otros)}</p>
             </div>
             <div className='flex'>
-                <p className='flex-1 text-right pr-6'>Total:</p>
-                <p className='w-20 text-right'>{numberFormat(total)}</p>
+                <p className='flex-1 text-right pr-6 font-semibold'>Total:</p>
+                <p className='w-20 text-right font-semibold'>{numberFormat(total)}</p>
             </div>
             <div className='flex text-sm text-gray-400'>
                 <p className='flex-1 text-right pr-6'>Comisión ({comision_pc}%):</p>
                 <p className='w-20 text-right'>{numberFormat(comision)}</p>
             </div>
+            <p className='text-xl text-gray-800'>Pago</p>
+            <RegularInput
+                icon={faDollarSign}
+                placeholder='Cantidad'
+            />
+            <RegularInput
+                icon={faCreditCard}
+                placeholder='Forma de Pago'
+            />
         </div>
     )
 }

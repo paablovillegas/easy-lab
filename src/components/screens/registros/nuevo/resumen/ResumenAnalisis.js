@@ -8,6 +8,13 @@ export const ResumenAnalisis = () => {
 
     return (
         <div className='rounded-xl p-3 mx-4 mb-3 shadow'>
+            <div className='flex px-4 py-2'>
+                <div className='flex-1'>
+                    <p className='text-gray-700 font-semibold'>Análisis</p>
+                </div>
+                <p className='text-gray-700 font-semibold'>Precio</p>
+            </div>
+            <hr className='h-0.5 border-gray-700 bg-gray-700'/>
             { analisis.map((item, index) =>
                 <React.Fragment key={index}>
                     <div className='flex px-4 py-2'>

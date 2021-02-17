@@ -1,4 +1,4 @@
-import { faAt, faReceipt, faTasks } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faCreditCard, faReceipt, faTasks } from '@fortawesome/free-solid-svg-icons';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { enableDisableFacturacion, setFacturacion } from '../../../../../redux/actions/orden/newOrden';
@@ -20,8 +20,8 @@ export const FacturacionForm = () => {
 
     return (
         <div className={`rounded-xl p-3 mx-4 mb-3 ${active ? 'shadow' : 'shadow-sm'}`}>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-4 mb-3'>
-                <div className='md:col-span-2 lg:col-span-3'>
+            <div className='grid grid-cols-1 md:grid-cols-2 md:space-x-4 mb-3'>
+                <div className='md:col-span-2'>
                     <ToggleSwitch
                         title='Facturación'
                         active={active}
@@ -52,6 +52,15 @@ export const FacturacionForm = () => {
                     placeholder='Uso CFDI'
                     name='uso_cfdi'
                     value={facturacion.uso_cfdi}
+                    onChange={handleChange}
+                    disabled={!active}
+                    required
+                />
+                <RegularInput
+                    icon={faCreditCard}
+                    placeholder='Forma de Pago'
+                    name='forma_pago'
+                    value={facturacion.forma_pago}
                     onChange={handleChange}
                     disabled={!active}
                     required
