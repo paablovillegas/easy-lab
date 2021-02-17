@@ -15,7 +15,7 @@ export const ResumenPrecio = () => {
     const total = subtotal - descuento;
 
     return (
-        <React.Fragment>
+        <div className='rounded-xl p-3 mx-4 mb-3 shadow'>
             <div className='flex'>
                 <p className='flex-1 text-right pr-6'>Subtotal:</p>
                 <p className='w-20 text-right'>{numberFormat(subtotal)}</p>
@@ -36,6 +36,6 @@ export const ResumenPrecio = () => {
                 <p className='flex-1 text-right pr-6'>Comisión ({comision_pc}%):</p>
                 <p className='w-20 text-right'>{numberFormat(comision)}</p>
             </div>
-        </React.Fragment>
+        </div>
     )
 }

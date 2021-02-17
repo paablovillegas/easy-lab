@@ -7,7 +7,7 @@ export const ResumenAnalisis = () => {
     const { analisis } = useSelector(state => state.orden.active);
 
     return (
-        <div>
+        <div className='rounded-xl p-3 mx-4 mb-3 shadow'>
             { analisis.map((item, index) =>
                 <React.Fragment key={index}>
                     <div className='flex px-4 py-2'>
