@@ -4,7 +4,7 @@ export const NextPrevious = ({ pDisabled = false, nDisabled = false, previous })
     return (
         <div className='flex px-4 pb-3 mt-3 space-x-2'>
             <button
-                className='flex-1 rounded py-2 font-medium uppercase text-gray-700 transition duration-300 active:bg-gray-200 focus:outline-none disabled:opacity-50'
+                className='flex-1 rounded py-2 font-medium uppercase text-gray-700 transition duration-300 active:bg-gray-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
                 disabled={pDisabled}
                 type='button'
                 onClick={previous}
@@ -12,7 +12,7 @@ export const NextPrevious = ({ pDisabled = false, nDisabled = false, previous })
                 Anterior
             </button>
             <button
-                className='flex-1 rounded py-2 font-medium uppercase text-yellow-400 bg-gray-700 transition duration-300 active:bg-gray-900 focus:outline-none disabled:opacity-50'
+                className='flex-1 rounded py-2 font-medium uppercase text-yellow-400 bg-gray-700 transition duration-300 active:bg-gray-900 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
                 disabled={nDisabled}
             >
                 Siguiente

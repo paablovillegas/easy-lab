@@ -23,10 +23,7 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
             state.active.doctor = payload;
             return { ...state };
         case Types.Orden.Nuevo.Analisis.ADD_ANALISIS:
-            state.active.analisis = [
-                ...state.active.analisis,
-                { ...initialStateOrdenAnalisis }
-            ];
+            state.active.analisis = [...state.active.analisis, { ...initialStateOrdenAnalisis }];
             return { ...state };
         case Types.Orden.Nuevo.Analisis.SET_ANALISIS:
             state.active.analisis = state.active.analisis.map((i, index) =>
@@ -34,6 +31,12 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
             return { ...state };
         case Types.Orden.Nuevo.Analisis.REMOVE_ANALISIS:
             state.active.analisis = state.active.analisis.filter((_, index) => index !== payload);
+            return { ...state };
+        case Types.Orden.Nuevo.Facturacion.ENABLE_DISABLE:
+            state.active.facturacion_activo = payload;
+            return { ...state };
+        case Types.Orden.Nuevo.Facturacion.SET_FACTURACION:
+            state.active.facturacion = payload;
             return { ...state };
         default:
             return state;

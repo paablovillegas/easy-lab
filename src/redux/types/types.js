@@ -67,6 +67,10 @@ export const Types = {
                 ADD_ANALISIS: '[Orden] Add analisis',
                 REMOVE_ANALISIS: '[Orden] Remove analisis',
             },
+            Facturacion: {
+                ENABLE_DISABLE: '[Orden] Enable disable facturacion',
+                SET_FACTURACION: '[Orden] Set facturacion',
+            }
         },
     },
 }

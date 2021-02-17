@@ -45,15 +45,9 @@ export const NuevaOrdenScreen = () => {
                         {(() => {
                             switch (step) {
                                 case 1: return <GeneralForm next={next} />
-                                case 2: return <AnalisisForm
-                                    next={next}
-                                    prev={prev}
-                                />
-                                case 3: return <FacturacionForm
-                                    next={next}
-                                    prev={prev}
-                                />
-                                case 4: return <ResumenForm />
+                                case 2: return <AnalisisForm next={next} prev={prev} />
+                                case 3: return <ResumenForm next={next} prev={prev} />
+                                case 4: return <FacturacionForm next={next} prev={prev} />
                                 default: return '?'
                             }
                         })()}

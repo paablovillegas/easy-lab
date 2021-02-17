@@ -44,3 +44,13 @@ export const removeAnalisis = (index) => ({
     type: Types.Orden.Nuevo.Analisis.REMOVE_ANALISIS,
     payload: index,
 });
+
+export const enableDisableFacturacion = (active) => ({
+    type: Types.Orden.Nuevo.Facturacion.ENABLE_DISABLE,
+    payload: active,
+});
+
+export const setFacturacion = (facturacion) => ({
+    type: Types.Orden.Nuevo.Facturacion.SET_FACTURACION,
+    payload: facturacion,
+});

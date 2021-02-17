@@ -1,3 +1,4 @@
+import { initialStateOrdenAnalisis } from "./initialAnalisis";
 import { initialStateDoctor } from "./initialDoctor";
 import { initialStateInsitucion } from "./initialInstitucion";
 import { initialStatePaciente } from "./initialPaciente";
@@ -23,7 +24,13 @@ const initialStateOrden = {
         active: true,
     },
     institucion_activo: true,
-    analisis: [],
+    analisis: [{ ...initialStateOrdenAnalisis }],
+    facturacion: {
+        rfc: '',
+        correo: '',
+        uso_cfdi: '',
+    },
+    facturacion_activo: true,
 };
 
 export {

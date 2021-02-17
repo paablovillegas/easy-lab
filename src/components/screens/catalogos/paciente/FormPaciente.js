@@ -100,7 +100,6 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                 </div>
                 <RegularInput
                     placeholder='Nombre'
-                    inputType="text"
                     icon={faUser}
                     name='nombre'
                     value={paciente.nombre}
@@ -109,7 +108,6 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                 />
                 <RegularInput
                     placeholder='Apellido Paterno'
-                    inputType="text"
                     icon={faUser}
                     name='apellido_paterno'
                     value={paciente.apellido_paterno}
@@ -118,7 +116,6 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                 />
                 <RegularInput
                     placeholder='Apellido Materno'
-                    inputType="text"
                     icon={faUser}
                     name='apellido_materno'
                     value={paciente.apellido_materno}
@@ -144,7 +141,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                 />
                 <RegularInput
                     placeholder='Correo Electrónico'
-                    inputType="mail"
+                    inputType="email"
                     icon={faAt}
                     name='correo'
                     value={paciente.correo}
@@ -161,7 +158,6 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                 <div className={`xl:col-span-2 ${!barraLateral ? 'lg:col-span-2' : ''}`}>
                     <RegularInput
                         placeholder="Dirección"
-                        inputType="text"
                         icon={faHome}
                         name="direccion"
                         value={paciente.direccion}
