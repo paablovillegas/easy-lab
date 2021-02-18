@@ -5,7 +5,8 @@ import { Types } from "../types/types";
 export const ordenReducer = (state = initialReducerOrden, { type, payload }) => {
     switch (type) {
         case Types.Orden.INSERT:
-            console.log(payload);
+            console.log(payload)
+            state.ordenes = [payload, ...state.ordenes];
             return { ...state };
         case Types.Orden.Nuevo.START_ORDEN:
             state.active = payload

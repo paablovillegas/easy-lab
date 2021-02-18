@@ -1,4 +1,4 @@
-import { faAt, faFileInvoiceDollar, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faFileInvoiceDollar, faPhoneAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { initialStateDoctor } from '../../../../../helper/states/initialDoctor';
@@ -63,7 +63,7 @@ export const DoctorForm = () => {
                 </div>
                 <RegularInput
                     placeholder='Comisión'
-                    icon={faUser}
+                    icon={faFileInvoiceDollar}
                     value={doctor.comision}
                     disabled
                 />
@@ -77,7 +77,7 @@ export const DoctorForm = () => {
                 </div>
                 <RegularInput
                     placeholder='Teléfono'
-                    icon={faFileInvoiceDollar}
+                    icon={faPhoneAlt}
                     value={doctor.telefono}
                     disabled
                 />

@@ -55,7 +55,6 @@ export const NuevaOrdenScreen = () => {
         }
         dispatch(setTotales(getTotales()));
         const newOrden = validateOrden({ ...active });
-        console.log(newOrden);
         if (newOrden) {
             dispatch(startInsertOrden(newOrden));
         }

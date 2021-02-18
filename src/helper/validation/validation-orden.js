@@ -12,9 +12,8 @@ export const validateOrden = (orden) => {
             orden.facturacion = undefined;
         delete orden.facturacion_activo;
         orden.fecha_entrega = fromInputDate(orden.fecha_entrega);
-        if (orden.comentarios)
-            if (!orden.comentarios.length)
-                delete orden.comentarios;
+        if (!orden.comentarios)
+            delete orden.comentarios;
         return orden;
     } catch (err) {
         console.log(err)
