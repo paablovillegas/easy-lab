@@ -28,9 +28,9 @@ export const ResumenPrecio = () => {
 
     const subtotal = orden.analisis
         .reduce((acc, item) => acc += item.precio, 0);
-    const descuento_pc = orden.institucion.descuento;
+    const descuento_pc = (orden.institucion_activo && orden.institucion.descuento) || 0;
     const descuento = Math.round(subtotal * descuento_pc) / 100;
-    const comision_pc = orden.doctor.comision;
+    const comision_pc = (orden.doctor_activo && orden.doctor.comision) || 0;
     const comision = Math.round((subtotal - descuento) * comision_pc) / 100;
     const descuento_2 = parseFloat(orden.totales.descuento_2) || 0;
     const extras = parseFloat(orden.totales.extras) || 0;

@@ -10,7 +10,7 @@ export const clearActive = () => ({
     type: Types.Orden.CLEAR_ACTIVE,
 });
 
-export const startInsert = (orden) => {
+export const startInsertOrden = (orden) => {
     return (dispatch) => fetchConToken('ordenes', orden, 'POST')
         .then(response => response.json())
         .then(({ orden }) => dispatch(insert(orden)));
@@ -21,7 +21,7 @@ const insert = (orden) => ({
     payload: orden,
 });
 
-export const startUpdate = (orden) => {
+export const startUpdateOrden = (orden) => {
     return (dispatch) => {
         const endpoint = 'ordenes/' + orden._id;
         fetchConToken(endpoint, orden, 'PUT')

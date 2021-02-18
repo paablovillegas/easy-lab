@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from '../../../../helper/alerts';
 import { fromInputDate } from '../../../../helper/fechas';
+import { validateOrden } from '../../../../helper/validation/validation-orden';
 import { startFetchAnalisis } from '../../../../redux/actions/analisis';
 import { startFetchDoctores } from '../../../../redux/actions/doctor';
 import { startFetchInstituciones } from '../../../../redux/actions/institucion';
+import { startInsertOrden } from '../../../../redux/actions/orden';
 import { nuevaOrden, setTotales, startGetTiposPago, startGetUsoCFDI } from '../../../../redux/actions/orden/newOrden';
 import { startFetchPacientes } from '../../../../redux/actions/paciente';
 import { AnalisisForm } from './analisis/AnalisisForm';
@@ -35,7 +37,6 @@ export const NuevaOrdenScreen = () => {
     const prev = () => setStep(step - 1);
 
     const validate = () => {
-
         if (new Date().getTime() > fromInputDate(active.fecha_entrega)) {
             toast.fire({
                 title: 'Fecha de entrega anterior a hoy!',
@@ -53,13 +54,18 @@ export const NuevaOrdenScreen = () => {
             return;
         }
         dispatch(setTotales(getTotales()));
+        const newOrden = validateOrden({ ...active });
+        console.log(newOrden);
+        if (newOrden) {
+            dispatch(startInsertOrden(newOrden));
+        }
     }
 
     const getTotales = () => {
         const subtotal = active.analisis.reduce((acc, item) => acc += item.precio, 0);
-        const descuento_pc = active.institucion.descuento;
+        const descuento_pc = (active.institucion_activo && active.institucion.descuento) || 0;
         const descuento = Math.round(subtotal * descuento_pc) / 100;
-        const comision_pc = active.doctor.comision;
+        const comision_pc = (active.doctor_activo && active.doctor.comision) || 0;
         const comision = Math.round((subtotal - descuento) * comision_pc) / 100;
         const descuento_2 = parseFloat(active.totales.descuento_2) || 0;
         const extras = parseFloat(active.totales.extras) || 0;
