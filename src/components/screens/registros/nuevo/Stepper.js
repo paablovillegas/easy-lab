@@ -26,6 +26,7 @@ export const Stepper = ({ steps = [], step, setStep }) => {
                                 ${index + 1 < step ? styleRegular : index + 1 === step ? styleActive : styleOutline}`}
                             type='button'
                             onClick={() => setStep(index + 1)}
+                            disabled={index >= step}
                         >
                             <span className='hidden md:inline'>{i}</span>
                             <span className='inline md:hidden'>{i[0]}</span>

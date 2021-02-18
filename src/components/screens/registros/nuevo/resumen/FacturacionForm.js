@@ -1,15 +1,66 @@
 import { faAt, faCreditCard, faReceipt, faTasks } from '@fortawesome/free-solid-svg-icons';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { enableDisableFacturacion, setFacturacion } from '../../../../../redux/actions/orden/newOrden';
 import { RegularInput } from '../../../../forms/input-types/RegularInput';
+import { SelectInput } from '../../../../forms/input-types/SelectInput';
 import { ToggleSwitch } from '../../../../forms/input-types/ToggleSwitch';
+
+const defaultTipoPago = {
+    value: '',
+    name: '-- Seleccionar Tipo de Pago --',
+};
+
+const defaultCFDI = {
+    value: '',
+    name: '-- Seleccionar Uso CFDI --',
+};
 
 export const FacturacionForm = () => {
     const { facturacion, facturacion_activo: active } = useSelector(state => state.orden.active);
+    const { cfdi, tipo_pago } = useSelector(state => state.orden);
     const dispatch = useDispatch();
 
+    const [itemsCFDI, setItemsCFDI] = useState([]);
+    const [itemsTipoPago, setItemsTipoPago] = useState([]);
+
+    useEffect(() => {
+        let mapa = tipo_pago.map(i => ({
+            name: i.forma_pago,
+            value: i.forma_pago,
+        }));
+        mapa = [defaultTipoPago, ...mapa];
+        setItemsTipoPago(mapa);
+    }, [tipo_pago]);
+
+    useEffect(() => {
+        let mapa = cfdi.map(i => ({
+            value: i.uso,
+            name: i.uso,
+        }));
+        mapa = [defaultCFDI, ...mapa];
+        setItemsCFDI(mapa);
+    }, [cfdi]);
+
     const setActive = (active) => dispatch(enableDisableFacturacion(active));
+
+    const handleTipoPago = ({ target }) => {
+        const item = itemsTipoPago.find(i => i.value === target.value);
+        if (item)
+            dispatch(setFacturacion({
+                ...facturacion,
+                [target.name]: item.name,
+            }));
+    }
+
+    const handleCFDI = ({ target }) => {
+        const item = itemsCFDI.find(i => i.value === target.value);
+        if (item)
+            dispatch(setFacturacion({
+                ...facturacion,
+                [target.name]: item.name,
+            }));
+    }
 
     const handleChange = ({ target }) => {
         dispatch(setFacturacion({
@@ -47,21 +98,23 @@ export const FacturacionForm = () => {
                     disabled={!active}
                     required
                 />
-                <RegularInput
+                <SelectInput
                     icon={faTasks}
-                    placeholder='Uso CFDI'
                     name='uso_cfdi'
+                    onChange={handleCFDI}
+                    title='Uso CFDI'
+                    options={itemsCFDI}
                     value={facturacion.uso_cfdi}
-                    onChange={handleChange}
                     disabled={!active}
                     required
                 />
-                <RegularInput
+                <SelectInput
                     icon={faCreditCard}
-                    placeholder='Forma de Pago'
                     name='forma_pago'
+                    onChange={handleTipoPago}
+                    title='Forma de pago'
+                    options={itemsTipoPago}
                     value={facturacion.forma_pago}
-                    onChange={handleChange}
                     disabled={!active}
                     required
                 />

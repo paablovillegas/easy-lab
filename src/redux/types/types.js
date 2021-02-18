@@ -48,6 +48,8 @@ export const Types = {
             INSTITUCION: '[Orden] Fetch institucion',
             ANALISIS: '[Orden] Fetch analisis',
             ESTATUS: '[Orden] Fetch estatus',
+            TIPO_PAGO: '[Orden] Fetch tipos de pago',
+            CFDI: '[Orden] Fetch uso de cfdi',
         },
         Nuevo: {
             START_ORDEN: '[Orden] Nueva orden',
@@ -70,7 +72,13 @@ export const Types = {
             Facturacion: {
                 ENABLE_DISABLE: '[Orden] Enable disable facturacion',
                 SET_FACTURACION: '[Orden] Set facturacion',
-            }
+            },
+            Totales: {
+                SET_TOTALES: '[Orden] Set totales'
+            },
+            SET_FECHA_ENTREGA: '[Orden] Set fecha entrega',
+            SET_COMENTARIOS: '[Orden] Set comentarios',
+            SET_PAGO: '[Orden] Set pago',
         },
     },
 }

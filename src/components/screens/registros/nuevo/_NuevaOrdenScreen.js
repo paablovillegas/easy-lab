@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from '../../../../helper/alerts';
+import { fromInputDate } from '../../../../helper/fechas';
 import { startFetchAnalisis } from '../../../../redux/actions/analisis';
 import { startFetchDoctores } from '../../../../redux/actions/doctor';
 import { startFetchInstituciones } from '../../../../redux/actions/institucion';
-import { nuevaOrden } from '../../../../redux/actions/orden/newOrden';
+import { nuevaOrden, setTotales, startGetTiposPago, startGetUsoCFDI } from '../../../../redux/actions/orden/newOrden';
 import { startFetchPacientes } from '../../../../redux/actions/paciente';
 import { AnalisisForm } from './analisis/AnalisisForm';
 import { FacturacionForm } from './facturacion/FacturacionForm';
@@ -24,11 +26,55 @@ export const NuevaOrdenScreen = () => {
         dispatch(startFetchInstituciones())
         dispatch(startFetchAnalisis())
         dispatch(nuevaOrden())
+        dispatch(startGetUsoCFDI())
+        dispatch(startGetTiposPago())
     }, [dispatch]);
 
     const next = () => setStep(step + 1);
 
     const prev = () => setStep(step - 1);
+
+    const validate = () => {
+
+        if (new Date().getTime() > fromInputDate(active.fecha_entrega)) {
+            toast.fire({
+                title: 'Fecha de entrega anterior a hoy!',
+                icon: 'error',
+            });
+            return;
+        }
+        if (active.facturacion_activo) {
+            if (active.facturacion.forma_pago !== active.pagos[0].tipo_pago) {
+                toast.fire({
+                    title: 'Tipos de pago diferentes para facturación!',
+                    icon: 'error'
+                });
+            }
+            return;
+        }
+        dispatch(setTotales(getTotales()));
+    }
+
+    const getTotales = () => {
+        const subtotal = active.analisis.reduce((acc, item) => acc += item.precio, 0);
+        const descuento_pc = active.institucion.descuento;
+        const descuento = Math.round(subtotal * descuento_pc) / 100;
+        const comision_pc = active.doctor.comision;
+        const comision = Math.round((subtotal - descuento) * comision_pc) / 100;
+        const descuento_2 = parseFloat(active.totales.descuento_2) || 0;
+        const extras = parseFloat(active.totales.extras) || 0;
+        const total = subtotal - descuento - descuento_2 + extras;
+        return {
+            subtotal,
+            descuento_pc,
+            descuento,
+            descuento_2,
+            comision_pc,
+            comision,
+            extras,
+            total,
+        };
+    }
 
     return (
         <>
@@ -46,7 +92,7 @@ export const NuevaOrdenScreen = () => {
                             switch (step) {
                                 case 1: return <GeneralForm next={next} />
                                 case 2: return <AnalisisForm next={next} prev={prev} />
-                                case 3: return <ResumenForm next={next} prev={prev} />
+                                case 3: return <ResumenForm next={validate} prev={prev} />
                                 case 4: return <FacturacionForm next={next} prev={prev} />
                                 default: return '?'
                             }

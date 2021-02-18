@@ -1,11 +1,30 @@
 import { faCreditCard, faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { numberFormat } from '../../../../../helper/currency';
+import { setPago } from '../../../../../redux/actions/orden/newOrden';
 import { RegularInput } from '../../../../forms/input-types/RegularInput';
+import { SelectInput } from '../../../../forms/input-types/SelectInput';
+
+const defaultTipoPago = {
+    value: '',
+    name: '-- Seleccionar Tipo de Pago --',
+};
 
 export const ResumenPrecio = () => {
-    const orden = useSelector(state => state.orden.active);
+    const { active: orden, tipo_pago } = useSelector(state => state.orden);
+    const dispatch = useDispatch();
+
+    const [itemsTipoPago, setItemsTipoPago] = useState([]);
+
+    useEffect(() => {
+        let mapa = tipo_pago.map(i => ({
+            name: i.forma_pago,
+            value: i.forma_pago,
+        }));
+        mapa = [defaultTipoPago, ...mapa];
+        setItemsTipoPago(mapa);
+    }, [tipo_pago]);
 
     const subtotal = orden.analisis
         .reduce((acc, item) => acc += item.precio, 0);
@@ -13,8 +32,15 @@ export const ResumenPrecio = () => {
     const descuento = Math.round(subtotal * descuento_pc) / 100;
     const comision_pc = orden.doctor.comision;
     const comision = Math.round((subtotal - descuento) * comision_pc) / 100;
-    const otros = 0;
-    const total = subtotal - descuento;
+    const descuento_2 = parseFloat(orden.totales.descuento_2) || 0;
+    const extras = parseFloat(orden.totales.extras) || 0;
+    const total = subtotal - descuento - descuento_2 + extras;
+
+    const handleChangePago = ({ target }) =>
+        dispatch(setPago({
+            ...orden.pagos[0],
+            [target.name]: target.value,
+        }));
 
     return (
         <div className='rounded-xl p-3 mx-4 mb-3 shadow'>
@@ -28,8 +54,12 @@ export const ResumenPrecio = () => {
                 <p className='w-20 text-right'>{numberFormat(descuento)}</p>
             </div>
             <div className='flex'>
-                <p className='flex-1 text-right pr-6'>Otros:</p>
-                <p className='w-20 text-right'>{numberFormat(otros)}</p>
+                <p className='flex-1 text-right pr-6'>Descuento Extra:</p>
+                <p className='w-20 text-right'>{numberFormat(descuento_2)}</p>
+            </div>
+            <div className='flex'>
+                <p className='flex-1 text-right pr-6'>Extras:</p>
+                <p className='w-20 text-right'>{numberFormat(extras)}</p>
             </div>
             <div className='flex'>
                 <p className='flex-1 text-right pr-6 font-semibold'>Total:</p>
@@ -43,10 +73,19 @@ export const ResumenPrecio = () => {
             <RegularInput
                 icon={faDollarSign}
                 placeholder='Cantidad'
+                name='pago'
+                value={orden.pagos[0].pago}
+                onChange={handleChangePago}
+                required
             />
-            <RegularInput
+            <SelectInput
                 icon={faCreditCard}
-                placeholder='Forma de Pago'
+                name='tipo_pago'
+                title='Tipo de Pago'
+                onChange={handleChangePago}
+                options={itemsTipoPago}
+                value={orden.pagos[0].tipo_pago}
+                required
             />
         </div>
     )

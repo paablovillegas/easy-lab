@@ -1,3 +1,4 @@
+import { fetchConToken } from "../../../helper/fetch";
 import { initialStateOrden } from "../../../helper/states/initialOrden";
 import { Types } from "../../types/types";
 
@@ -53,4 +54,46 @@ export const enableDisableFacturacion = (active) => ({
 export const setFacturacion = (facturacion) => ({
     type: Types.Orden.Nuevo.Facturacion.SET_FACTURACION,
     payload: facturacion,
+});
+
+export const setComentarios = (comentarios) => ({
+    type: Types.Orden.Nuevo.SET_COMENTARIOS,
+    payload: comentarios,
+});
+
+export const setTotales = (totales) => ({
+    type: Types.Orden.Nuevo.Totales.SET_TOTALES,
+    payload: totales,
+});
+
+export const setFechaEntrega = (fecha_entrega) => ({
+    type: Types.Orden.Nuevo.SET_FECHA_ENTREGA,
+    payload: fecha_entrega,
+});
+
+export const setPago = (pago) => ({
+    type: Types.Orden.Nuevo.SET_PAGO,
+    payload: pago,
+});
+
+export const startGetTiposPago = () => {
+    return (dispatch) => fetchConToken('ordenes/extras/formas_pago')
+        .then(response => response.json())
+        .then(({ data }) => dispatch(getTiposPago(data)));
+};
+
+const getTiposPago = (tipos) => ({
+    type: Types.Orden.Fetch.TIPO_PAGO,
+    payload: tipos,
+});
+
+export const startGetUsoCFDI = () => {
+    return (dispatch) => fetchConToken('ordenes/extras/uso_cfdi')
+        .then(response => response.json())
+        .then(({ data }) => dispatch(getCFDI(data)));
+};
+
+const getCFDI = (cfdi) => ({
+    type: Types.Orden.Fetch.CFDI,
+    payload: cfdi,
 });

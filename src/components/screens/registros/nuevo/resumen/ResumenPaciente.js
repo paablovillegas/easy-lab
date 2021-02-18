@@ -1,10 +1,16 @@
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFechaEntrega } from '../../../../../redux/actions/orden/newOrden';
 import { RegularInput } from '../../../../forms/input-types/RegularInput';
 
 export const ResumenPaciente = () => {
-    const { paciente } = useSelector(state => state.orden.active);
+    const { paciente, fecha_entrega } = useSelector(state => state.orden.active);
+    const dispatch = useDispatch();
+
+    const handleChange = ({ target }) => {
+        dispatch(setFechaEntrega(target.value));
+    }
 
     return (
         <div className='rounded-xl p-3 mx-4 mb-3 shadow flex flex-col space-y-2'>
@@ -16,6 +22,9 @@ export const ResumenPaciente = () => {
                 icon={faCalendar}
                 inputType='date'
                 placeholder='Fecha de entrega'
+                name='fecha_entrega'
+                value={fecha_entrega}
+                onChange={handleChange}
                 required
             />
         </div>

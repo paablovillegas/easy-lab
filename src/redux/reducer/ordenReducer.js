@@ -38,6 +38,24 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
         case Types.Orden.Nuevo.Facturacion.SET_FACTURACION:
             state.active.facturacion = payload;
             return { ...state };
+        case Types.Orden.Nuevo.SET_COMENTARIOS:
+            state.active.comentarios = payload;
+            return { ...state };
+        case Types.Orden.Nuevo.Totales.SET_TOTALES:
+            state.active.totales = payload;
+            return { ...state };
+        case Types.Orden.Nuevo.SET_FECHA_ENTREGA:
+            state.active.fecha_entrega = payload;
+            return { ...state };
+        case Types.Orden.Nuevo.SET_PAGO:
+            state.active.pagos[0] = payload;
+            return { ...state };
+        case Types.Orden.Fetch.CFDI:
+            state.cfdi = payload;
+            return { ...state };
+        case Types.Orden.Fetch.TIPO_PAGO:
+            state.tipo_pago = payload;
+            return { ...state };
         default:
             return state;
     }
