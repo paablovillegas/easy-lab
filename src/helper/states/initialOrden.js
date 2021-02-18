@@ -6,6 +6,7 @@ import { initialStatePaciente } from "./initialPaciente";
 const initialReducerOrden = {
     ordenes: [],
     active: null,
+    created: false,
     cfdi: [],
     tipo_pago: [],
 };

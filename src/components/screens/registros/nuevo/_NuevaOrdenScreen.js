@@ -15,10 +15,10 @@ import { GeneralForm } from './general/GeneralForm';
 import { ResumenForm } from './resumen/ResumenForm';
 import { Stepper } from './Stepper';
 
-const steps = ['General', 'Análisis', 'Resumen', 'Pago'];
+const steps = ['General', 'Análisis', 'Resumen', 'Comprobantes'];
 
 export const NuevaOrdenScreen = () => {
-    const { active } = useSelector(state => state.orden);
+    const { active, created } = useSelector(state => state.orden);
     const [step, setStep] = useState(1);
     const dispatch = useDispatch();
 
@@ -31,6 +31,11 @@ export const NuevaOrdenScreen = () => {
         dispatch(startGetUsoCFDI())
         dispatch(startGetTiposPago())
     }, [dispatch]);
+
+    useEffect(() => {
+        if (created)
+            setStep(s => s + 1);
+    }, [created]);
 
     const next = () => setStep(step + 1);
 
@@ -50,15 +55,15 @@ export const NuevaOrdenScreen = () => {
                     title: 'Tipos de pago diferentes para facturación!',
                     icon: 'error'
                 });
+                return;
             }
-            return;
         }
         dispatch(setTotales(getTotales()));
         const newOrden = validateOrden({ ...active });
         if (newOrden) {
             dispatch(startInsertOrden(newOrden));
         }
-    }
+    };
 
     const getTotales = () => {
         const subtotal = active.analisis.reduce((acc, item) => acc += item.precio, 0);
