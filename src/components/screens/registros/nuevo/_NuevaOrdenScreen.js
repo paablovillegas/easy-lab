@@ -10,15 +10,15 @@ import { startInsertOrden } from '../../../../redux/actions/orden';
 import { nuevaOrden, setTotales, startGetTiposPago, startGetUsoCFDI } from '../../../../redux/actions/orden/newOrden';
 import { startFetchPacientes } from '../../../../redux/actions/paciente';
 import { AnalisisForm } from './analisis/AnalisisForm';
-import { FacturacionForm } from './facturacion/FacturacionForm';
 import { GeneralForm } from './general/GeneralForm';
+import { ImprimirScreen } from './impirimir/ImprimirScreen';
 import { ResumenForm } from './resumen/ResumenForm';
 import { Stepper } from './Stepper';
 
 const steps = ['General', 'Análisis', 'Resumen', 'Comprobantes'];
 
 export const NuevaOrdenScreen = () => {
-    const { active, created } = useSelector(state => state.orden);
+    const { active } = useSelector(state => state.orden);
     const [step, setStep] = useState(1);
     const dispatch = useDispatch();
 
@@ -31,11 +31,6 @@ export const NuevaOrdenScreen = () => {
         dispatch(startGetUsoCFDI())
         dispatch(startGetTiposPago())
     }, [dispatch]);
-
-    useEffect(() => {
-        if (created)
-            setStep(s => s + 1);
-    }, [created]);
 
     const next = () => setStep(step + 1);
 
@@ -62,6 +57,7 @@ export const NuevaOrdenScreen = () => {
         const newOrden = validateOrden({ ...active });
         if (newOrden) {
             dispatch(startInsertOrden(newOrden));
+            next();
         }
     };
 
@@ -103,7 +99,7 @@ export const NuevaOrdenScreen = () => {
                                 case 1: return <GeneralForm next={next} />
                                 case 2: return <AnalisisForm next={next} prev={prev} />
                                 case 3: return <ResumenForm next={validate} prev={prev} />
-                                case 4: return <FacturacionForm next={next} prev={prev} />
+                                case 4: return <ImprimirScreen next={next} prev={prev} />
                                 default: return '?'
                             }
                         })()}

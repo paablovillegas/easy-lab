@@ -47,7 +47,7 @@ export const ItemAnalisis = ({ item, index }) => {
                 </button>
             </div>
             <div className='grid grid-cols-2 space-x-4'>
-                <hr className='md:col-span-2 lg:col-span-3 mt-3' />
+                <hr className='col-span-2 lg:col-span-3 mt-3' />
                 <SelectInput
                     icon={faVial}
                     onChange={handleChange}

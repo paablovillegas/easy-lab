@@ -14,6 +14,8 @@ export const validateOrden = (orden) => {
         orden.fecha_entrega = fromInputDate(orden.fecha_entrega);
         if (!orden.comentarios)
             delete orden.comentarios;
+        if (orden.pagos && orden.pagos.length)
+            orden.pagos[0].fecha_pago = new Date();
         return orden;
     } catch (err) {
         console.log(err)
