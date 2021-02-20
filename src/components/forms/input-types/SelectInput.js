@@ -11,6 +11,7 @@ export const SelectInput = ({
     onChange,
     required = false,
     disabled = false,
+    firstDisabled = true,
 }) => {
     return (
         <div>
@@ -31,7 +32,7 @@ export const SelectInput = ({
                             <option 
                                 key={option.value}
                                 value={option.value}
-                                disabled={option.value.toString().length === 0}
+                                disabled={firstDisabled ? option.value.toString().length === 0 : false}
                             >
                                 {option.name}
                             </option>

@@ -42,6 +42,7 @@ export const Types = {
         INSERT: '[Orden] New',
         UPDATE: '[Orden] Update',
         Fetch: {
+            DEFAULT: '[Orden] Fetch default',
             FECHAS: '[Orden] Fetch fechas',
             PACIENTE: '[Orden] Fetch paciente',
             DOCTOR: '[Orden] Fetch doctor',

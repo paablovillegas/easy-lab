@@ -42,4 +42,17 @@ export const startFetchFechas = (fechaInicio, fechaFin) => {
             .then(response => response.json())
             .then(({ ordenes }) => console.log(ordenes));
     }
-}
+};
+
+export const startFetchDefault = () => {
+    return (dispatch) => {
+        fetchConToken('ordenes')
+            .then(response => response.json())
+            .then(({ ordenes }) => dispatch(fetchDeault(ordenes)));
+    }
+};
+
+const fetchDeault = (ordenes) => ({
+    type: Types.Orden.Fetch.DEFAULT,
+    payload: ordenes,
+});

@@ -83,29 +83,27 @@ export const NuevaOrdenScreen = () => {
     }
 
     return (
-        <>
-            <div className='flex flex-1 flex-col space-y-3 sm:max-h-screen sm:overflow-y-auto'>
-                {
-                    active &&
-                    <>
-                        <h1 className='text-3xl px-4 pt-3 font-semibold text-gray-800'>Nueva Orden</h1>
-                        <Stepper
-                            steps={steps}
-                            step={step}
-                            setStep={setStep}
-                        />
-                        {(() => {
-                            switch (step) {
-                                case 1: return <GeneralForm next={next} />
-                                case 2: return <AnalisisForm next={next} prev={prev} />
-                                case 3: return <ResumenForm next={validate} prev={prev} />
-                                case 4: return <ImprimirScreen next={next} prev={prev} />
-                                default: return '?'
-                            }
-                        })()}
-                    </>
-                }
-            </div>
-        </>
+        <div className='flex flex-1 flex-col space-y-3 sm:max-h-screen sm:overflow-y-auto'>
+            {
+                active &&
+                <>
+                    <h1 className='text-3xl px-4 pt-3 font-semibold text-gray-800'>Nueva Orden</h1>
+                    <Stepper
+                        steps={steps}
+                        step={step}
+                        setStep={setStep}
+                    />
+                    {(() => {
+                        switch (step) {
+                            case 1: return <GeneralForm next={next} />
+                            case 2: return <AnalisisForm next={next} prev={prev} />
+                            case 3: return <ResumenForm next={validate} prev={prev} />
+                            case 4: return <ImprimirScreen next={next} prev={prev} />
+                            default: return '?'
+                        }
+                    })()}
+                </>
+            }
+        </div>
     )
 }

@@ -59,6 +59,9 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
         case Types.Orden.Fetch.TIPO_PAGO:
             state.tipo_pago = payload;
             return { ...state };
+        case Types.Orden.Fetch.DEFAULT:
+            state.ordenes = payload;
+            return { ...state };
         default:
             return state;
     }
