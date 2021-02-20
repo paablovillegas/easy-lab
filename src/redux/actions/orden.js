@@ -56,3 +56,16 @@ const fetchDeault = (ordenes) => ({
     type: Types.Orden.Fetch.DEFAULT,
     payload: ordenes,
 });
+
+export const startFetchBusquedaAvanzada = (options) => {
+    return (dispatch) => {
+        fetchConToken('ordenes/avanzado', options, 'POST')
+            .then(response => response.json())
+            .then(({ ordenes }) => dispatch(fetchBusquedaAvanzada(ordenes)));
+    }
+}
+
+const fetchBusquedaAvanzada = (ordenes) => ({
+    type: Types.Orden.Fetch.DEFAULT,
+    payload: ordenes,
+});

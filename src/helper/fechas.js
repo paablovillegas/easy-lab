@@ -22,4 +22,11 @@ export const toInputDate = (fecha) => {
     return '';
 }
 
+export const toDatabaseDate = (fecha) => {
+    const aux = dayjs(fecha);
+    if (aux.isValid())
+        return aux.toISOString();
+    return '';
+}
+
 export const fromInputDate = (fecha) => dayjs(fecha, inputFormat).unix() * 1000;

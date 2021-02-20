@@ -1,9 +1,11 @@
 import { faCalendarAlt, faDollarSign, faFileInvoice, faHospital, faSearch, faUser, faUserMd, faVial } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { toDatabaseDate, toInputDate } from '../../../../helper/fechas'
 import { startFetchAnalisis } from '../../../../redux/actions/analisis'
 import { startFetchDoctores } from '../../../../redux/actions/doctor'
 import { startFetchInstituciones } from '../../../../redux/actions/institucion'
+import { startFetchBusquedaAvanzada } from '../../../../redux/actions/orden'
 import { startFetchPacientes } from '../../../../redux/actions/paciente'
 import { RegularButton } from '../../../forms/input-types/RegularButton'
 import { RegularInput } from '../../../forms/input-types/RegularInput'
@@ -17,7 +19,7 @@ const firstItem = {
 const yesNoOptions = [
     { ...firstItem },
     { name: 'Sí', value: 1 },
-    { name: 'No', value: 0 },
+    { name: 'No', value: 2 },
 ];
 
 export const BuscadorForm = () => {
@@ -28,6 +30,33 @@ export const BuscadorForm = () => {
     const [doctores, setDoctores] = useState([]);
     const [instituciones, setInstituciones] = useState([]);
     const [analisis, setAnalisis] = useState([]);
+
+    const [busquedaAvanzada, setBusquedaAvanzada] = useState({
+        paciente: '',
+        doctor: '',
+        institucion: '',
+        analisis: '',
+        facturado: '',
+        liquidado: '',
+        fecha_inicio: '',
+        fecha_fin: '',
+    });
+
+    const handleChange = ({ target }) => {
+        setBusquedaAvanzada({
+            ...busquedaAvanzada,
+            [target.name]: target.value,
+        });
+    }
+
+    const fetchData = (e) => {
+        e.preventDefault();
+        dispatch(startFetchBusquedaAvanzada({
+            ...busquedaAvanzada,
+            fecha_inicio: toDatabaseDate(busquedaAvanzada.fecha_inicio),
+            fecha_fin: toDatabaseDate(busquedaAvanzada.fecha_fin),
+        }));
+    }
 
     useEffect(() => {
         if (!all.paciente.pacientes.length) {
@@ -69,7 +98,10 @@ export const BuscadorForm = () => {
     }, [all, dispatch]);
 
     return (
-        <div className='grid grid-cols-3 space-x-3 px-3'>
+        <form
+            className='grid grid-cols-3 space-x-3 px-3'
+            onSubmit={fetchData}
+        >
             <h2 className='col-span-2 text-3xl px-4 pt-3 font-semibold text-gray-800'>Ordenes</h2>
             {/*Folio*/}
             <div className='flex flex-row'>
@@ -94,12 +126,16 @@ export const BuscadorForm = () => {
                 name='fecha_inicio'
                 placeholder='Desde'
                 inputType='date'
+                value={busquedaAvanzada.fecha_inicio}
+                onChange={handleChange}
             />
             <RegularInput
                 icon={faCalendarAlt}
-                name='fecha_inicio'
+                name='fecha_fin'
                 placeholder='Hasta'
                 inputType='date'
+                value={busquedaAvanzada.fecha_fin}
+                onChange={handleChange}
             />
             {/*Paciente*/}
             <SelectInput
@@ -108,6 +144,8 @@ export const BuscadorForm = () => {
                 options={pacientes}
                 title='Paciente'
                 firstDisabled={false}
+                value={busquedaAvanzada.paciente}
+                onChange={handleChange}
             />
             {/*Doctor*/}
             <SelectInput
@@ -116,6 +154,8 @@ export const BuscadorForm = () => {
                 options={doctores}
                 title='Doctor'
                 firstDisabled={false}
+                value={busquedaAvanzada.doctor}
+                onChange={handleChange}
             />
             {/*Institucion*/}
             <SelectInput
@@ -124,6 +164,8 @@ export const BuscadorForm = () => {
                 options={instituciones}
                 title='Institucióon'
                 firstDisabled={false}
+                value={busquedaAvanzada.institucion}
+                onChange={handleChange}
             />
             {/*Análisis*/}
             <SelectInput
@@ -132,28 +174,34 @@ export const BuscadorForm = () => {
                 options={analisis}
                 title='Análsis'
                 firstDisabled={false}
+                value={busquedaAvanzada.analisis}
+                onChange={handleChange}
             />
             {/*Facturacion*/}
             <SelectInput
                 icon={faFileInvoice}
-                name='facturacion'
+                name='facturado'
                 options={yesNoOptions}
                 title='Facturado'
                 firstDisabled={false}
+                value={busquedaAvanzada.facturado}
+                onChange={handleChange}
             />
             {/*Pagos*/}
             <SelectInput
                 icon={faDollarSign}
-                name='pago'
+                name='liquidado'
                 options={yesNoOptions}
                 title='Liquidado'
                 firstDisabled={false}
+                value={busquedaAvanzada.liquidado}
+                onChange={handleChange}
             />
             <div className='mt-auto'>
                 <RegularButton
                     title='Busqueda Avanzada'
                 />
             </div>
-        </div>
+        </form>
     )
 }
