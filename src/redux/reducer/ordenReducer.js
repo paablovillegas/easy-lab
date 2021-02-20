@@ -62,6 +62,10 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
         case Types.Orden.Fetch.DEFAULT:
             state.ordenes = payload;
             return { ...state };
+        case Types.Orden.Fetch.ITEM:
+            console.log(payload);
+            state.active = payload;
+            return { ...state };
         default:
             return state;
     }

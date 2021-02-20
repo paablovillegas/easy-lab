@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from '../../../../../helper/alerts';
-import { LoadingState } from './LoadingState';
+import { LoadingState } from '../../../loading/LoadingState';
 
 const pad = function (number, size) {
     var s = String(number);

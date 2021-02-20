@@ -1,20 +1,18 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { startFetchDefault } from '../../../../redux/actions/orden';
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { BuscadorForm } from './BuscadorForm'
 import { ListaOrdenes } from './ListaOrdenes'
 
 export const ScreenOrden = () => {
-    const dispatch = useDispatch();
+    const { ordenes } = useSelector(state => state.orden);
 
-    useEffect(() => {
-        dispatch(startFetchDefault())
-    }, [dispatch]);
-
+    console.log(ordenes)
     return (
         <div className='flex flex-1 flex-col space-y-3 sm:max-h-screen sm:overflow-y-auto'>
             <BuscadorForm />
-            <ListaOrdenes />
+            {ordenes.length > 0 &&
+                <ListaOrdenes />
+            }
         </div>
     )
 }

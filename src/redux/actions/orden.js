@@ -35,15 +35,6 @@ export const update = (orden) => ({
     payload: orden,
 });
 
-export const startFetchFechas = (fechaInicio, fechaFin) => {
-    return (dispatch) => {
-        const values = { fecha_inicio: fechaInicio, fecha_fin: fechaFin };
-        fetchConToken('ordenes/fechas', values, 'POST')
-            .then(response => response.json())
-            .then(({ ordenes }) => console.log(ordenes));
-    }
-};
-
 export const startFetchDefault = () => {
     return (dispatch) => {
         fetchConToken('ordenes')
@@ -68,4 +59,17 @@ export const startFetchBusquedaAvanzada = (options) => {
 const fetchBusquedaAvanzada = (ordenes) => ({
     type: Types.Orden.Fetch.DEFAULT,
     payload: ordenes,
+});
+
+export const startFetchItem = (uid) => {
+    return (dispatch) => {
+        fetchConToken('ordenes/' + uid)
+            .then(response => response.json())
+            .then(({ orden }) => dispatch(fetchItem(orden)));
+    }
+}
+
+const fetchItem = (orden) => ({
+    type: Types.Orden.Fetch.ITEM,
+    payload: orden,
 });

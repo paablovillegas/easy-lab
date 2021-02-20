@@ -1,6 +1,7 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { numberFormat } from '../../../../helper/currency';
 import { toInputDate } from '../../../../helper/fechas';
 
@@ -36,16 +37,31 @@ export const ItemOrden = ({ item }) => {
     return (
         <tr className='hover:bg-gray-50'>
             <td className='py-4 text-center'>{item.folio}</td>
-            <td className='py-4 text-center'>{toInputDate(item.fecha_pedido)}</td>
-            <td className='py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>{getName(item.paciente)}</td>
-            <td className='py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>{getDoctor()}</td>
-            <td className='py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>{getInstitucion()}</td>
-            <td className='py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>{getAnalisis()}</td>
-            <td className='py-4 text-right'>{numberFormat(item.totales.total)}</td>
+            <td className='hidden sm:table-cell py-4 text-center'>
+                {toInputDate(item.fecha_pedido)}
+            </td>
+            <td className='py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                {getName(item.paciente)}
+            </td>
+            <td className='hidden md:table-cell py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                {getDoctor()}
+            </td>
+            <td className='hidden lg:table-cell py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                {getInstitucion()}
+            </td>
+            <td className='hidden md:table-cell py-4 whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                {getAnalisis()}
+            </td>
+            <td className='hidden sm:table-cell py-4 text-right'>
+                {numberFormat(item.totales.total)}
+            </td>
             <td className='text-center'>
-                <button className='p-3 focus:outline-none text-gray-900'>
+                <Link
+                    className='p-3 focus:outline-none text-gray-900'
+                    to={`/registros/${item._id}`}
+                >
                     <FontAwesomeIcon icon={faArrowRight} />
-                </button>
+                </Link>
             </td>
         </tr>
     );

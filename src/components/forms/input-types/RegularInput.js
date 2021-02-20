@@ -11,10 +11,13 @@ export const RegularInput = ({
     inputType = 'text',
     required = false,
     disabled = false,
+    showLabel = true,
 }) => {
     return (
         <div>
-            <label className="block mt-2 mb-1 text-sm text-gray-300">{title || placeholder}</label>
+            { showLabel &&
+                <label className="block mt-2 mb-1 text-sm text-gray-300">{title || placeholder}</label>
+            }
             <div className="relative">
                 <FontAwesomeIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600" icon={icon} />
                 <input

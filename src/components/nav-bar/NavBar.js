@@ -138,14 +138,14 @@ export const NavBar = () => {
                         className="text-gray-400"
                         icon={faInfoCircle}
                     />
-                    <h5 className="menu lg:hidden">Información</h5>
+                    <h5 className="menu-2">Información</h5>
                 </Link>
                 <Link to="/" className="text-center px-3 py-1 mx-2 lg:mr-4 rounded transition focus:outline-none active:bg-gray-800">
                     <FontAwesomeIcon
                         className="text-gray-400"
                         icon={faSignOutAlt}
                     />
-                    <h5 className="menu lg:hidden">Cerrar Sesión</h5>
+                    <h5 className="menu-2">Cerrar Sesión</h5>
                 </Link>
             </div>
         </div>
