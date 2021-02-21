@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 
 const format = 'DD [de] MMMM YYYY, hh:mm A';
 const inputFormat = 'YYYY-MM-DD';
+const dataFormat = 'DD-MMM-YY';
 
 export const maxFecha = ({ fecha_creacion: fc, fecha_actualizacion: fa }) => {
     if (!fa)
@@ -19,6 +20,13 @@ export const toInputDate = (fecha) => {
     const aux = dayjs(fecha);
     if (aux.isValid())
         return aux.format(inputFormat);
+    return '';
+}
+
+export const toDataDate = (fecha) => {
+    const aux = dayjs(fecha);
+    if (aux.isValid())
+        return aux.format(dataFormat);
     return '';
 }
 
