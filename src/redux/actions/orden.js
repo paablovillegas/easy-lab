@@ -73,3 +73,16 @@ const fetchItem = (orden) => ({
     type: Types.Orden.Fetch.ITEM,
     payload: orden,
 });
+
+export const startInsertPago = (uid, pago) => {
+    return (dispatch) => {
+        fetchConToken(`ordenes/${uid}/pago`, pago, 'POST')
+            .then(response => response.json())
+            .then(({ orden }) => dispatch(insertPago(orden)));
+    }
+};
+
+const insertPago = (orden) => ({
+    type: Types.Orden.NUEVO_PAGO,
+    payload: orden,
+});

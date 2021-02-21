@@ -63,7 +63,9 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
             state.ordenes = payload;
             return { ...state };
         case Types.Orden.Fetch.ITEM:
-            console.log(payload);
+            state.active = payload;
+            return { ...state };
+        case Types.Orden.NUEVO_PAGO:
             state.active = payload;
             return { ...state };
         default:

@@ -5,7 +5,7 @@ import React from 'react'
 export const SelectInput = ({
     title, 
     icon,
-    options,
+    options = [],
     name,
     value,
     onChange,

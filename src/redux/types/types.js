@@ -76,5 +76,6 @@ export const Types = {
             SET_COMENTARIOS: '[Orden] Set comentarios',
             SET_PAGO: '[Orden] Set pago',
         },
+        NUEVO_PAGO: '[Orden] Insert pago',
     },
 }
