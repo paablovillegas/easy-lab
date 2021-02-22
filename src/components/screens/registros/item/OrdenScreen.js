@@ -5,6 +5,7 @@ import { pad } from '../../../../helper/currency';
 import { toDataDate } from '../../../../helper/fechas';
 import { startFetchItem } from '../../../../redux/actions/orden';
 import { LoadingState } from '../../loading/LoadingState';
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall';
 import { AnalisisItem } from './AnalisisItem';
 import { ArchivosItem } from './ArchivosItem';
 import { BalanceItem } from './BalanceItem';
@@ -36,8 +37,8 @@ export const OrdenScreen = () => {
                     <p className='px-3 text-gray-400 inline-block'>Fecha del pedido: {toDataDate(active.fecha_pedido)} | </p>
                     <p className='px-3 text-gray-500 inline-block sm:pl-4'>Fecha de entrega: {toDataDate(active.fecha_entrega)}</p>
                 </div>
-                <div className='my-auto px-3'>
-                    <div className='w-14 h-14 bg-gray-500 rounded-full'></div>
+                <div className='my-auto px-3 w-20'>
+                    <LoadingStateSmall />
                 </div>
                 <button className='my-auto py-2 px-4 bg-gray-700 text-white uppercase font-semibold focus:outline-none rounded'>
                     Publicar

@@ -73,7 +73,6 @@ export const BuscadorForm = () => {
         e.preventDefault()
         if (busquedaAvanzada.folio)
             fetchConToken('ordenes/folio/' + busquedaAvanzada.folio)
-                .then(response => response.json())
                 .then(({ orden }) => {
                     if (orden)
                         history.push('/registros/' + orden._id);

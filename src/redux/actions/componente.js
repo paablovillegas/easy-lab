@@ -6,40 +6,32 @@ export const setActive = (componente) => ({
     payload: componente,
 });
 
-export const clearActive = () => ({
-    type: Types.Componente.CLEAR_ACTIVE,
-});
+export const clearActive = () => ({ type: Types.Componente.CLEAR_ACTIVE });
 
-export const startInsertComponente = (componente) => {
-    return (dispatch) => fetchConToken('componentes', componente, 'POST')
-        .then(response => response.json())
+export const startInsertComponente = (componente) =>
+    (dispatch) => fetchConToken('componentes', componente, 'POST')
         .then(({ componente }) => dispatch(insert(componente)));
-};
 
 const insert = (componente) => ({
     type: Types.Componente.INSERT,
     payload: componente,
 });
 
-export const startUpdateComponente = (componente) => {
-    return (dispatch) => {
+export const startUpdateComponente = (componente) =>
+    (dispatch) => {
         const endpoint = 'componentes/' + componente._id;
         fetchConToken(endpoint, componente, 'PUT')
-            .then(response => response.json())
             .then(({ componente }) => dispatch(update(componente)));
     }
-}
 
 const update = (componente) => ({
     type: Types.Componente.UPDATE,
     payload: componente,
 });
 
-export const startFetchComponentes = () => {
-    return (dispatch) => fetchConToken('componentes')
-        .then(response => response.json())
+export const startFetchComponentes = () =>
+    (dispatch) => fetchConToken('componentes')
         .then(({ componentes }) => dispatch(fetch(componentes)));
-};
 
 const fetch = (componentes) => ({
     type: Types.Componente.FETCH,

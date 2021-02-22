@@ -6,40 +6,33 @@ export const setActive = (analisis) => ({
     payload: analisis,
 });
 
-export const clearActive = () => ({
-    type: Types.Analisis.CLEAR_ACTIVE,
-});
+export const clearActive = () => ({ type: Types.Analisis.CLEAR_ACTIVE });
 
-export const startInsertAnalisis = (analisis) => {
-    return (dispatch) => fetchConToken('analisis', analisis, 'POST')
-        .then(response => response.json())
-        .then(({ analisis }) => dispatch(insert(analisis)));
-};
+export const startInsertAnalisis = (analisis) =>
+    (dispatch) =>
+        fetchConToken('analisis', analisis, 'POST')
+            .then(({ analisis }) => dispatch(insert(analisis)));
 
 const insert = (analisis) => ({
     type: Types.Analisis.INSERT,
     payload: analisis,
 });
 
-export const startUpdateAnalisis = (analisis) => {
-    return (dispatch) => {
+export const startUpdateAnalisis = (analisis) =>
+    (dispatch) => {
         const endpoint = 'analisis/' + analisis._id;
         fetchConToken(endpoint, analisis, 'PUT')
-            .then(response => response.json())
             .then(({ analisis }) => dispatch(update(analisis)));
-    }
-};
+    };
 
 const update = (analisis) => ({
     type: Types.Analisis.UPDATE,
     payload: analisis,
 });
 
-export const startFetchAnalisis = () => {
-    return (dispatch) => fetchConToken('analisis')
-        .then(response => response.json())
+export const startFetchAnalisis = () =>
+    (dispatch) => fetchConToken('analisis')
         .then(({ analisis }) => dispatch(fetch(analisis)));
-};
 
 const fetch = (analisis) => ({
     type: Types.Analisis.FETCH,

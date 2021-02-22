@@ -76,22 +76,19 @@ export const setPago = (pago) => ({
     payload: pago,
 });
 
-export const startGetTiposPago = () => {
-    return (dispatch) => fetchConToken('ordenes/extras/formas_pago')
-        .then(response => response.json())
+export const startGetTiposPago = () =>
+    (dispatch) => fetchConToken('ordenes/extras/formas_pago')
         .then(({ data }) => dispatch(getTiposPago(data)));
-};
 
 const getTiposPago = (tipos) => ({
     type: Types.Orden.Fetch.TIPO_PAGO,
     payload: tipos,
 });
 
-export const startGetUsoCFDI = () => {
-    return (dispatch) => fetchConToken('ordenes/extras/uso_cfdi')
-        .then(response => response.json())
+export const startGetUsoCFDI = () =>
+    (dispatch) => fetchConToken('ordenes/extras/uso_cfdi')
         .then(({ data }) => dispatch(getCFDI(data)));
-};
+
 
 const getCFDI = (cfdi) => ({
     type: Types.Orden.Fetch.CFDI,

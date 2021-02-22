@@ -6,39 +6,29 @@ export const setActive = (paciente) => ({
     payload: paciente,
 });
 
-export const clearActive = () => ({
-    type: Types.Paciente.CLEAR_ACTIVE,
-});
+export const clearActive = () => ({ type: Types.Paciente.CLEAR_ACTIVE });
 
-export const startInsertPaciente = (paciente) => {
-    return (dispatch) => fetchConToken('pacientes', paciente, 'POST')
-        .then(response => response.json())
+export const startInsertPaciente = (paciente) =>
+    (dispatch) => fetchConToken('pacientes', paciente, 'POST')
         .then(({ paciente }) => dispatch(insertPaciente(paciente)));
-};
 
 const insertPaciente = (paciente) => ({
     type: Types.Paciente.INSERT,
     payload: paciente,
 });
 
-export const startUpdatePaciente = (paciente) => {
-    return (dispatch) => {
-        fetchConToken('pacientes/' + paciente._id, paciente, 'PUT')
-            .then(response => response.json())
-            .then(({ paciente }) => dispatch(updatePaciente(paciente)))
-    }
-};
+export const startUpdatePaciente = (paciente) =>
+    (dispatch) => fetchConToken('pacientes/' + paciente._id, paciente, 'PUT')
+        .then(({ paciente }) => dispatch(updatePaciente(paciente)));
 
 const updatePaciente = (paciente) => ({
     type: Types.Paciente.UPDATE,
     payload: paciente,
 });
 
-export const startFetchPacientes = () => {
-    return (dispatch) => fetchConToken('pacientes')
-        .then(response => response.json())
-        .then(({ pacientes }) => dispatch(fetchPacientes(pacientes)))
-};
+export const startFetchPacientes = () =>
+    (dispatch) => fetchConToken('pacientes')
+        .then(({ pacientes }) => dispatch(fetchPacientes(pacientes)));
 
 const fetchPacientes = (pacientes) => ({
     type: Types.Paciente.FETCH,
