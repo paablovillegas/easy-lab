@@ -86,3 +86,16 @@ const insertPago = (orden) => ({
     type: Types.Orden.NUEVO_PAGO,
     payload: orden,
 });
+
+export const startSetResultados = (uid, analisis) => {
+    return (dispatch) => {
+        fetchConToken(`ordenes/${uid}/resultados`, analisis, 'PUT')
+            .then(response => response.json())
+            .then(({ orden }) => dispatch(setResultados(orden)));
+    };
+}
+
+const setResultados = (orden) => ({
+    type: Types.Orden.SET_RESULTADOS,
+    payload: orden,
+});

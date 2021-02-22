@@ -10,7 +10,7 @@ export const BalanceItem = () => {
         pagos.reduce((acc, i) => acc += i.pago, 0);
 
     return (
-        <div className='shadow rounded-xl p-2.5 m-3'>
+        <div className='shadow rounded-xl p-2.5 m-1.5'>
             <h3 className='text-xl text-gray-700 font-medium'>Resumen</h3>
             <div className='flex'>
                 <p className='flex-1 text-right pr-6'>Subtotal:</p>

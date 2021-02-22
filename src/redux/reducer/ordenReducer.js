@@ -68,6 +68,9 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
         case Types.Orden.NUEVO_PAGO:
             state.active = payload;
             return { ...state };
+        case Types.Orden.SET_RESULTADOS:
+            state.active = payload;
+            return { ...state };
         default:
             return state;
     }

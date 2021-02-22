@@ -77,5 +77,6 @@ export const Types = {
             SET_PAGO: '[Orden] Set pago',
         },
         NUEVO_PAGO: '[Orden] Insert pago',
+        SET_RESULTADOS: '[Orden] Set resultados',
     },
 }

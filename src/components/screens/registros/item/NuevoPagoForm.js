@@ -57,7 +57,7 @@ export const NuevoPagoForm = () => {
     }
 
     return (
-        <div className='shadow rounded-xl p-2 m-3 cursor-pointer'>
+        <div className='shadow rounded-xl p-2 m-1.5 cursor-pointer'>
             <div
                 className='flex'
                 onClick={handleShowForm}

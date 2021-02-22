@@ -1,4 +1,4 @@
-import { faCheck, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { useSelector } from 'react-redux';
@@ -11,21 +11,13 @@ export const AnalisisItem = () => {
         .reduce((acc, i) => acc + i.componente + ', ', '')
         .slice(0, -2);
 
-    const resultCaptured = (analisis) => analisis.componentes
-        .reduce((acc, i) => i.resultado ? acc + 1 : acc, 0) === analisis.componentes.length;
+    const resultCaptured = (analisis) => analisis.componentes.every(i => i.resultado);
 
     return (
-        <div className='lg:col-span-6 shadow rounded-xl p-2 m-3'>
-            <div className='flex cursor-pointer select-none'>
-                <h3 className='flex-grow text-2xl text-gray-700'>
-                    Análisis: {active.analisis.length}
-                </h3>
-                <div className='my-auto pr-3'>
-                <FontAwesomeIcon
-                    icon={faChevronRight}
-                />
-                </div>
-            </div>
+        <div className='lg:col-span-6 shadow rounded-xl p-2 m-1.5'>
+            <h3 className='flex-grow text-2xl text-gray-700'>
+                Análisis: {active.analisis.length}
+            </h3>
             <table className='w-full mb-3'>
                 <thead>
                     <tr className='border-b border-gray-400'>

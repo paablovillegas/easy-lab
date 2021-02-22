@@ -10,6 +10,7 @@ import { ArchivosItem } from './ArchivosItem';
 import { BalanceItem } from './BalanceItem';
 import { InfoItem } from './InfoItem';
 import { NuevoPagoForm } from './NuevoPagoForm';
+import { ResultadosItem } from './ResultadosItem';
 
 export const OrdenScreen = () => {
     const active = useSelector(state => state.orden.active);
@@ -27,15 +28,27 @@ export const OrdenScreen = () => {
         return <LoadingState />;
     return (
         <div className='flex-1 sm:max-h-screen sm:overflow-y-auto p-3'>
-            <h1 className='text-4xl px-3 pt-3'>Orden #{pad(active.folio, 5)}</h1>
-            <p className='px-3 text-gray-400 inline-block'>Fecha del pedido: {toDataDate(active.fecha_pedido)}</p>
-            |
-            <p className='px-3 text-gray-500 inline-block sm:pl-4'>Fecha de entrega: {toDataDate(active.fecha_entrega)}</p>
+            <div className='flex'>
+                <div className='flex-grow'>
+                    <h1 className='text-4xl px-3 pt-3'>
+                        Orden #{pad(active.folio, 5)} <small className='text-lg bg-gray-500 text-white p-0.5 rounded'>No publicado</small>
+                    </h1>
+                    <p className='px-3 text-gray-400 inline-block'>Fecha del pedido: {toDataDate(active.fecha_pedido)} | </p>
+                    <p className='px-3 text-gray-500 inline-block sm:pl-4'>Fecha de entrega: {toDataDate(active.fecha_entrega)}</p>
+                </div>
+                <div className='my-auto px-3'>
+                    <div className='w-14 h-14 bg-gray-500 rounded-full'></div>
+                </div>
+                <button className='my-auto py-2 px-4 bg-gray-700 text-white uppercase font-semibold focus:outline-none rounded'>
+                    Publicar
+                </button>
+            </div>
             <div className='grid md:grid-cols-2 lg:grid-cols-3'>
                 <div className='lg:col-span-2'>
                     <div className='grid lg:grid-cols-6'>
                         <InfoItem />
                         <AnalisisItem />
+                        <ResultadosItem />
                     </div>
                 </div>
                 <div>

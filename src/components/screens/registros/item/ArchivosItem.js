@@ -10,7 +10,7 @@ export const ArchivosItem = () => {
     const { files } = useSelector(state => state.orden.active);
 
     return (
-        <div className='shadow rounded-xl p-2 m-3'>
+        <div className='shadow rounded-xl p-2 m-1.5'>
             <h3 className='text-xl text-gray-700 font-medium'>
                 Archivos: {files.length}
             </h3>
