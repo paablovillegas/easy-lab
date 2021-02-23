@@ -78,5 +78,6 @@ export const Types = {
         },
         NUEVO_PAGO: '[Orden] Insert pago',
         SET_RESULTADOS: '[Orden] Set resultados',
+        PUBLICAR: '[Orden] Publicar orden',
     },
 }

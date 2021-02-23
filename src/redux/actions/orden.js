@@ -75,3 +75,12 @@ const setResultados = (orden) => ({
     type: Types.Orden.SET_RESULTADOS,
     payload: orden,
 });
+
+export const startPublicacion = (uid) =>
+    (dispatch) => fetchConToken(`ordenes/${uid}/publicar`)
+        .then(({ orden }) => dispatch(publicar(orden)));
+
+const publicar = (orden) => ({
+    type: Types.Orden.PUBLICAR,
+    payload: orden,
+});

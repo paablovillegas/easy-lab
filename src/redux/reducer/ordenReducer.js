@@ -71,6 +71,9 @@ export const ordenReducer = (state = initialReducerOrden, { type, payload }) => 
         case Types.Orden.SET_RESULTADOS:
             state.active = payload;
             return { ...state };
+        case Types.Orden.PUBLICAR:
+            state.active = payload;
+            return { ...state };
         default:
             return state;
     }
