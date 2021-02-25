@@ -1,4 +1,4 @@
-import { faChevronRight, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faFileMedicalAlt, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 import React from 'react'
@@ -7,7 +7,7 @@ import { nameCapitalized } from '../../../../helper/capitalize';
 import { toDataDate } from '../../../../helper/fechas';
 
 export const ArchivosItem = () => {
-    const { files } = useSelector(state => state.orden.active);
+    const { files = [] } = useSelector(state => state.orden.active);
 
     return (
         <div className='shadow rounded-xl p-2 m-1.5'>
@@ -22,10 +22,10 @@ export const ArchivosItem = () => {
                 })
                 .map((i, index) => (
                     <div className='flex cursor-pointer rounded-lg my-1 hover:bg-gray-100' key={index}>
-                        <div className='p-3'>
+                        <div className='p-3 w-14'>
                             <FontAwesomeIcon
-                                className='text-red-600'
-                                icon={faFilePdf}
+                                className={i.type === 'recibo' ? 'text-red-600' :  'text-yellow-500'}
+                                icon={i.type === 'recibo' ? faFilePdf : faFileMedicalAlt}
                                 size='2x'
                             />
                         </div>
