@@ -1,3 +1,4 @@
+import { toast, showError } from "../../helper/alerts";
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types"
 
@@ -10,7 +11,8 @@ export const clearActive = () => ({ type: Types.Doctor.CLEAR_ACTIVE });
 
 export const startInsertDoctor = (doctor) =>
     (dispatch) => fetchConToken('doctores', doctor, 'POST')
-        .then(({ doctor }) => dispatch(insertDoctor(doctor)));
+        .then(({ doctor }) => dispatch(insertDoctor(doctor)))
+        .catch(showError);
 
 const insertDoctor = (doctor) => ({
     type: Types.Doctor.INSERT,

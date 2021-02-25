@@ -1,3 +1,4 @@
+import { toast } from "../../helper/alerts";
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
 
@@ -10,7 +11,21 @@ export const clearActive = () => ({ type: Types.Institucion.CLEAR_ACTIVE });
 
 export const startInsertInstitucion = (institucion) =>
     (dispatch) => fetchConToken('instituciones', institucion, 'POST')
-        .then(({ institucion }) => dispatch(insertInstitucion(institucion)));
+        .then(res => {
+            if (!res) Promise.reject();
+            if (res.institucion) {
+                dispatch(insertInstitucion(institucion));
+                toast.fire({
+                    title: 'Institución creada',
+                    icon: 'success',
+                })
+            }
+        })
+        .catch(_ =>
+            toast.fire({
+                title: 'Error al insertar institución',
+                icon: 'error'
+            }));
 
 const insertInstitucion = (institucion) => ({
     type: Types.Institucion.INSERT,
@@ -21,7 +36,21 @@ export const startUpdateInstitucion = (institucion) =>
     (dispatch) => {
         const endpoint = 'instituciones/' + institucion._id
         fetchConToken(endpoint, institucion, 'PUT')
-            .then(({ institucion }) => dispatch(updateInstitucion(institucion)));
+            .then(res => {
+                if (!res) Promise.reject();
+                if (res.institucion) {
+                    dispatch(updateInstitucion(institucion));
+                    toast.fire({
+                        title: 'Institución actualizada',
+                        icon: 'success',
+                    })
+                }
+            })
+            .catch(_ =>
+                toast.fire({
+                    title: 'Error al editar institución',
+                    icon: 'error'
+                }));
     }
 
 const updateInstitucion = (institucion) => ({

@@ -164,7 +164,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                         onChange={handleChange}
                     />
                 </div>
-                <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
+                <div className={`pb-3 mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>
                     <RegularButton title={paciente._id ? 'Actualizar' : 'Registrar'} />
