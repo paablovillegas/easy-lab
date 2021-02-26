@@ -86,7 +86,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                             className="my-auto ml-1 mr-2"
                         />
                     </button>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col flex-grow">
                         <h1 className="text-5xl font-bold">
                             {
                                 paciente._id

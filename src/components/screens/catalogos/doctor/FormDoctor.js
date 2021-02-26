@@ -1,14 +1,16 @@
 import { faAt, faChevronLeft, faChevronRight, faFileInvoiceDollar, faPhoneAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { maxFecha } from '../../../../helper/fechas';
 import { initialStateDoctor } from '../../../../helper/states/initialDoctor';
 import { clearActive, startInsertDoctor, startUpdateDoctor } from '../../../../redux/actions/doctor';
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall';
 
 export const FormDoctor = ({ data, setBarraLateral, barraLateral }) => {
+    const { loading } = useSelector(state => state.doctor);
     const dispatch = useDispatch();
     const [doctor, setDoctor] = useState({
         ...initialStateDoctor,
@@ -80,7 +82,7 @@ export const FormDoctor = ({ data, setBarraLateral, barraLateral }) => {
                             className="my-auto ml-1 mr-2"
                         />
                     </button>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col flex-grow">
                         <h1 className="text-5xl font-bold">
                             {
                                 doctor._id
@@ -93,6 +95,7 @@ export const FormDoctor = ({ data, setBarraLateral, barraLateral }) => {
                             Última modificación: {maxFecha(doctor)}
                         </h5>
                     </div>
+                    {loading && <LoadingStateSmall />}
                 </div>
                 <RegularInput
                     placeholder='Nombre'
@@ -147,7 +150,10 @@ export const FormDoctor = ({ data, setBarraLateral, barraLateral }) => {
                 <div className={`mt-4 xl:col-start-3 xl:col-span-1
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>
-                    <RegularButton title={doctor._id ? 'Actualizar' : 'Registrar'} />
+                    <RegularButton
+                        title={doctor._id ? 'Actualizar' : 'Registrar'}
+                        disabled={loading}
+                    />
                 </div>
             </form>
         </div>

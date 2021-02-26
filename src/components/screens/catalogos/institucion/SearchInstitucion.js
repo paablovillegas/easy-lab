@@ -1,15 +1,17 @@
 import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initialOrderInstitucion, initialStateInsitucion, opcionesInstitucion } from '../../../../helper/states/initialInstitucion'
 import { setActive, startFetchInstituciones } from '../../../../redux/actions/institucion'
 import { RoundInput } from '../../../forms/input-types/RoundInput'
 import { SelectSmallInput } from '../../../forms/input-types/SelectSmallInput'
 import { ItemFile } from '../../../forms/search-bar/ItemFile'
 import { ResumeBar } from '../../../forms/search-bar/ResumeBar'
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall'
 
 export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
+    const { loading } = useSelector(state => state.institucion);
     const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
     const [{ selected, ascendente }, setSearchOrder] = useState(initialOrderInstitucion);
@@ -49,7 +51,7 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
     const updateList = () => dispatch(startFetchInstituciones());
 
     return (
-        <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen
+        <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen items-center
             ${active && 'hidden'} ${active && !mostrarBarra && 'sm:hidden'}
         `}>
             <div
@@ -80,6 +82,11 @@ export const SearchInstitucion = ({ data = [], active, mostrarBarra }) => {
                 changeSelected={setCampoOrdenamiento}
             />
             <hr></hr>
+            { loading && !items.length &&
+                <div className='pt-10'>
+                    <LoadingStateSmall />
+                </div>
+            }
             <div className="w-full flex-grow sm:mb-10 sm:overflow-y-auto">
                 {
                     items.filter(item => filterList(item))

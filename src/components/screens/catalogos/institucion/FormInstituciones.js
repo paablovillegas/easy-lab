@@ -1,13 +1,15 @@
 import { faChevronLeft, faChevronRight, faIndustry, faPercentage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { maxFecha } from '../../../../helper/fechas'
 import { clearActive, startInsertInstitucion, startUpdateInstitucion } from '../../../../redux/actions/institucion'
 import { RegularButton } from '../../../forms/input-types/RegularButton'
 import { RegularInput } from '../../../forms/input-types/RegularInput'
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall'
 
 export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
+    const { loading } = useSelector(state => state.institucion);
     const dispatch = useDispatch();
 
     const [institucion, setInstitucion] = useState(data);
@@ -69,7 +71,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                             className="my-auto ml-1 mr-2"
                         />
                     </button>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col flex-grow">
                         <h1 className="text-5xl font-bold">
                             {
                                 institucion._id
@@ -82,6 +84,7 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                             Última modificación: {maxFecha(institucion)}
                         </h5>
                     </div>
+                    {loading && <LoadingStateSmall />}
                 </div>
                 <RegularInput
                     placeholder="Institucion"
@@ -103,7 +106,10 @@ export const FormInstituciones = ({ data, barraLateral, setBarraLateral }) => {
                 <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>
-                    <RegularButton title={institucion._id ? 'Actualizar' : 'Registrar'} />
+                    <RegularButton
+                        title={institucion._id ? 'Actualizar' : 'Registrar'}
+                        disabled={loading}
+                    />
                 </div>
             </form>
         </div>
