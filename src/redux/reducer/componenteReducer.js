@@ -8,7 +8,13 @@ const insertComponente = (componentes = [], componente) => [...componentes, comp
     .sort((a, b) => a.componente > b.componente ? 1 : -1);
 
 export const componenteReducer = (state = initialStateReducer, { type, payload }) => {
+    state.loading = false;
     switch (type) {
+        case Types.Componente.LOADING:
+            return {
+                ...state,
+                loading: true,
+            }
         case Types.Componente.FETCH:
             return {
                 componentes: payload,

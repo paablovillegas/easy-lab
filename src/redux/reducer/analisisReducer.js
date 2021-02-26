@@ -8,7 +8,13 @@ const insertAnalisis = (analisis = [], als) => [...analisis, als]
     .sort((a, b) => a.analisis > b.analisis ? 1 : -1);
 
 export const analisisReducer = (state = initialReducerAnalisis, { type, payload }) => {
+    state.loading = false;
     switch (type) {
+        case Types.Analisis.LOADING:
+            return {
+                ...state,
+                loading: true,
+            }
         case Types.Analisis.FETCH:
             return {
                 analisis: payload,

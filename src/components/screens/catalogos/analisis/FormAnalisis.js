@@ -9,9 +9,11 @@ import { clearActive, startInsertAnalisis, startUpdateAnalisis } from '../../../
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
 import { RoundButton } from '../../../forms/input-types/RoundButton';
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall';
 import { ItemComponente } from './ItemComponente';
 
 export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
+    const { loading } = useSelector(state => state.analisis);
     const { componentes } = useSelector(state => state.componente);
     const dispatch = useDispatch();
     const [analisis, setAnalisis] = useState({
@@ -125,7 +127,7 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                             className="my-auto ml-1 mr-2"
                         />
                     </button>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col flex-grow">
                         <h1 className="text-5xl font-bold">
                             {
                                 analisis._id
@@ -138,6 +140,7 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                             Última modificación: {maxFecha(analisis)}
                         </h5>
                     </div>
+                    {loading && <LoadingStateSmall />}
                 </div>
                 <div className={`${barraLateral ? 'xl:col-span-2' : 'lg:col-span-2'}`}>
                     <RegularInput
@@ -197,7 +200,10 @@ export const FormAnalisis = ({ data = [], barraLateral, setBarraLateral }) => {
                 <div className={`mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8 pb-2
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>
-                    <RegularButton title={analisis._id ? 'Actualizar' : 'Registrar'} />
+                    <RegularButton
+                        title={analisis._id ? 'Actualizar' : 'Registrar'}
+                        disabled={loading}
+                    />
                 </div>
             </form>
         </div>

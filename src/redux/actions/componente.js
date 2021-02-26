@@ -1,5 +1,14 @@
+import { showError, showSuccess } from "../../helper/alerts";
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
+
+const startLoading = {
+    type: Types.Componente.LOADING,
+};
+
+const endLoading = {
+    type: Types.Componente.END_LOADING,
+}
 
 export const setActive = (componente) => ({
     type: Types.Componente.SET_ACTIVE,
@@ -9,8 +18,20 @@ export const setActive = (componente) => ({
 export const clearActive = () => ({ type: Types.Componente.CLEAR_ACTIVE });
 
 export const startInsertComponente = (componente) =>
-    (dispatch) => fetchConToken('componentes', componente, 'POST')
-        .then(({ componente }) => dispatch(insert(componente)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('componentes', componente, 'POST')
+            .then(res => {
+                if (!res || !res.componente)
+                    Promise.reject();
+                dispatch(insert(res.componente))
+                showSuccess('Componente creado');
+            })
+            .catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            });
+    }
 
 const insert = (componente) => ({
     type: Types.Componente.INSERT,
@@ -19,9 +40,19 @@ const insert = (componente) => ({
 
 export const startUpdateComponente = (componente) =>
     (dispatch) => {
+        dispatch(startLoading);
         const endpoint = 'componentes/' + componente._id;
         fetchConToken(endpoint, componente, 'PUT')
-            .then(({ componente }) => dispatch(update(componente)));
+            .then(res => {
+                if (!res || !res.componente)
+                    Promise.reject();
+                dispatch(update(res.componente));
+                showSuccess('Componente actualizado');
+            })
+            .catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            });
     }
 
 const update = (componente) => ({
@@ -30,8 +61,16 @@ const update = (componente) => ({
 });
 
 export const startFetchComponentes = () =>
-    (dispatch) => fetchConToken('componentes')
-        .then(({ componentes }) => dispatch(fetch(componentes)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('componentes')
+            .then(res => {
+                if (!res || !res.componentes)
+                    Promise.reject();
+                dispatch(fetch(res.componentes))
+            })
+            .catch(err => dispatch(endLoading));
+    }
 
 const fetch = (componentes) => ({
     type: Types.Componente.FETCH,

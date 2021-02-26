@@ -1,14 +1,16 @@
 import { faBook, faChevronLeft, faChevronRight, faFlask } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { maxFecha } from '../../../../helper/fechas';
 import { initialStateComponente } from '../../../../helper/states/initialComponente';
 import { clearActive, startInsertComponente, startUpdateComponente } from '../../../../redux/actions/componente';
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall';
 
 export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
+    const { loading } = useSelector(state => state.componente);
     const dispatch = useDispatch();
 
     const [componente, setComponente] = useState({
@@ -47,7 +49,7 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
     return (
         <div className='flex-1'>
             <form
-                className={`pt-3 px-2 space-x-3.5 grid grid-cols-1 sm:max-h-screen sm:overflow-y-auto xl:grid-cols-3
+                className={`pt-3 px-2 space-x-3.5 grid grid-cols-1 sm:max-h-screen sm:overflow-y-auto xl:grid-cols-3 items-center
                     ${barraLateral ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}`}
                 onSubmit={updateInsert}
                 autoComplete='off'
@@ -78,7 +80,7 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
                             className="my-auto ml-1 mr-2"
                         />
                     </button>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col flex-grow">
                         <h1 className="text-5xl font-bold">
                             {
                                 componente._id
@@ -91,6 +93,7 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
                             Última modificación: {maxFecha(componente)}
                         </h5>
                     </div>
+                    {loading && <LoadingStateSmall />}
                 </div>
                 <RegularInput
                     placeholder="Componente"
@@ -114,7 +117,10 @@ export const FormComponente = ({ data, barraLateral, setBarraLateral }) => {
                 <div className={`xl:col-start-2 xl:col-span-2 mt-4
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3'}
                 `}>
-                    <RegularButton title={componente._id ? 'Actualizar' : 'Registrar'} />
+                    <RegularButton
+                        title={componente._id ? 'Actualizar' : 'Registrar'}
+                        disabled={loading}
+                    />
                 </div>
             </form>
         </div>

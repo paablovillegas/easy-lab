@@ -1,15 +1,17 @@
 import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initialOrderAnalisis, initialStateAnalisis, opcionesAnalisis } from '../../../../helper/states/initialAnalisis';
 import { setActive, startFetchAnalisis } from '../../../../redux/actions/analisis';
 import { RoundInput } from '../../../forms/input-types/RoundInput';
 import { SelectSmallInput } from '../../../forms/input-types/SelectSmallInput';
 import { ItemFile } from '../../../forms/search-bar/ItemFile';
 import { ResumeBar } from '../../../forms/search-bar/ResumeBar';
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall';
 
 export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
+    const { loading } = useSelector(state => state.analisis);
     const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
     const [{ selected, ascendente }, setSearchOrder] = useState(initialOrderAnalisis)
@@ -49,7 +51,7 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
     const updateList = () => dispatch(startFetchAnalisis());
 
     return (
-        <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen
+        <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen items-center
             ${active && 'hidden'} ${active && !mostrarBarra && 'sm:hidden'}
         `}>
             <div
@@ -80,9 +82,14 @@ export const SearchAnalisis = ({ data = [], active, mostrarBarra }) => {
                 changeSelected={setCampoOrdenamiento}
             />
             <hr></hr>
+            { loading && !items.length &&
+                <div className='pt-10'>
+                    <LoadingStateSmall />
+                </div>
+            }
             <div className="w-full flex-grow sm:mb-10 sm:overflow-y-auto">
                 {
-                    data.filter(item => filterList(item))
+                    items.filter(item => filterList(item))
                         .map((item, i) => {
                             return <ItemFile
                                 key={item._id}

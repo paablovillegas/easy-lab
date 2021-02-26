@@ -1,15 +1,17 @@
 import { faPlus, faVial } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initialOrderComponente, initialStateComponente, opcionesComponente } from '../../../../helper/states/initialComponente';
 import { setActive, startFetchComponentes } from '../../../../redux/actions/componente';
 import { RoundInput } from '../../../forms/input-types/RoundInput';
 import { SelectSmallInput } from '../../../forms/input-types/SelectSmallInput';
 import { ItemFile } from '../../../forms/search-bar/ItemFile';
 import { ResumeBar } from '../../../forms/search-bar/ResumeBar';
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall';
 
 export const SearchComponente = ({ data = [], active, mostrarBarra }) => {
+    const { loading } = useSelector(state => state.componente);
     const [items, setItems] = useState(data);
     const [stringSearch, setStringSearch] = useState('');
     const [{ selected, ascendente }, setSearchOrder] = useState(initialOrderComponente);
@@ -21,35 +23,35 @@ export const SearchComponente = ({ data = [], active, mostrarBarra }) => {
     const filterList = ({ componente, referencia }) => componente.toLowerCase().includes(stringSearch)
         || referencia.toLowerCase().includes(stringSearch);
 
-        const setCampoOrdenamiento = (field) => setSearchOrder({
-            selected: field,
-            ascendente: ascendente,
-        });
-    
-        const setAscendenteDescendente = () => setSearchOrder({
-            selected,
-            ascendente: !ascendente,
-        });
-    
-        useEffect(() => {
-            setItems([...data]);
-        }, [data]);
-    
-        useEffect(() => {
-            setItems(prev => [...prev].sort((a, b) => ascendente
-                ? a[selected] > b[selected] ? 1 : -1
-                : a[selected] < b[selected] ? 1 : -1
-            ));
-        }, [setItems, selected, ascendente]);
-    
-        const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
-    
-        const newItem = () => dispatch(setActive(initialStateComponente));
-    
-        const updateList = () => dispatch(startFetchComponentes());
-    
+    const setCampoOrdenamiento = (field) => setSearchOrder({
+        selected: field,
+        ascendente: ascendente,
+    });
+
+    const setAscendenteDescendente = () => setSearchOrder({
+        selected,
+        ascendente: !ascendente,
+    });
+
+    useEffect(() => {
+        setItems([...data]);
+    }, [data]);
+
+    useEffect(() => {
+        setItems(prev => [...prev].sort((a, b) => ascendente
+            ? a[selected] > b[selected] ? 1 : -1
+            : a[selected] < b[selected] ? 1 : -1
+        ));
+    }, [setItems, selected, ascendente]);
+
+    const selectItem = (id) => dispatch(setActive(data.find(i => i._id === id)));
+
+    const newItem = () => dispatch(setActive(initialStateComponente));
+
+    const updateList = () => dispatch(startFetchComponentes());
+
     return (
-        <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen
+        <div className={`bg-gray-50 min-h-full w-screen flex-col relative sm:flex sm:w-auto sm:h-screen items-center
             ${active && 'hidden'} ${active && !mostrarBarra && 'sm:hidden'}
         `}>
             <div
@@ -80,6 +82,11 @@ export const SearchComponente = ({ data = [], active, mostrarBarra }) => {
                 changeSelected={setCampoOrdenamiento}
             />
             <hr></hr>
+            { loading && !items.length &&
+                <div className='pt-10'>
+                    <LoadingStateSmall />
+                </div>
+            }
             <div className="w-full flex-grow sm:mb-10 sm:overflow-y-auto">
                 {
                     items.filter(item => filterList(item))
