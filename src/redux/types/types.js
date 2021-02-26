@@ -2,6 +2,8 @@ export const Types = {
     LOGIN: '[Auth] Login',
     LOGOUT: '[Auth] Logout',
     Institucion: {
+        LOADING: '[Inst] Loading',
+        END_LOADING: '[Inst] End loading',
         SET_ACTIVE: '[Inst] Set',
         CLEAR_ACTIVE: '[Inst] Clear',
         INSERT: '[Inst] New',
@@ -9,6 +11,8 @@ export const Types = {
         FETCH: '[Inst] Fetch',
     },
     Doctor: {
+        LOADING: '[Doc] Loading',
+        END_LOADING: '[Doc] End loading',
         SET_ACTIVE: '[Doc] Set',
         CLEAR_ACTIVE: '[Doc] Clear',
         INSERT: '[Doc] New',
@@ -16,6 +20,8 @@ export const Types = {
         FETCH: '[Doc] Fetch',
     },
     Paciente: {
+        LOADING: '[Pax] Loading',
+        END_LOADING: '[Pax] End loading',
         SET_ACTIVE: '[Pax] Set',
         CLEAR_ACTIVE: '[Pax] Clear',
         INSERT: '[Pax] New',
@@ -23,6 +29,8 @@ export const Types = {
         FETCH: '[Pax] Fetch',
     },
     Analisis: {
+        LOADING: '[Als] Loading',
+        END_LOADING: '[Als] End loading',
         SET_ACTIVE: '[Als] Set',
         CLEAR_ACTIVE: '[Als] Clear',
         INSERT: '[Als] New',
@@ -30,6 +38,8 @@ export const Types = {
         FETCH: '[Als] Fetch',
     },
     Componente: {
+        LOADING: '[Comp] Loading',
+        END_LOADING: '[Comp] End loading',
         SET_ACTIVE: '[Comp] Set',
         CLEAR_ACTIVE: '[Comp] Clear',
         INSERT: '[Comp] New',
@@ -37,6 +47,8 @@ export const Types = {
         FETCH: '[Comp] Fetch',
     },
     Orden: {
+        LOADING: '[Orden] Loading',
+        END_LOADING: '[Orden] End loading',
         SET_ACTIVE: '[Orden] Set',
         CLEAR_ACTIVE: '[Orden] Clear',
         INSERT: '[Orden] New',

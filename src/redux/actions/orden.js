@@ -1,5 +1,14 @@
+import { showError, showSuccess } from "../../helper/alerts";
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
+
+const startLoading = {
+    type: Types.Orden.LOADING,
+};
+
+const endLoading = {
+    type: Types.Orden.END_LOADING,
+}
 
 export const setActive = (orden) => ({
     type: Types.Orden.SET_ACTIVE,
@@ -11,8 +20,20 @@ export const clearActive = () => ({
 });
 
 export const startInsertOrden = (orden) =>
-    (dispatch) => fetchConToken('ordenes', orden, 'POST')
-        .then(({ orden }) => dispatch(insert(orden)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('ordenes', orden, 'POST')
+            .then(res => {
+                if (!res || !res.orden)
+                    Promise.reject()
+                dispatch(insert(res.orden))
+                showSuccess('Orden creada');
+            })
+            .catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            });
+    }
 
 const insert = (orden) => ({
     type: Types.Orden.INSERT,
@@ -21,9 +42,19 @@ const insert = (orden) => ({
 
 export const startUpdateOrden = (orden) =>
     (dispatch) => {
+        dispatch(startLoading);
         const endpoint = 'ordenes/' + orden._id;
         fetchConToken(endpoint, orden, 'PUT')
-            .then(({ orden }) => dispatch(update(orden)));
+            .then(res => {
+                if (!res || !res.orden)
+                    Promise.reject();
+                dispatch(update(orden));
+                showSuccess('Orden actualizada');
+            })
+            .catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            })
     }
 
 export const update = (orden) => ({
@@ -32,8 +63,16 @@ export const update = (orden) => ({
 });
 
 export const startFetchDefault = () =>
-    (dispatch) => fetchConToken('ordenes')
-        .then(({ ordenes }) => dispatch(fetchDeault(ordenes)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('ordenes')
+            .then(res => {
+                if (!res || !res.ordenes)
+                    Promise.reject();
+                dispatch(fetchDeault(res.ordenes));
+            })
+            .catch(err => dispatch(endLoading));
+    }
 
 const fetchDeault = (ordenes) => ({
     type: Types.Orden.Fetch.DEFAULT,
@@ -42,7 +81,12 @@ const fetchDeault = (ordenes) => ({
 
 export const startFetchBusquedaAvanzada = (options) =>
     (dispatch) => fetchConToken('ordenes/avanzado', options, 'POST')
-        .then(({ ordenes }) => dispatch(fetchBusquedaAvanzada(ordenes)));
+        .then(res => {
+            if (!res || !res.ordenes)
+                Promise.reject();
+            dispatch(fetchBusquedaAvanzada(res.ordenes))
+        })
+        .catch(err => dispatch(endLoading));
 
 const fetchBusquedaAvanzada = (ordenes) => ({
     type: Types.Orden.Fetch.DEFAULT,
@@ -50,8 +94,19 @@ const fetchBusquedaAvanzada = (ordenes) => ({
 });
 
 export const startFetchItem = (uid) =>
-    (dispatch) => fetchConToken('ordenes/' + uid)
-        .then(({ orden }) => dispatch(fetchItem(orden)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('ordenes/' + uid)
+            .then(res => {
+                if (!res || !res.orden)
+                    Promise.reject();
+                dispatch(fetchItem(res.orden))
+            })
+            .catch(err => {
+                showError(err);
+                dispatch(endLoading);
+            });
+    }
 
 const fetchItem = (orden) => ({
     type: Types.Orden.Fetch.ITEM,
@@ -59,8 +114,16 @@ const fetchItem = (orden) => ({
 });
 
 export const startInsertPago = (uid, pago) =>
-    (dispatch) => fetchConToken(`ordenes/${uid}/pago`, pago, 'POST')
-        .then(({ orden }) => dispatch(insertPago(orden)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken(`ordenes/${uid}/pago`, pago, 'POST')
+            .then(res => {
+                if (!res || !res.orden)
+                    Promise.reject();
+                dispatch(insertPago(res.orden))
+            })
+            .catch(err => dispatch(endLoading));
+    }
 
 const insertPago = (orden) => ({
     type: Types.Orden.NUEVO_PAGO,
@@ -68,8 +131,16 @@ const insertPago = (orden) => ({
 });
 
 export const startSetResultados = (uid, analisis) =>
-    (dispatch) => fetchConToken(`ordenes/${uid}/resultados`, analisis, 'PUT')
-        .then(({ orden }) => dispatch(setResultados(orden)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken(`ordenes/${uid}/resultados`, analisis, 'PUT')
+            .then(res => {
+                if (!res || !res.orden)
+                    Promise.reject();
+                dispatch(setResultados(res.orden))
+            })
+            .catch(err => dispatch(endLoading));
+    }
 
 const setResultados = (orden) => ({
     type: Types.Orden.SET_RESULTADOS,
@@ -77,8 +148,15 @@ const setResultados = (orden) => ({
 });
 
 export const startPublicacion = (uid) =>
-    (dispatch) => fetchConToken(`ordenes/${uid}/publicar`)
-        .then(({ orden }) => dispatch(publicar(orden)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken(`ordenes/${uid}/publicar`)
+            .then(res => {
+                if (!res || !res.orden)
+                    dispatch(publicar(res.orden));
+            })
+            .catch(err => dispatch(endLoading));
+    }
 
 const publicar = (orden) => ({
     type: Types.Orden.PUBLICAR,

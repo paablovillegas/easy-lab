@@ -1,4 +1,9 @@
 
+const initialStateReducer = {
+    componentes: [],
+    active: null,
+    loading: false,
+};
 const initialStateComponente = {
     componente: '',
     referencia: '',
@@ -21,6 +26,7 @@ const opcionesComponente = [
 ];
 
 export {
+    initialStateReducer,
     initialStateComponente,
     initialOrderComponente,
     opcionesComponente,

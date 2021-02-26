@@ -1,9 +1,5 @@
+import { initialStateReducer } from "../../helper/states/initialInstitucion";
 import { Types } from "../types/types";
-
-const initialState = {
-    instituciones: [],
-    active: null,
-};
 
 const replaceInstitucion = (instituciones, inst) =>
     instituciones.map(i => i._id === inst._id ? inst : i);
@@ -11,8 +7,14 @@ const replaceInstitucion = (instituciones, inst) =>
 const addInstitucion = (instituciones, inst) =>
     [...instituciones, inst].sort((a, b) => a.institucion > b.institucion ? 1 : -1);
 
-export const institucionReducer = (state = initialState, { type, payload }) => {
+export const institucionReducer = (state = initialStateReducer, { type, payload }) => {
+    state.loading = false;
     switch (type) {
+        case Types.Institucion.LOADING:
+            return {
+                ...state,
+                loading: true,
+            }
         case Types.Institucion.FETCH:
             return {
                 instituciones: payload,

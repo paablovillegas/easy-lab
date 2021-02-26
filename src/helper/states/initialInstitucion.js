@@ -1,4 +1,10 @@
 
+const initialStateReducer = {
+    instituciones: [],
+    active: null,
+    loading: false,
+};
+
 const initialStateInsitucion = {
     institucion: '',
     descuento: 0
@@ -21,6 +27,7 @@ const opcionesInstitucion = [
 ];
 
 export {
+    initialStateReducer,
     initialStateInsitucion,
     initialOrderInstitucion,
     opcionesInstitucion,

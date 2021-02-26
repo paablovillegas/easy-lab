@@ -1,6 +1,14 @@
-import { toast, showError } from "../../helper/alerts";
+import { showError, showSuccess } from "../../helper/alerts";
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types";
+
+const startLoading = {
+    type: Types.Paciente.LOADING,
+};
+
+const endLoading = {
+    type: Types.Paciente.END_LOADING,
+};
 
 export const setActive = (paciente) => ({
     type: Types.Paciente.SET_ACTIVE,
@@ -10,17 +18,19 @@ export const setActive = (paciente) => ({
 export const clearActive = () => ({ type: Types.Paciente.CLEAR_ACTIVE });
 
 export const startInsertPaciente = (paciente) =>
-    (dispatch) => fetchConToken('pacientes', paciente, 'POST')
-        .then(res => {
-            if (!res) Promise.reject();
-            if (res.paciente) {
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('pacientes', paciente, 'POST')
+            .then(res => {
+                if (!res || !res.paciente)
+                    Promise.reject();
                 dispatch(insertPaciente(res.paciente));
-                toast.fire({
-                    title: 'Paciente creado',
-                    icon: 'success',
-                });
-            }
-        }).catch(showError);
+                showSuccess('Paciente creado');
+            }).catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            });
+    }
 
 const insertPaciente = (paciente) => ({
     type: Types.Paciente.INSERT,
@@ -28,17 +38,19 @@ const insertPaciente = (paciente) => ({
 });
 
 export const startUpdatePaciente = (paciente) =>
-    (dispatch) => fetchConToken('pacientes/' + paciente._id, paciente, 'PUT')
-        .then(res => {
-            if (!res) Promise.reject();
-            if (res.paciente) {
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('pacientes/' + paciente._id, paciente, 'PUT')
+            .then(res => {
+                if (!res || !res.paciente)
+                    Promise.reject();
                 dispatch(updatePaciente(res.paciente));
-                toast.fire({
-                    title: 'Paciente actualizado',
-                    icon: 'success',
-                });
-            }
-        }).catch(showError);
+                showSuccess('Paciente actualizado');
+            }).catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            });
+    }
 
 const updatePaciente = (paciente) => ({
     type: Types.Paciente.UPDATE,
@@ -46,11 +58,16 @@ const updatePaciente = (paciente) => ({
 });
 
 export const startFetchPacientes = () =>
-    (dispatch) => fetchConToken('pacientes')
-        .then(res => {
-            if (res && res.pacientes)
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('pacientes')
+            .then(res => {
+                if (!res || !res.pacientes)
+                    Promise.reject();
                 dispatch(fetchPacientes(res.pacientes));
-        });
+            })
+            .catch(err => dispatch(endLoading));
+    }
 
 const fetchPacientes = (pacientes) => ({
     type: Types.Paciente.FETCH,

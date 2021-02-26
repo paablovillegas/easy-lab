@@ -3,7 +3,13 @@ import { initialReducerOrden } from "../../helper/states/initialOrden";
 import { Types } from "../types/types";
 
 export const ordenReducer = (state = initialReducerOrden, { type, payload }) => {
+    state.loading = false;
     switch (type) {
+        case Types.Orden.LOADING:
+            return {
+                ...state,
+                loading: true,
+            }
         case Types.Orden.INSERT:
             state.active = { ...payload };
             return { ...state };

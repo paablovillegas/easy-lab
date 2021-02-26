@@ -8,6 +8,14 @@ const toast = Swal.mixin({
     timer: 3000,
 });
 
+const showSuccess = (msg) => {
+    if (!msg) return;
+    toast.fire({
+        title: msg,
+        icon: 'success',
+    });
+}
+
 const showError = (err) => {
     if (err instanceof Promise) {
         err.then(res => {
@@ -23,5 +31,6 @@ const showError = (err) => {
 
 module.exports = {
     toast,
+    showSuccess,
     showError,
 }

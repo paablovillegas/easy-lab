@@ -1,6 +1,14 @@
-import { toast, showError } from "../../helper/alerts";
+import { showError, showSuccess } from "../../helper/alerts";
 import { fetchConToken } from "../../helper/fetch";
 import { Types } from "../types/types"
+
+const startLoading = {
+    type: Types.Doctor.LOADING,
+};
+
+const endLoading = {
+    type: Types.Doctor.END_LOADING,
+}
 
 export const setActive = (doctor) => ({
     type: Types.Doctor.SET_ACTIVE,
@@ -10,9 +18,19 @@ export const setActive = (doctor) => ({
 export const clearActive = () => ({ type: Types.Doctor.CLEAR_ACTIVE });
 
 export const startInsertDoctor = (doctor) =>
-    (dispatch) => fetchConToken('doctores', doctor, 'POST')
-        .then(({ doctor }) => dispatch(insertDoctor(doctor)))
-        .catch(showError);
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('doctores', doctor, 'POST')
+            .then(res => {
+                if (!res || !res.doctor)
+                    Promise.reject();
+                dispatch(insertDoctor(res.doctor));
+                showSuccess('Doctor creado');
+            }).catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            });
+    }
 
 const insertDoctor = (doctor) => ({
     type: Types.Doctor.INSERT,
@@ -21,9 +39,18 @@ const insertDoctor = (doctor) => ({
 
 export const startUpdateDoctor = (doctor) =>
     (dispatch) => {
+        dispatch(startLoading);
         const endpoint = 'doctores/' + doctor._id;
         fetchConToken(endpoint, doctor, 'PUT')
-            .then(({ doctor }) => dispatch(updateDoctor(doctor)));
+            .then(res => {
+                if (!res || !res.doctor)
+                    Promise.reject()
+                dispatch(updateDoctor(res.doctor))
+                showSuccess('Doctor actualizado');
+            }).catch(err => {
+                dispatch(endLoading);
+                showError(err);
+            });
     }
 
 const updateDoctor = (doctor) => ({
@@ -32,8 +59,16 @@ const updateDoctor = (doctor) => ({
 });
 
 export const startFetchDoctores = () =>
-    (dispatch) => fetchConToken('doctores')
-        .then(({ doctores }) => dispatch(fetch(doctores)));
+    (dispatch) => {
+        dispatch(startLoading);
+        fetchConToken('doctores')
+            .then(res => {
+                if (!res || !res.doctores)
+                    Promise.reject();
+                dispatch(fetch(res.doctores));
+            })
+            .catch(err => dispatch(endLoading));
+    }
 
 const fetch = (doctores) => ({
     type: Types.Doctor.FETCH,

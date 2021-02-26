@@ -8,6 +8,7 @@ const initialReducerOrden = {
     active: null,
     cfdi: [],
     tipo_pago: [],
+    loading: false,
 };
 
 const initialStateOrden = {

@@ -1,4 +1,9 @@
 
+const initialStateReducer = {
+    pacientes: [],
+    active: null,
+    loading: false,
+};
 
 const initialStatePaciente = {
     nombre: '',
@@ -51,6 +56,7 @@ const opcionesGenero = [
 ];
 
 export {
+    initialStateReducer,
     initialStatePaciente,
     initialOrderPaciente,
     opcionesPaciente,

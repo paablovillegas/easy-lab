@@ -1,9 +1,5 @@
+import { initialStateReducer } from "../../helper/states/initialDoctor";
 import { Types } from "../types/types";
-
-const initialState = {
-    doctores: [],
-    active: null,
-}
 
 const replaceDoctor = (doctores = [], doctor) =>
     doctores.map(i => i._id === doctor._id ? doctor : i);
@@ -12,8 +8,14 @@ const insertDoctor = (doctores = [], doctor) => [...doctores, doctor]
     .sort((a, b) => a.apellido_paterno + a.apellido_materno >
         b.apellido_paterno + b.apellido_materno ? 1 : -1);
 
-export const doctorReducer = (state = initialState, { type, payload }) => {
+export const doctorReducer = (state = initialStateReducer, { type, payload }) => {
+    state.loading = false;
     switch (type) {
+        case Types.Doctor.LOADING:
+            return {
+                ...state,
+                loading: true,
+            }
         case Types.Doctor.FETCH:
             return {
                 doctores: payload,

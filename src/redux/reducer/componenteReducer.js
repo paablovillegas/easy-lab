@@ -1,9 +1,5 @@
+import { initialStateReducer } from "../../helper/states/initialComponente";
 import { Types } from "../types/types";
-
-const initialState = {
-    componentes: [],
-    active: null,
-};
 
 const replaceComponente = (componentes = [], componente) =>
     componentes.map(i => i._id === componente._id ? componente : i);
@@ -11,7 +7,7 @@ const replaceComponente = (componentes = [], componente) =>
 const insertComponente = (componentes = [], componente) => [...componentes, componente]
     .sort((a, b) => a.componente > b.componente ? 1 : -1);
 
-export const componenteReducer = (state = initialState, { type, payload }) => {
+export const componenteReducer = (state = initialStateReducer, { type, payload }) => {
     switch (type) {
         case Types.Componente.FETCH:
             return {

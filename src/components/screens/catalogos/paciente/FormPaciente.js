@@ -1,15 +1,17 @@
 import { faChevronLeft, faChevronRight, faUser, faCalendarDay, faVenusMars, faAt, faPhoneAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fromInputDate, maxFecha, toInputDate } from '../../../../helper/fechas';
 import { initialStatePaciente, opcionesGenero } from '../../../../helper/states/initialPaciente';
 import { clearActive, startInsertPaciente, startUpdatePaciente } from '../../../../redux/actions/paciente';
 import { RegularButton } from '../../../forms/input-types/RegularButton';
 import { RegularInput } from '../../../forms/input-types/RegularInput';
 import { SelectInput } from '../../../forms/input-types/SelectInput';
+import { LoadingStateSmall } from '../../loading/LoadingStateSmall';
 
 export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
+    const { loading } = useSelector(state => state.paciente);
     const dispatch = useDispatch();
     const [paciente, setPaciente] = useState({
         ...initialStatePaciente,
@@ -97,6 +99,7 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                             Última actualización: {maxFecha(paciente)}
                         </h5>
                     </div>
+                    {loading && <LoadingStateSmall />}
                 </div>
                 <RegularInput
                     placeholder='Nombre'
@@ -167,7 +170,10 @@ export const FormPaciente = ({ data, setBarraLateral, barraLateral }) => {
                 <div className={`pb-3 mt-4 xl:col-start-auto xl:col-span-1 xl:mt-8
                     ${barraLateral ? 'lg:col-span-2' : 'sm:col-start-2 lg:col-start-3 lg:mt-8'}
                 `}>
-                    <RegularButton title={paciente._id ? 'Actualizar' : 'Registrar'} />
+                    <RegularButton
+                        title={paciente._id ? 'Actualizar' : 'Registrar'}
+                        disabled={loading}
+                    />
                 </div>
             </form>
         </div>

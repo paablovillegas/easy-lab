@@ -1,9 +1,5 @@
+import { initialStateReducer } from "../../helper/states/initialPaciente";
 import { Types } from "../types/types";
-
-const initialState = {
-    pacientes: [],
-    active: null,
-}
 
 const replacePaciente = (pacientes, pax) =>
     pacientes.map(i => i._id === pax._id ? pax : i);
@@ -12,8 +8,14 @@ const insertPaciente = (pacientes, pax) => [...pacientes, pax]
     .sort((a, b) => a.apellido_paterno + a.apellido_materno >
         b.apellido_paterno + b.apellido_materno ? 1 : -1);
 
-export const pacienteReducer = (state = initialState, { type, payload }) => {
+export const pacienteReducer = (state = initialStateReducer, { type, payload }) => {
+    state.loading = false;
     switch (type) {
+        case Types.Paciente.LOADING:
+            return {
+                ...state,
+                loading: true,
+            }
         case Types.Paciente.FETCH:
             return {
                 pacientes: payload,

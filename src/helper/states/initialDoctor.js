@@ -1,4 +1,10 @@
 
+const initialStateReducer = {
+    doctores: [],
+    active: null,
+    loading: false,
+}
+
 const initialStateDoctor = {
     nombre: '',
     apellido_paterno: '',
@@ -41,6 +47,7 @@ const opcionesDoctor = [
 ];
 
 export {
+    initialStateReducer,
     initialStateDoctor,
     initialOrderDoctor,
     opcionesDoctor,

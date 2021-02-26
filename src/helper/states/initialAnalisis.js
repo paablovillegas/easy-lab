@@ -2,6 +2,7 @@
 const initialReducerAnalisis = {
     analisis: [],
     active: null,
+    loading: false,
 };
 
 const initialStateAnalisis = {
