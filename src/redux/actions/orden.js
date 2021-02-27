@@ -62,10 +62,10 @@ export const update = (orden) => ({
     payload: orden,
 });
 
-export const startFetchDefault = () =>
+export const startFetchDefault = (pagina) =>
     (dispatch) => {
         dispatch(startLoading);
-        fetchConToken('ordenes')
+        fetchConToken('ordenes', { pagina }, 'POST')
             .then(res => {
                 if (!res || !res.ordenes)
                     Promise.reject();
@@ -76,7 +76,7 @@ export const startFetchDefault = () =>
 
 const fetchDeault = (ordenes) => ({
     type: Types.Orden.Fetch.DEFAULT,
-    payload: ordenes,
+    payload: { ...ordenes, type: 'default' },
 });
 
 export const startFetchBusquedaAvanzada = (options) =>
@@ -90,7 +90,7 @@ export const startFetchBusquedaAvanzada = (options) =>
 
 const fetchBusquedaAvanzada = (ordenes) => ({
     type: Types.Orden.Fetch.DEFAULT,
-    payload: ordenes,
+    payload: { ...ordenes, type: 'advanced' },
 });
 
 export const startFetchItem = (uid) =>

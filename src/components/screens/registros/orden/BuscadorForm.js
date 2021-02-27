@@ -148,12 +148,14 @@ export const BuscadorForm = () => {
                 </form>
             </div>
             <hr className='mt-4 mb-2' />
-            <div className='flex'>
+            <div
+                className='flex cursor-pointer'
+                onClick={handleClick}
+            >
                 <h2 className='flex-1 text-2xl text-gray-700'>Búsqueda avanzada</h2>
                 <button
                     className='px-2 focus:outline-none'
                     type='button'
-                    onClick={handleClick}
                 >
                     <FontAwesomeIcon icon={faChevronDown} />
                 </button>

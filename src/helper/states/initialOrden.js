@@ -4,7 +4,13 @@ import { initialStateInsitucion } from "./initialInstitucion";
 import { initialStatePaciente } from "./initialPaciente";
 
 const initialReducerOrden = {
-    ordenes: [],
+    ordenes: {
+        ordenes: [],
+        pagina: 0,
+        paginas: 0,
+        cantidad: 0,
+        type: '',
+    },
     active: null,
     cfdi: [],
     tipo_pago: [],

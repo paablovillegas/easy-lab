@@ -15,9 +15,9 @@ export const ScreenOrden = () => {
     return (
         <div className='flex flex-1 flex-col space-y-3 sm:max-h-screen sm:overflow-y-auto'>
             <BuscadorForm />
-            {ordenes.length > 0 &&
+            {ordenes.cantidad > 0 &&
                 <ListaOrdenes />
             }
         </div>
-    )
+    );
 }
